@@ -1,0 +1,15 @@
+{
+  "gap_event_count": 3,
+  "limitations": [
+    "AIS event detection depends on satellite and terrestrial reception quality.",
+    "A recorded gap does not establish why messages were absent.",
+    "GFW's intended AIS-off criterion applies to gaps starting at least 50 nautical miles offshore. This project does not establish whether an individual nearshore event meets that condition.",
+    "GFW limits SAR detections in much of the Arctic where sea ice can produce false positives. A sparse or empty SAR layer is not evidence of no vessels.",
+    "SAR detections can contain false positives and coverage is not spatially uniform."
+  ],
+  "minimum_gap_hours": 12.0,
+  "mode": "demo",
+  "notice": "Synthetic demonstration fixture. It is not an observation of Cambridge Bay.",
+  "sar_cell_count": 3,
+  "sar_detection_sum": 4
+}

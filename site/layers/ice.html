@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Sea ice · Arctic Passage Atlas</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/maplibre-gl@5.7.1/dist/maplibre-gl.css"
+      integrity="sha384-gNYNsUmuZqDYiT3gbirWTV5K7rt71RoveS/yXAaU09d4ZUmeDVTD3XoqB6uJAIFR"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../assets/site.css" /><link rel="stylesheet" href="../assets/pro.css" />
+      <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%230b1e2b' stroke='%2324465b'/%3E%3Cpath d='M5 21C10 11 14 23 19 14S25 9 27 11' fill='none' stroke='%237bdff2' stroke-width='2.4' stroke-linecap='round'/%3E%3Ccircle cx='19' cy='14' r='2.4' fill='%23ffb454'/%3E%3C/svg%3E" />
+      <meta name="description" content="Sentinel-1 sea-ice classification over the study area: threshold method, sensitivity and limitations." />
+      <meta property="og:site_name" content="Arctic Passage Atlas" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Sea ice · Arctic Passage Atlas" />
+    <meta property="og:description" content="Sentinel-1 sea-ice classification over the study area: threshold method, sensitivity and limitations." />
+    <meta name="twitter:card" content="summary" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <div class="demo-banner" data-mode>
+      DEMONSTRATION DATA — NOT OBSERVATIONS
+    </div>
+    <!-- chrome:header --><header class="site-header"><nav class="nav" aria-label="Primary"><a class="brand" href="../index.html"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><circle cx="16" cy="16" r="14.5" fill="#0b1e2b" stroke="#24465b"/><path d="M5 21 C10 11 14 23 19 14 S25 9 27 11" fill="none" stroke="#7bdff2" stroke-width="2.2" stroke-linecap="round"/><circle cx="19" cy="14" r="2.3" fill="#ffb454"/></svg><span class="brand-text">Arctic Passage Atlas<small>Open geospatial method</small></span></a><button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button><div class="nav-links" id="nav-links"><a href="../index.html">Home</a><a href="../live.html">Live</a><a href="../route.html">Route</a><a href="../layers/change.html">Change</a><a aria-current="page" href="../layers/ice.html">Ice</a><a href="../layers/vessels.html">Vessels</a><a href="../methodology.html">Method</a><a href="../contact.html">Contact</a></div></nav></header><!-- /chrome:header -->
+    <main id="main">
+      <section class="hero">
+        <div class="wrap">
+          <p class="eyebrow">Layer B · Sentinel-1 SAR</p>
+          <h1>Threshold-derived ice classification</h1>
+          <p class="lede">
+            Monthly radar composites are classified over a fixed water mask.
+            Threshold sensitivity is shown because backscatter does not separate
+            ice and water perfectly under all conditions.
+          </p>
+        </div>
+      </section>
+      <section class="section" style="padding-bottom:0">
+        <div class="wrap">
+          <div class="panel" id="ice-method-card" aria-live="polite"></div>
+        </div>
+      </section>
+      <section class="section">
+        <div class="wrap">
+          <div class="map-shell">
+            <div
+              class="map"
+              data-map-layer="ice"
+              aria-label="Interactive ice classification snapshot map"
+            ></div>
+            <div class="map-copy">
+              <span>Blue polygons show configured snapshot months.</span
+              ><span>Overlapping months can occupy the same location.</span>
+            </div>
+          </div>
+          <details>
+            <summary>Static fallback</summary>
+            <img
+              class="fallback"
+              src="../assets/fallback-ice.svg"
+              alt="Static sea-ice classification map fallback"
+            />
+          </details>
+        </div>
+      </section>
+      <section class="section">
+        <div class="wrap">
+          <p class="eyebrow">Seasonal check</p>
+          <h2>Classified fraction of the water mask</h2>
+          <div class="chart" data-ice-chart></div>
+          <p class="note">
+            The coarse reference is a seasonality comparison, not pixel-level
+            ground truth. A disagreement is a result to investigate, not
+            something to hide.
+          </p>
+        </div>
+      </section>
+      <section class="section">
+        <div class="wrap prose">
+          <h2>Method</h2>
+          <p>
+            The pipeline selects one consistent Sentinel-1 acquisition mode and
+            polarization for the year, records the alternatives it checked,
+            composites each month, then applies the configured dB threshold
+            inside a WorldCover water mask.
+          </p>
+          <h2>Principal limitations</h2>
+          <ul>
+            <li>
+              Wind-roughened water and some ice types can have overlapping
+              backscatter.
+            </li>
+            <li>
+              Incidence angle, orbit direction, melt state and snow cover affect
+              the signal.
+            </li>
+            <li>The fixed coast mask can be wrong near shore.</li>
+            <li>
+              Months without compatible scenes remain missing rather than
+              interpolated.
+            </li>
+          </ul>
+          <h2>Reproduce this</h2>
+          <p>
+            Run the live pipeline’s <code>ice</code> part or open
+            <code>notebooks/02_ice_extent_s1.ipynb</code>. The selected
+            acquisition characteristics are stored in
+            <code>ice_summary.json</code>.
+          </p>
+        </div>
+      </section>
+    </main>
+    <!-- chrome:footer --><footer class="site-footer pro"><div class="wrap"><div class="footer-grid"><div><strong>Arctic Passage Atlas</strong><p style="margin:.5rem 0 0;max-width:34ch">An open-source method for observing Arctic surface, sea-ice and vessel-event change from public data. By Maheep Chowdhary.</p></div><div><h4>Project</h4><a href="../index.html">Overview</a><a href="../live.html">Live conditions</a><a href="../methodology.html">Method and limits</a><a href="../sources.html">Sources and licences</a></div><div><h4>Layers</h4><a href="../layers/change.html">Surface change</a><a href="../layers/ice.html">Sea ice</a><a href="../layers/vessels.html">Vessel events</a></div><div><h4>Company</h4><a href="../contact.html">Contact and support</a><a href="../defence.html">Defence and security</a><a href="../about.html">About the author</a><a href="../sources.html#licences">Licences</a><a href="../route.html">Route planner</a></div></div><p class="footer-legal">Source: Copernicus Sentinel-1 GRD via Google Earth Engine. Reference: NOAA CDR OISST V2.1 ice band. Not an operational ice chart.</p></div></footer><!-- /chrome:footer -->
+    <script src="../assets/data.js"></script>
+    <script
+      src="https://unpkg.com/maplibre-gl@5.7.1/dist/maplibre-gl.js"
+      integrity="sha384-gLKaKK6bcaV7wXNta/DHnECgiF2+mF15OXviE93B/+Q4CI68+ivYMRY4utfeUOTN"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../assets/site.js"></script>
+    <script src="../assets/tools.js"></script>
+      <script src="../assets/ui.js" defer></script>
+  </body>
+</html>

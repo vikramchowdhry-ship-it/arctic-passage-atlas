@@ -1,0 +1,122 @@
+{
+  "acquisition": {
+    "instrument_mode": "DEMO",
+    "orbit": "DEMO",
+    "polarization": "DEMO"
+  },
+  "mode": "demo",
+  "monthly": [
+    {
+      "classified_fraction": 0.886,
+      "coarse_reference_fraction": 0.853,
+      "high_threshold_fraction": 0.806,
+      "low_threshold_fraction": 0.966,
+      "month": 1,
+      "period": "2024-01",
+      "scene_count": 5
+    },
+    {
+      "classified_fraction": 0.94,
+      "coarse_reference_fraction": 0.904,
+      "high_threshold_fraction": 0.86,
+      "low_threshold_fraction": 1,
+      "month": 2,
+      "period": "2024-02",
+      "scene_count": 6
+    },
+    {
+      "classified_fraction": 0.886,
+      "coarse_reference_fraction": 0.853,
+      "high_threshold_fraction": 0.806,
+      "low_threshold_fraction": 0.966,
+      "month": 3,
+      "period": "2024-03",
+      "scene_count": 4
+    },
+    {
+      "classified_fraction": 0.74,
+      "coarse_reference_fraction": 0.716,
+      "high_threshold_fraction": 0.66,
+      "low_threshold_fraction": 0.82,
+      "month": 4,
+      "period": "2024-04",
+      "scene_count": 5
+    },
+    {
+      "classified_fraction": 0.54,
+      "coarse_reference_fraction": 0.528,
+      "high_threshold_fraction": 0.46,
+      "low_threshold_fraction": 0.62,
+      "month": 5,
+      "period": "2024-05",
+      "scene_count": 6
+    },
+    {
+      "classified_fraction": 0.34,
+      "coarse_reference_fraction": 0.34,
+      "high_threshold_fraction": 0.26,
+      "low_threshold_fraction": 0.42,
+      "month": 6,
+      "period": "2024-06",
+      "scene_count": 4
+    },
+    {
+      "classified_fraction": 0.194,
+      "coarse_reference_fraction": 0.202,
+      "high_threshold_fraction": 0.114,
+      "low_threshold_fraction": 0.274,
+      "month": 7,
+      "period": "2024-07",
+      "scene_count": 5
+    },
+    {
+      "classified_fraction": 0.14,
+      "coarse_reference_fraction": 0.152,
+      "high_threshold_fraction": 0.06,
+      "low_threshold_fraction": 0.22,
+      "month": 8,
+      "period": "2024-08",
+      "scene_count": 6
+    },
+    {
+      "classified_fraction": 0.194,
+      "coarse_reference_fraction": 0.202,
+      "high_threshold_fraction": 0.114,
+      "low_threshold_fraction": 0.274,
+      "month": 9,
+      "period": "2024-09",
+      "scene_count": 4
+    },
+    {
+      "classified_fraction": 0.34,
+      "coarse_reference_fraction": 0.34,
+      "high_threshold_fraction": 0.26,
+      "low_threshold_fraction": 0.42,
+      "month": 10,
+      "period": "2024-10",
+      "scene_count": 5
+    },
+    {
+      "classified_fraction": 0.54,
+      "coarse_reference_fraction": 0.528,
+      "high_threshold_fraction": 0.46,
+      "low_threshold_fraction": 0.62,
+      "month": 11,
+      "period": "2024-11",
+      "scene_count": 6
+    },
+    {
+      "classified_fraction": 0.74,
+      "coarse_reference_fraction": 0.716,
+      "high_threshold_fraction": 0.66,
+      "low_threshold_fraction": 0.82,
+      "month": 12,
+      "period": "2024-12",
+      "scene_count": 4
+    }
+  ],
+  "notice": "Synthetic demonstration fixture. It is not an observation of Cambridge Bay.",
+  "sensitivity_db": 2.0,
+  "threshold_db": -16.0,
+  "year": 2024
+}

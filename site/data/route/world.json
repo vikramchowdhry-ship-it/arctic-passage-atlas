@@ -1,0 +1,43 @@
+{
+  "bbox": [
+    -180.0,
+    -78.0,
+    180.0,
+    84.0
+  ],
+  "caveat": "Generalised coastline on a coarse grid. Not navigation data: no traffic separation, depth, piracy areas, ice or weather routing.",
+  "closable_boxes": {
+    "panama": [
+      -80.0,
+      8.88,
+      -79.52,
+      9.38
+    ],
+    "suez": [
+      32.2,
+      30.0,
+      32.75,
+      31.35
+    ]
+  },
+  "cols": 3600,
+  "convention": "row 0 is the north edge; white pixels are water; columns wrap at 180 degrees",
+  "dlat": 0.1,
+  "dlon": 0.1,
+  "generated_at": "2026-10-03T17:38:55+00:00",
+  "png_sha256": "b2cdcf4a7147546c91865560ec7957d6018c6426c5a5175a12972dd2cdd6a0ce",
+  "rows": 1620,
+  "source": "Natural Earth 1:10m land polygons (public domain), with canals and narrow straits opened by hand",
+  "source_url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_land.geojson",
+  "water_fraction": 0.6901,
+  "waterways_opened": [
+    "Bab-el-Mandeb",
+    "Bosphorus and Dardanelles",
+    "Gulf of Suez",
+    "Panama Canal",
+    "Singapore Strait",
+    "Strait of Gibraltar",
+    "Suez Canal"
+  ],
+  "wrap": true
+}

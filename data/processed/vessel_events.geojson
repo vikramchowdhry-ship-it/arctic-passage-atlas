@@ -1,0 +1,82 @@
+{
+  "demo": true,
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            -105.452,
+            69.082
+          ],
+          [
+            -105.188,
+            69.138
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "demo": true,
+        "duration_hours": 18.5,
+        "end": "2024-08-01T18:30:00Z",
+        "event_id": "DEMO-G01",
+        "event_type": "AIS gap event",
+        "start": "2024-08-01T00:00:00Z",
+        "vessel_type": "cargo"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            -104.946,
+            69.038
+          ],
+          [
+            -105.056,
+            69.17399999999999
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "demo": true,
+        "duration_hours": 14.0,
+        "end": "2024-08-01T18:30:00Z",
+        "event_id": "DEMO-G02",
+        "event_type": "AIS gap event",
+        "start": "2024-08-01T00:00:00Z",
+        "vessel_type": "passenger"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            -105.32000000000001,
+            69.238
+          ],
+          [
+            -104.847,
+            69.206
+          ]
+        ],
+        "type": "LineString"
+      },
+      "properties": {
+        "demo": true,
+        "duration_hours": 25.2,
+        "end": "2024-08-01T18:30:00Z",
+        "event_id": "DEMO-G03",
+        "event_type": "AIS gap event",
+        "start": "2024-08-01T00:00:00Z",
+        "vessel_type": "other"
+      },
+      "type": "Feature"
+    }
+  ],
+  "notice": "Synthetic demonstration fixture. It is not an observation of Cambridge Bay.",
+  "type": "FeatureCollection"
+}

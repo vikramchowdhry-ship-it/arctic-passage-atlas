@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="Plan the shortest sea route between ports worldwide, with sailing time, daylight, canal and polar-ice options, and wind and wave forecasts along the way. A detailed Arctic corridor view uses Environment Canada data. A planning aid, not navigation advice."
+    />
+    <meta name="theme-color" content="#06121b" />
+    <title>Route planner · Arctic Passage Atlas</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/maplibre-gl@5.7.1/dist/maplibre-gl.css"
+      integrity="sha384-gNYNsUmuZqDYiT3gbirWTV5K7rt71RoveS/yXAaU09d4ZUmeDVTD3XoqB6uJAIFR"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="assets/site.css" /><link rel="stylesheet" href="assets/pro.css" />
+      <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%230b1e2b' stroke='%2324465b'/%3E%3Cpath d='M5 21C10 11 14 23 19 14S25 9 27 11' fill='none' stroke='%237bdff2' stroke-width='2.4' stroke-linecap='round'/%3E%3Ccircle cx='19' cy='14' r='2.4' fill='%23ffb454'/%3E%3C/svg%3E" />
+      <meta property="og:site_name" content="Arctic Passage Atlas" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Route planner · Arctic Passage Atlas" />
+    <meta property="og:description" content="Plan the shortest sea route between ports worldwide, with sailing time, daylight, canal and polar-ice options, and wind and wave forecasts along the way. A detailed Arctic corridor view uses Environment Canada data. A planning aid, not navigation advice." />
+    <meta name="twitter:card" content="summary" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <div class="info-banner warn">PLANNING ESTIMATE · NOT FOR NAVIGATION · ICE, DEPTH AND CHARTS ARE NOT MODELLED</div>
+    <!-- chrome:header --><header class="site-header"><nav class="nav" aria-label="Primary"><a class="brand" href="index.html"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><circle cx="16" cy="16" r="14.5" fill="#0b1e2b" stroke="#24465b"/><path d="M5 21 C10 11 14 23 19 14 S25 9 27 11" fill="none" stroke="#7bdff2" stroke-width="2.2" stroke-linecap="round"/><circle cx="19" cy="14" r="2.3" fill="#ffb454"/></svg><span class="brand-text">Arctic Passage Atlas<small>Open geospatial method</small></span></a><button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button><div class="nav-links" id="nav-links"><a href="index.html">Home</a><a href="live.html">Live</a><a aria-current="page" href="route.html">Route</a><a href="layers/change.html">Change</a><a href="layers/ice.html">Ice</a><a href="layers/vessels.html">Vessels</a><a href="methodology.html">Method</a><a href="contact.html">Contact</a></div></nav></header><!-- /chrome:header -->
+    <main id="main">
+      <section class="hero pro compact">
+        <div class="wrap">
+          <p class="eyebrow">Route planner</p>
+          <h1 style="max-width:22ch">Plan a sea route anywhere in the world.</h1>
+          <p class="lede">
+            Pick two ports. The planner finds the shortest open-water path around the land, works out
+            the time at your speed, and shows wind, waves and daylight where the ship would be, using live
+            model forecasts. It runs in your browser, with no sign-up.
+          </p>
+          <div class="tabs" role="tablist" aria-label="Planner mode">
+            <button class="tab" role="tab" id="tab-world" aria-controls="panel-world" aria-selected="true" type="button">Worldwide</button>
+            <button class="tab" role="tab" id="tab-arctic" aria-controls="panel-arctic" aria-selected="false" tabindex="-1" type="button">Arctic corridor (detailed)</button>
+          </div>
+        </div>
+      </section>
+
+      <div id="panel-world" role="tabpanel" aria-labelledby="tab-world">
+      <div class="wrap print-only" id="w-print-head"></div>
+      <section class="section alt tight">
+        <div class="wrap">
+          <form class="route-form world panel" onsubmit="return false" aria-label="Worldwide route inputs">
+            <label>From <select id="w-from"></select></label>
+            <button type="button" id="w-swap" aria-label="Swap start and end">⇄</button>
+            <label>To <select id="w-to"></select></label>
+            <label>Speed (knots) <input type="number" id="w-speed" value="14" min="1" max="40" step="0.5" /></label>
+            <label>Departure (UTC) <input type="datetime-local" id="w-depart" /></label>
+            <fieldset class="checks">
+              <legend>Route options</legend>
+              <label class="check">Sea ice
+                <select id="w-ice" aria-describedby="w-ice-date">
+                  <option value="15" selected>Avoid ice at 15% or more</option>
+                  <option value="40">Avoid ice at 40% or more</option>
+                  <option value="70">Avoid ice at 70% or more</option>
+                  <option value="0">Ignore sea ice</option>
+                </select>
+              </label>
+              <label class="check"><input type="checkbox" id="w-suez" checked /> Allow Suez Canal</label>
+              <label class="check"><input type="checkbox" id="w-panama" checked /> Allow Panama Canal</label>
+            </fieldset>
+          </form>
+          <div class="presets" aria-label="Example routes"><span>Try:</span>
+            <button type="button" data-preset="rtm>sin">Rotterdam → Singapore</button>
+            <button type="button" data-preset="sha>lax">Shanghai → Los Angeles</button>
+            <button type="button" data-preset="nyc>rtm">New York → Rotterdam</button>
+            <button type="button" data-preset="nyc>lax">New York → Los Angeles</button>
+            <button type="button" data-preset="cpt>sin">Cape Town → Singapore</button>
+            <button type="button" data-preset="yok>syd">Yokohama → Sydney</button>
+          </div>
+          <p class="busy" id="w-busy" role="status">Loading the world coastline…</p>
+          <p class="busy" id="w-ice-date"></p>
+
+          <div class="kpis four" style="margin:1.1rem 0">
+            <div class="kpi"><div class="label">Distance</div><div class="value"><span id="w-nm">—</span><span class="unit">nm</span></div><div class="foot" id="w-km">—</div></div>
+            <div class="kpi"><div class="label">Time under way</div><div class="value" style="font-size:1.35rem"><span id="w-time">—</span></div><div class="foot">at the chosen speed, no delays</div></div>
+            <div class="kpi"><div class="label">Arrival</div><div class="value" style="font-size:1.05rem;line-height:1.35"><span id="w-arrival">—</span></div><div class="foot">if you depart at the time above</div></div>
+            <div class="kpi"><div class="label">Light on the way</div><div class="value" style="font-size:1.35rem"><span id="w-light">—</span></div><div class="foot" id="w-light-foot">—</div></div>
+          </div>
+
+          <div class="map-shell" style="margin-bottom:1.2rem">
+            <div class="map tall" id="w-map" aria-label="Map of the calculated route"></div>
+            <div class="map-copy"><span>Amber: selected route. Dashed cyan: alternatives. Select a row below to show it.</span><span>Map: OpenFreeMap, © OpenStreetMap contributors</span></div>
+          </div>
+
+          <div class="export-bar" aria-label="Export the route">
+            <span class="export-title">Export route</span>
+            <span class="export-group"><button type="button" data-route-export="geojson">GeoJSON</button><button type="button" data-route-export="kml">KML (Google Earth)</button><button type="button" data-route-export="csv">CSV</button></span>
+            <button type="button" class="print-btn" id="w-print">Save PDF briefing</button>
+          </div>
+
+          <div class="section-head" style="margin-top:1.6rem"><h3>Route options</h3><p>The shortest path, a path that keeps off the coast, and what the trip looks like without each canal. Select a row to see it on the map.</p></div>
+          <div class="table-wrap">
+            <table class="data" style="min-width:600px">
+              <thead><tr><th>Option</th><th>Distance</th><th>Time under way</th><th>Extra distance</th><th></th></tr></thead>
+              <tbody id="w-alt"><tr><td colspan="5">Loading…</td></tr></tbody>
+            </table>
+          </div>
+
+          <div class="section-head" style="margin-top:2rem"><h3>Conditions along the route</h3><p>Model forecast for the hour the ship would reach each point: wind, gusts, wave height and temperature, with a plain sea-state band. <span id="w-weather-status" role="status"></span></p></div>
+          <div class="table-wrap">
+            <table class="data" style="min-width:760px">
+              <thead><tr><th>Point</th><th>Position</th><th>Time</th><th>Wind</th><th>Waves</th><th>Air</th><th>Sea state</th></tr></thead>
+              <tbody id="w-cond"><tr><td colspan="7">Loading…</td></tr></tbody>
+            </table>
+          </div>
+          <ul id="w-notes" class="route-notes" aria-live="polite"></ul>
+          <p class="chart-note">Forecasts: Open-Meteo weather and marine models (free service for non-commercial use). The sea-state band is a simple guide: calm below 1.25 m waves and 22 kn gusts, moderate below 2.5 m and 34 kn, rough below 4 m and 48 kn, severe above. It is not a safety assessment. Sun position uses the NOAA method. Ports are marked at their sea approach, not at a berth.</p>
+
+          <details class="limits">
+            <summary>What “shortest” means here, and what is not modelled</summary>
+            <ul>
+              <li>This is the shortest path through open water on a generalised 0.1° coastline (about 11 km cells). It is an estimate, not a recommended or safe route.</li>
+              <li>Not modelled: ice, depth, tides and currents, charted hazards, traffic separation, canal rules and fees, piracy and conflict areas, sanctions, vessel limits, port restrictions.</li>
+              <li>Sea ice comes from the latest NSIDC daily concentration analysis (25 km passive-microwave cells), refreshed by the site build. It is one past day, not a forecast, and it is not an ice chart. “Ignore sea ice” shows the geometric shortest path, which can pass through ice.</li>
+              <li>For real passage planning use official charts, ice services and the guidance of the relevant authorities.</li>
+            </ul>
+          </details>
+        </div>
+      </section>
+      </div>
+
+      <div id="panel-arctic" role="tabpanel" aria-labelledby="tab-arctic" hidden>
+      <section class="section tight">
+        <div class="wrap">
+          <div class="panel warn-panel">
+            <h3>Arctic corridor: what “shortest” means here</h3>
+            <p class="sub" style="margin-bottom:.4rem">A finer 0.05° × 0.02° grid over the Northwest Passage corridor, with live Environment Canada observations and hourly forecasts for seven communities. It is not a recommended or safe route.</p>
+            <ul>
+              <li>Not modelled: ice concentration and type, depth, tides and currents, charted hazards, vessel ice class and regulations. In the Arctic these decide where a ship can go, and they change daily.</li>
+              <li>Use the official <a href="https://www.canada.ca/en/environment-climate-change/services/ice-forecasts-observations.html">Canadian Ice Service</a> products and the <a href="https://www.ccg-gcc.gc.ca/">Canadian Coast Guard</a>.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <section class="section alt">
+        <div class="wrap">
+          <div class="section-head">
+            <p class="eyebrow num" data-n="01">Calculator</p>
+            <h2>Plan a passage.</h2>
+            <p><span data-r="stations">Contacting stations…</span> <span data-r="updated"></span> <span data-r="forecasts"></span></p>
+          </div>
+          <form class="route-form panel" onsubmit="return false" aria-label="Route inputs">
+            <label>From <select id="r-from"></select></label>
+            <button type="button" id="r-swap" aria-label="Swap start and end">⇄</button>
+            <label>To <select id="r-to"></select></label>
+            <label>Speed (knots) <input type="number" id="r-speed" value="8" min="1" max="30" step="0.5" /></label>
+            <label>Departure (UTC) <input type="datetime-local" id="r-depart" /></label>
+            <label>Hours in each port <input type="number" id="r-dwell" value="0" min="0" max="72" step="1" /></label>
+            <label class="check"><input type="checkbox" id="r-via" /> Call at every port in between</label>
+            <label>Sea ice
+              <select id="r-ice">
+                <option value="15" selected>Avoid ice at 15% or more</option>
+                <option value="40">Avoid ice at 40% or more</option>
+                <option value="70">Avoid ice at 70% or more</option>
+                <option value="0">Ignore sea ice</option>
+              </select>
+            </label>
+            <span class="muted" data-r="ice-date" style="align-self:center"></span>
+          </form>
+
+          <div class="kpis four" style="margin:1.1rem 0">
+            <div class="kpi"><div class="label">Distance</div><div class="value"><span data-r="total-nm">—</span><span class="unit">nm</span></div><div class="foot"><span data-r="total-km">—</span> km · <span data-r="detour">—</span> the straight line</div></div>
+            <div class="kpi"><div class="label">Time under way</div><div class="value" style="font-size:1.35rem"><span data-r="total-time">—</span></div><div class="foot">at the chosen speed, no delays</div></div>
+            <div class="kpi"><div class="label">Final arrival</div><div class="value" style="font-size:1.05rem;line-height:1.35"><span data-r="arrival">—</span></div><div class="foot">includes port time</div></div>
+            <div class="kpi"><div class="label">Light on the way</div><div class="value" style="font-size:1.35rem"><span data-r="daylight">—</span></div><div class="foot" data-r="daylight-foot">—</div></div>
+          </div>
+
+          <div class="map-shell" style="margin-bottom:1.2rem">
+            <div class="map tall" id="route-map" aria-label="Map of the calculated sea route with numbered stops"></div>
+            <div class="map-copy"><span>Amber: shortest water path. Dashed cyan: alternatives that keep off the coast. Dots mark each 12 hours of sailing.</span><span>Imagery: NASA GIBS (VIIRS)</span></div>
+          </div>
+
+          <div class="section-head" style="margin-top:2rem"><h3>Alternatives</h3><p>The same trip with a margin from the coast. Larger margins cost distance, and may not be possible in narrow channels.</p></div>
+          <div class="table-wrap">
+            <table class="data" style="min-width:560px">
+              <thead><tr><th>Option</th><th>Distance</th><th>Time under way</th><th>Extra distance</th><th>Margin</th></tr></thead>
+              <tbody id="alt-body"><tr><td colspan="5">Loading the coastline grid…</td></tr></tbody>
+            </table>
+          </div>
+
+          <div class="section-head" style="margin-top:2rem"><h3>Stops</h3><p>Arrival times, daylight on the arrival day, the current observation, and the Environment Canada hourly forecast for the hour of arrival (the forecast covers the next day only).</p></div>
+          <div class="table-wrap">
+            <table class="data">
+              <thead><tr><th>Stop</th><th>Leg</th><th>Arrival</th><th>Daylight that day</th><th>Weather now</th><th>Forecast at arrival</th></tr></thead>
+              <tbody id="route-body"><tr><td colspan="6">Loading…</td></tr></tbody>
+            </table>
+          </div>
+
+          <div class="section-head" style="margin-top:2rem"><h3>Along the way</h3><p>A checkpoint every 12 hours of sailing: where the ship would be, how high the sun is, and the current observation at the nearest corridor station.</p></div>
+          <div class="table-wrap">
+            <table class="data" style="min-width:640px">
+              <thead><tr><th>Checkpoint</th><th>Position</th><th>Sun</th><th>Nearest station now</th></tr></thead>
+              <tbody id="cp-body"><tr><td colspan="4">Loading…</td></tr></tbody>
+            </table>
+          </div>
+          <ul id="route-notes" class="route-notes" aria-live="polite"></ul>
+          <p class="chart-note">Observations are the latest from Environment and Climate Change Canada and are not forecasts. Sun elevation uses the NOAA solar-position method, with day above −0.83°, civil twilight to −6° and night below −12°. Distances are great-circle sums over the water path, including the short link from each port to the nearest open water.</p>
+        </div>
+      </section>
+      </div>
+    </main>
+    <!-- chrome:footer --><footer class="site-footer pro"><div class="wrap"><div class="footer-grid"><div><strong>Arctic Passage Atlas</strong><p style="margin:.5rem 0 0;max-width:34ch">An open-source method for observing Arctic surface, sea-ice and vessel-event change from public data. By Maheep Chowdhary.</p></div><div><h4>Project</h4><a href="index.html">Overview</a><a href="live.html">Live conditions</a><a href="methodology.html">Method and limits</a><a href="sources.html">Sources and licences</a></div><div><h4>Layers</h4><a href="layers/change.html">Surface change</a><a href="layers/ice.html">Sea ice</a><a href="layers/vessels.html">Vessel events</a></div><div><h4>Company</h4><a href="contact.html">Contact and support</a><a href="defence.html">Defence and security</a><a href="about.html">About the author</a><a href="sources.html#licences">Licences</a><a href="route.html">Route planner</a></div></div><p class="footer-legal">Planning estimate from shortest-water paths on a coarse coastline, with model and Environment Canada forecasts. Not for navigation; ice, depth, currents and charts are not modelled.</p></div></footer><!-- /chrome:footer -->
+    <script
+      src="https://unpkg.com/maplibre-gl@5.7.1/dist/maplibre-gl.js"
+      integrity="sha384-gLKaKK6bcaV7wXNta/DHnECgiF2+mF15OXviE93B/+Q4CI68+ivYMRY4utfeUOTN"
+      crossorigin="anonymous"
+    ></script>
+    <script src="assets/router.js"></script>
+    <script src="assets/route.js"></script>
+    <script src="assets/world.js"></script>
+    <script src="assets/tabs.js"></script>
+    <script src="assets/tools.js"></script>
+      <script src="assets/ui.js" defer></script>
+  </body>
+</html>

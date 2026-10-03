@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "arctic-passage-atlas"
+version = "0.1.0"
+description = "Reproducible Arctic environmental and maritime change portfolio project"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+authors = [{ name = "Maheep Chowdhary" }]
+dependencies = [
+  "earthengine-api>=1.4,<2",
+  "gfw-api-python-client>=1.4,<2",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "ruff>=0.11,<1"]
+notebooks = ["jupyterlab>=4,<5", "matplotlib>=3.9,<4"]
+
+[project.scripts]
+arctic-atlas = "arctic_passage_atlas.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["arctic_passage_atlas*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+exclude = ["notebooks"]
+

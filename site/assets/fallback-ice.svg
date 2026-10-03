@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="t d">
+<title id="t">Seasonal ice classification static fallback</title><desc id="d">DEMONSTRATION FIXTURE · not an observation. 4 mapped features shown. AOI outline only; no basemap.</desc>
+<rect width="1200" height="675" fill="#071521"/>
+<rect x="345.5" y="70.0" width="509.0" height="520.0" fill="#0c2232" stroke="#83f3c7" stroke-width="2" stroke-dasharray="10 8"/>
+<path d="M 376.1 558.8 L 767.9 558.8 L 767.9 101.2 L 376.1 101.2 L 376.1 558.8 Z" fill="#c9f5ff" fill-opacity=".34" stroke="#c9f5ff" stroke-width="2" fill-rule="evenodd"/><path d="M 376.1 558.8 L 676.5 558.8 L 676.5 101.2 L 376.1 101.2 L 376.1 558.8 Z" fill="#7bdff2" fill-opacity=".34" stroke="#7bdff2" stroke-width="2" fill-rule="evenodd"/><path d="M 376.1 558.8 L 462.2 558.8 L 462.2 101.2 L 376.1 101.2 L 376.1 558.8 Z" fill="#4bb6dc" fill-opacity=".34" stroke="#4bb6dc" stroke-width="2" fill-rule="evenodd"/><path d="M 376.1 558.8 L 652.7 558.8 L 652.7 101.2 L 376.1 101.2 L 376.1 558.8 Z" fill="#267ca8" fill-opacity=".34" stroke="#267ca8" stroke-width="2" fill-rule="evenodd"/>
+<text x="80" y="42" fill="#d9edf7" font-family="system-ui,sans-serif" font-size="28" font-weight="700">Seasonal ice classification</text>
+<text x="345.5" y="60.0" fill="#8ba9b9" font-family="system-ui,sans-serif" font-size="14">-105.65°, 69.35°</text>
+<text x="854.5" y="610.0" text-anchor="end" fill="#8ba9b9" font-family="system-ui,sans-serif" font-size="14">-104.55°, 68.95°</text>
+<text x="1120" y="42" text-anchor="end" fill="#8ba9b9" font-family="system-ui,sans-serif" font-size="14">AOI outline only · no basemap</text>
+<circle cx="82" cy="615" r="6" fill="#c9f5ff"/><text x="94" y="620" fill="#d9edf7" font-family="system-ui,sans-serif" font-size="15">2024-02</text><circle cx="327" cy="615" r="6" fill="#7bdff2"/><text x="339" y="620" fill="#d9edf7" font-family="system-ui,sans-serif" font-size="15">2024-05</text><circle cx="572" cy="615" r="6" fill="#4bb6dc"/><text x="584" y="620" fill="#d9edf7" font-family="system-ui,sans-serif" font-size="15">2024-08</text><circle cx="817" cy="615" r="6" fill="#267ca8"/><text x="829" y="620" fill="#d9edf7" font-family="system-ui,sans-serif" font-size="15">2024-11</text>
+<text x="80" y="665" fill="#8ba9b9" font-family="system-ui,sans-serif" font-size="14">DEMONSTRATION FIXTURE · not an observation · 4 mapped features shown</text>
+</svg>

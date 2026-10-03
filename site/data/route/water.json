@@ -1,0 +1,19 @@
+{
+  "bbox": [
+    -142.0,
+    60.0,
+    -60.0,
+    78.5
+  ],
+  "caveat": "Generalised coastline. Narrow straits may be closed or opened. Not navigation data.",
+  "cols": 1640,
+  "convention": "row 0 is the north edge; white pixels are water",
+  "dlat": 0.02,
+  "dlon": 0.05,
+  "generated_at": "2026-10-03T17:12:34+00:00",
+  "png_sha256": "cabbb1c027a981fc9ea358611b4c2c57b22d8522b984440ec8886718aae9db9e",
+  "rows": 925,
+  "source": "Natural Earth 1:10m land polygons (public domain)",
+  "source_url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_land.geojson",
+  "water_fraction": 0.443
+}

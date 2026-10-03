@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="Every dataset behind Arctic Passage Atlas, its provider, licence or terms, and how each is used. Includes the non-commercial restriction on vessel data."
+    />
+    <meta name="theme-color" content="#06121b" />
+    <title>Sources and licences · Arctic Passage Atlas</title>
+    <link rel="stylesheet" href="assets/site.css" /><link rel="stylesheet" href="assets/pro.css" />
+      <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%230b1e2b' stroke='%2324465b'/%3E%3Cpath d='M5 21C10 11 14 23 19 14S25 9 27 11' fill='none' stroke='%237bdff2' stroke-width='2.4' stroke-linecap='round'/%3E%3Ccircle cx='19' cy='14' r='2.4' fill='%23ffb454'/%3E%3C/svg%3E" />
+      <meta property="og:site_name" content="Arctic Passage Atlas" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Sources and licences · Arctic Passage Atlas" />
+    <meta property="og:description" content="Every dataset behind Arctic Passage Atlas, its provider, licence or terms, and how each is used. Includes the non-commercial restriction on vessel data." />
+    <meta name="twitter:card" content="summary" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <!-- chrome:header --><header class="site-header"><nav class="nav" aria-label="Primary"><a class="brand" href="index.html"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><circle cx="16" cy="16" r="14.5" fill="#0b1e2b" stroke="#24465b"/><path d="M5 21 C10 11 14 23 19 14 S25 9 27 11" fill="none" stroke="#7bdff2" stroke-width="2.2" stroke-linecap="round"/><circle cx="19" cy="14" r="2.3" fill="#ffb454"/></svg><span class="brand-text">Arctic Passage Atlas<small>Open geospatial method</small></span></a><button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button><div class="nav-links" id="nav-links"><a href="index.html">Home</a><a href="live.html">Live</a><a href="route.html">Route</a><a href="layers/change.html">Change</a><a href="layers/ice.html">Ice</a><a href="layers/vessels.html">Vessels</a><a href="methodology.html">Method</a><a href="contact.html">Contact</a></div></nav></header><!-- /chrome:header -->
+    <main id="main">
+      <section class="hero pro">
+        <div class="wrap">
+          <p class="eyebrow">Sources and licences</p>
+          <h1 style="max-width:20ch">Where every number and picture comes from.</h1>
+          <p class="lede">
+            The list below is the project's data inventory. Terms can change, so
+            each row links to the provider and the page records when it was last
+            checked. Read the commercial-use note before reusing anything.
+          </p>
+        </div>
+      </section>
+
+      <section class="section" id="licences">
+        <div class="wrap">
+          <div class="panel" style="border-left:4px solid var(--change)">
+            <h3>Commercial use</h3>
+            <p class="sub" style="margin-bottom:.4rem">Short version: this is a portfolio and research project, not a commercial service.</p>
+            <ul>
+              <li>The code is MIT-licensed and may be reused, including commercially.</li>
+              <li>Global Fishing Watch data and outputs derived from it are licensed for non-commercial use (CC BY-NC 4.0). The vessel layer therefore cannot be offered commercially.</li>
+              <li>Earth Engine requires the cloud project to be registered as noncommercial or commercial use. This project uses noncommercial registration.</li>
+              <li>No customers, pricing, accuracy guarantees or service levels are offered or implied.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section alt">
+        <div class="wrap">
+          <div class="section-head">
+            <p class="eyebrow num" data-n="01">Inventory</p>
+            <h2>Datasets and services.</h2>
+          </div>
+          <div class="table-wrap">
+            <table class="data">
+              <thead><tr><th>Source</th><th>Provider</th><th>Used for</th><th>Terms</th><th>Access</th></tr></thead>
+              <tbody>
+                <tr><td>Landsat 8 Collection 2 Level 2</td><td>USGS / NASA</td><td>Surface-change screening</td><td>No restrictions on use; citation requested.</td><td>Earth Engine, at run time</td></tr>
+                <tr><td>Sentinel-1 GRD</td><td>ESA / Copernicus</td><td>Sea-ice classification</td><td>Free and open. Attribute as modified Copernicus Sentinel data.</td><td>Earth Engine, at run time</td></tr>
+                <tr><td>ESA WorldCover</td><td>ESA</td><td>Water and coast mask</td><td>CC BY 4.0</td><td>Earth Engine, at run time</td></tr>
+                <tr><td>NOAA OISST V2.1</td><td>NOAA</td><td>Coarse seasonal ice reference</td><td>NOAA open data; cite the dataset.</td><td>Earth Engine, at run time</td></tr>
+                <tr><td>AIS gap events, SAR presence</td><td>Global Fishing Watch</td><td>Vessel-event layer</td><td><strong>CC BY-NC 4.0</strong> and API terms. Non-commercial only; attribution required.</td><td>API token, at run time</td></tr>
+                <tr><td>Station observations (SWOB)</td><td>Environment and Climate Change Canada</td><td>Live conditions</td><td>Open Government Licence – Canada; attribution.</td><td>Browser, each visit</td></tr>
+                <tr><td>Satellite imagery tiles</td><td>NASA GIBS / ESDIS</td><td>Live conditions map, video</td><td>NASA open data; acknowledge GIBS.</td><td>Browser, each visit</td></tr>
+                <tr><td>Sea Ice Index, daily extent</td><td>NSIDC</td><td>Pan-Arctic sea-ice context</td><td>Free to use with citation; see the dataset page.</td><td>Scheduled snapshot</td></tr>
+                <tr><td>Basemap tiles</td><td>OpenFreeMap, OpenMapTiles, OpenStreetMap contributors</td><td>Study-area and route maps</td><td>No key needed. Keep the on-map attribution; ODbL for OpenStreetMap data.</td><td>Browser, each visit</td></tr>
+                <tr><td>Wind, wave and temperature forecasts</td><td>Open-Meteo</td><td>Worldwide route planner</td><td><strong>Free API is for non-commercial use</strong>; CC BY 4.0 attribution. A commercial deployment needs a subscription.</td><td>Browser, each visit</td></tr>
+                <tr><td>Daily sea-ice concentration</td><td>NSIDC Sea Ice Index v4 (G02135)</td><td>Ice avoidance in the route planner</td><td>Free to use with citation. Passive microwave, 25 km, one past day, not an ice chart.</td><td>Scheduled snapshot</td></tr>
+                <tr><td>Live AIS positions, Baltic Sea and Gulf of Bothnia</td><td>Fintraffic, digitraffic.fi</td><td>Live page vessel map</td><td>CC BY 4.0, attribution required. Names and identifiers are dropped.</td><td>Browser, each minute</td></tr>
+                <tr><td>Arctic AIS positions (optional relay)</td><td>AISStream</td><td>Live page vessel map</td><td>Key kept on a server relay; check their current terms. Community terrestrial receivers only.</td><td>Relay, each minute</td></tr>
+                <tr><td>Weather stations, northern Alaska</td><td>U.S. National Weather Service</td><td>Live page station map</td><td>U.S. government data, open.</td><td>Browser, every 15 minutes</td></tr>
+                <tr><td>Land polygons, 1:10m</td><td>Natural Earth</td><td>Route grids (worldwide and Arctic)</td><td>Public domain.</td><td>Built into the site</td></tr>
+                <tr><td>Map library</td><td>MapLibre GL JS</td><td>All interactive maps</td><td>BSD-3-Clause</td><td>CDN, version-pinned with integrity hash</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="wrap grid two">
+          <div>
+            <div class="section-head">
+              <p class="eyebrow num" data-n="02">Overview video</p>
+              <h2>Imagery in the video.</h2>
+            </div>
+            <ul>
+              <li>NASA Scientific Visualization Studio sea-ice spiral and NASA Goddard Space Flight Center ice-retreat animation: public domain, via Wikimedia Commons.</li>
+              <li>Sea-ice photograph: U.S. Geological Survey, public domain, via Wikimedia Commons.</li>
+              <li>Icebreaker photograph: U.S. Coast Guard, public domain, via Wikimedia Commons.</li>
+              <li>Landsat, MODIS and Blue Marble images: NASA GIBS.</li>
+              <li>Voice-over and instrumental music are AI-generated.</li>
+            </ul>
+          </div>
+          <div>
+            <div class="section-head">
+              <p class="eyebrow num" data-n="03">Acknowledgements</p>
+              <h2>Credit lines.</h2>
+            </div>
+            <ul>
+              <li>We acknowledge the use of imagery provided by services from NASA's Global Imagery Browse Services (GIBS), part of NASA's Earth Science Data and Information System (ESDIS).</li>
+              <li>Contains information licensed under the Open Government Licence – Canada.</li>
+              <li>Sea-ice extent: NSIDC Sea Ice Index (G02135). <a href="https://nsidc.org/data/g02135">Dataset page and citation</a>.</li>
+              <li>Vessel data: Global Fishing Watch, <a href="https://globalfishingwatch.org/our-apis/documentation/docs/license-rate-limits">licence and rate limits</a>.</li>
+              <li>Terms last reviewed 3 October 2026. They can change; recheck before publishing a new run.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- chrome:footer --><footer class="site-footer pro"><div class="wrap"><div class="footer-grid"><div><strong>Arctic Passage Atlas</strong><p style="margin:.5rem 0 0;max-width:34ch">An open-source method for observing Arctic surface, sea-ice and vessel-event change from public data. By Maheep Chowdhary.</p></div><div><h4>Project</h4><a href="index.html">Overview</a><a href="live.html">Live conditions</a><a href="methodology.html">Method and limits</a><a href="sources.html">Sources and licences</a></div><div><h4>Layers</h4><a href="layers/change.html">Surface change</a><a href="layers/ice.html">Sea ice</a><a href="layers/vessels.html">Vessel events</a></div><div><h4>Company</h4><a href="contact.html">Contact and support</a><a href="defence.html">Defence and security</a><a href="about.html">About the author</a><a href="sources.html#licences">Licences</a><a href="route.html">Route planner</a></div></div><p class="footer-legal">Method prototype. Not an operational navigation, enforcement or surveillance system.</p></div></footer><!-- /chrome:footer -->
+      <script src="assets/ui.js" defer></script>
+  </body>
+</html>

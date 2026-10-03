@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Methodology · Arctic Passage Atlas</title>
+    <link rel="stylesheet" href="assets/site.css" /><link rel="stylesheet" href="assets/pro.css" />
+      <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%230b1e2b' stroke='%2324465b'/%3E%3Cpath d='M5 21C10 11 14 23 19 14S25 9 27 11' fill='none' stroke='%237bdff2' stroke-width='2.4' stroke-linecap='round'/%3E%3Ccircle cx='19' cy='14' r='2.4' fill='%23ffb454'/%3E%3C/svg%3E" />
+      <meta name="description" content="How Arctic Passage Atlas screens surface change, classifies sea ice and handles vessel events, with limits and reproducibility boundaries stated." />
+      <meta property="og:site_name" content="Arctic Passage Atlas" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Methodology · Arctic Passage Atlas" />
+    <meta property="og:description" content="How Arctic Passage Atlas screens surface change, classifies sea ice and handles vessel events, with limits and reproducibility boundaries stated." />
+    <meta name="twitter:card" content="summary" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <div class="demo-banner" data-mode>
+      DEMONSTRATION DATA — NOT OBSERVATIONS
+    </div>
+    <!-- chrome:header --><header class="site-header"><nav class="nav" aria-label="Primary"><a class="brand" href="index.html"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><circle cx="16" cy="16" r="14.5" fill="#0b1e2b" stroke="#24465b"/><path d="M5 21 C10 11 14 23 19 14 S25 9 27 11" fill="none" stroke="#7bdff2" stroke-width="2.2" stroke-linecap="round"/><circle cx="19" cy="14" r="2.3" fill="#ffb454"/></svg><span class="brand-text">Arctic Passage Atlas<small>Open geospatial method</small></span></a><button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button><div class="nav-links" id="nav-links"><a href="index.html">Home</a><a href="live.html">Live</a><a href="route.html">Route</a><a href="layers/change.html">Change</a><a href="layers/ice.html">Ice</a><a href="layers/vessels.html">Vessels</a><a aria-current="page" href="methodology.html">Method</a><a href="contact.html">Contact</a></div></nav></header><!-- /chrome:header -->
+    <main id="main">
+      <section class="hero">
+        <div class="wrap">
+          <p class="eyebrow">Methods and limits</p>
+          <h1>How the publication is made</h1>
+          <p class="lede">
+            Configuration precedes analysis. Provider outputs are normalized
+            into small static files, verified, assigned checksums and then
+            bundled into the public site.
+          </p>
+        </div>
+      </section>
+      <section class="section">
+        <div class="wrap prose">
+          <h2>Study boundary</h2>
+          <p>
+            The project uses a compact rectangular study area around Cambridge
+            Bay. It is an analytical boundary, not an official port, municipal
+            or administrative boundary.
+          </p>
+          <h2>Surface change</h2>
+          <p>
+            Cloud-, shadow-, snow- and saturation-masked Landsat 8
+            surface-reflectance scenes are reduced to summer median composites.
+            Euclidean spectral distance across six optical bands produces a
+            change magnitude. Pixels above the configured threshold are
+            vectorized as candidates.
+          </p>
+          <h2>Sea-ice classification</h2>
+          <p>
+            The pipeline inventories Sentinel-1 acquisition combinations,
+            selects the most available consistent mode and polarization, and
+            calculates monthly median backscatter. It applies a fixed threshold
+            over a static water mask and repeats the area calculation at plus
+            and minus the sensitivity interval. NOAA OISST supplies a coarse
+            seasonal reference.
+          </p>
+          <h2>Vessel events</h2>
+          <p>
+            The official Global Fishing Watch Python client requests AIS gap
+            events of at least twelve hours and an aggregated SAR-presence
+            report inside the same geometry. Geometry and selected descriptive
+            fields are published. No intent score is added.
+          </p>
+          <h2>Projection and area</h2>
+          <p>
+            The website displays geographic coordinates. Earth Engine’s
+            pixel-area image is used for area statistics so square degrees are
+            never treated as square metres. The configured polar projection is
+            available for exported cartographic work.
+          </p>
+          <h2 id="reproduce">Reproduce this</h2>
+          <ol>
+            <li>
+              Create and activate a Python 3.11 or newer virtual environment.
+            </li>
+            <li>Install with <code>python -m pip install -e .</code></li>
+            <li>
+              Run <code>python -m arctic_passage_atlas demo</code> for the
+              credential-free demonstration.
+            </li>
+            <li>
+              Copy <code>.env.example</code> to <code>.env</code>, register and
+              authenticate an Earth Engine project, and add a Global Fishing
+              Watch token.
+            </li>
+            <li>Run <code>python -m arctic_passage_atlas live</code>.</li>
+            <li>Run <code>python -m arctic_passage_atlas verify</code>.</li>
+            <li>
+              Preview with <code>python -m arctic_passage_atlas serve</code>.
+            </li>
+          </ol>
+          <h2>Provenance</h2>
+          <p>
+            The generated manifest records the mode, configuration hash, Git
+            commit when available, dataset identifiers, file sizes and SHA-256
+            checksums. Dataset aliases ending in <code>:latest</code> are
+            mutable; reruns can therefore differ as providers update their
+            records.
+          </p>
+          <h2>Known limitations</h2>
+          <ul>
+            <li>
+              The AOI was selected for a portfolio-scale method and is not
+              representative of the whole Arctic.
+            </li>
+            <li>
+              There is no field validation or operational ice-chart comparison
+              at local resolution.
+            </li>
+            <li>
+              Thresholds are sensitivity-tested but not statistically
+              calibrated.
+            </li>
+            <li>
+              Provider coverage and corrections can change after publication.
+            </li>
+            <li>
+              The static site is an explanatory artifact, not an operational
+              monitoring service.
+            </li>
+          </ul>
+        </div>
+      </section>
+    </main>
+    <!-- chrome:footer --><footer class="site-footer pro"><div class="wrap"><div class="footer-grid"><div><strong>Arctic Passage Atlas</strong><p style="margin:.5rem 0 0;max-width:34ch">An open-source method for observing Arctic surface, sea-ice and vessel-event change from public data. By Maheep Chowdhary.</p></div><div><h4>Project</h4><a href="index.html">Overview</a><a href="live.html">Live conditions</a><a href="methodology.html">Method and limits</a><a href="sources.html">Sources and licences</a></div><div><h4>Layers</h4><a href="layers/change.html">Surface change</a><a href="layers/ice.html">Sea ice</a><a href="layers/vessels.html">Vessel events</a></div><div><h4>Company</h4><a href="contact.html">Contact and support</a><a href="defence.html">Defence and security</a><a href="about.html">About the author</a><a href="sources.html#licences">Licences</a><a href="route.html">Route planner</a></div></div><p class="footer-legal">Method prototype. Not an operational navigation, enforcement or surveillance system.</p></div></footer><!-- /chrome:footer -->
+    <script src="assets/data.js"></script>
+    <script src="assets/site.js"></script>
+      <script src="assets/ui.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,40 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -105.65,
+              68.95
+            ],
+            [
+              -104.55,
+              68.95
+            ],
+            [
+              -104.55,
+              69.35
+            ],
+            [
+              -105.65,
+              69.35
+            ],
+            [
+              -105.65,
+              68.95
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "demo": false,
+        "name": "Cambridge Bay passage and port study area"
+      },
+      "type": "Feature"
+    }
+  ],
+  "name": "Configured analysis boundary",
+  "type": "FeatureCollection"
+}

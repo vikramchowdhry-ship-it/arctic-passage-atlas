@@ -1,0 +1,22 @@
+.env
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+data/raw/*
+!data/raw/.gitkeep
+data/exports/*
+!data/exports/.gitkeep
+
+
+# video build output (the web copy lives in site/assets/video)
+video/work/
+video/*.mp4
+
+# local relay config and tooling
+ais-relay/wrangler.toml
+.wrangler/
+node_modules/
+video/assets/narration_v*.wav

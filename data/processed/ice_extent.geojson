@@ -1,0 +1,151 @@
+{
+  "demo": true,
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -105.584,
+              68.974
+            ],
+            [
+              -104.73722,
+              68.974
+            ],
+            [
+              -104.73722,
+              69.326
+            ],
+            [
+              -105.584,
+              69.326
+            ],
+            [
+              -105.584,
+              68.974
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "classified_fraction": 0.91,
+        "demo": true,
+        "period": "2024-02",
+        "threshold_db": -16.0
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -105.584,
+              68.974
+            ],
+            [
+              -104.93456,
+              68.974
+            ],
+            [
+              -104.93456,
+              69.326
+            ],
+            [
+              -105.584,
+              69.326
+            ],
+            [
+              -105.584,
+              68.974
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "classified_fraction": 0.68,
+        "demo": true,
+        "period": "2024-05",
+        "threshold_db": -16.0
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -105.584,
+              68.974
+            ],
+            [
+              -105.39788,
+              68.974
+            ],
+            [
+              -105.39788,
+              69.326
+            ],
+            [
+              -105.584,
+              69.326
+            ],
+            [
+              -105.584,
+              68.974
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "classified_fraction": 0.14,
+        "demo": true,
+        "period": "2024-08",
+        "threshold_db": -16.0
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -105.584,
+              68.974
+            ],
+            [
+              -104.98604,
+              68.974
+            ],
+            [
+              -104.98604,
+              69.326
+            ],
+            [
+              -105.584,
+              69.326
+            ],
+            [
+              -105.584,
+              68.974
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "classified_fraction": 0.62,
+        "demo": true,
+        "period": "2024-11",
+        "threshold_db": -16.0
+      },
+      "type": "Feature"
+    }
+  ],
+  "notice": "Synthetic demonstration fixture. It is not an observation of Cambridge Bay.",
+  "type": "FeatureCollection"
+}

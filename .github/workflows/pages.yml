@@ -1,0 +1,52 @@
+name: Build and deploy site
+
+# The site is static. Live feeds that browsers can read (station weather, NASA imagery) are fetched by the
+# visitor's browser. Feeds that browsers cannot read (NSIDC sea-ice extent) are snapshotted here, so the
+# schedule below is what keeps them current: every six hours the site is rebuilt with a fresh snapshot.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "17 */6 * * *"
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install -e ".[dev]"
+      - name: Refresh live-feed snapshots
+        run: python -m arctic_passage_atlas live-feeds
+      - name: Refresh sea-ice concentration for the route planner
+        run: python -m arctic_passage_atlas ice-grid
+      - run: python -m ruff check .
+      - run: python -m pytest -q
+      # Fails if checksums, publication mode, demo labelling or live-feed provenance are inconsistent.
+      - run: python -m arctic_passage_atlas verify
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="How defence and security organisations can use Arctic Passage Atlas: Arctic environmental context, route and ice planning estimates, and a reproducible open-source method, with clear limits on what it will not do."
+    />
+    <meta name="theme-color" content="#06121b" />
+    <title>Defence and security · Arctic Passage Atlas</title>
+    <link rel="stylesheet" href="assets/site.css" /><link rel="stylesheet" href="assets/pro.css" />
+      <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%230b1e2b' stroke='%2324465b'/%3E%3Cpath d='M5 21C10 11 14 23 19 14S25 9 27 11' fill='none' stroke='%237bdff2' stroke-width='2.4' stroke-linecap='round'/%3E%3Ccircle cx='19' cy='14' r='2.4' fill='%23ffb454'/%3E%3C/svg%3E" />
+      <meta property="og:site_name" content="Arctic Passage Atlas" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Defence and security · Arctic Passage Atlas" />
+    <meta property="og:description" content="How defence and security organisations can use Arctic Passage Atlas: Arctic environmental context, route and ice planning estimates, and a reproducible open-source method, with clear limits on what it will not do." />
+    <meta name="twitter:card" content="summary" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <!-- chrome:header --><header class="site-header"><nav class="nav" aria-label="Primary"><a class="brand" href="index.html"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><circle cx="16" cy="16" r="14.5" fill="#0b1e2b" stroke="#24465b"/><path d="M5 21 C10 11 14 23 19 14 S25 9 27 11" fill="none" stroke="#7bdff2" stroke-width="2.2" stroke-linecap="round"/><circle cx="19" cy="14" r="2.3" fill="#ffb454"/></svg><span class="brand-text">Arctic Passage Atlas<small>Open geospatial method</small></span></a><button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button><div class="nav-links" id="nav-links"><a href="index.html">Home</a><a href="live.html">Live</a><a href="route.html">Route</a><a href="layers/change.html">Change</a><a href="layers/ice.html">Ice</a><a href="layers/vessels.html">Vessels</a><a href="methodology.html">Method</a><a href="contact.html">Contact</a></div></nav></header><!-- /chrome:header -->
+    <main id="main">
+      <section class="hero pro compact">
+        <div class="wrap">
+          <p class="eyebrow">Defence and security organisations</p>
+          <h1 style="max-width:22ch">Open Arctic environmental context for planning teams.</h1>
+          <p class="lede">
+            Ministries, coast guards, navies, contractors and research units work in the Arctic where sea ice, weather
+            and daylight decide what is possible. This project offers open, reproducible tools for that environmental
+            picture. It is deliberately not a targeting, tracking or surveillance system.
+          </p>
+          <div class="actions">
+            <a class="button" href="contact.html#enquire">Send an enquiry</a>
+            <a class="button secondary" href="route.html">Try the route planner</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="wrap">
+          <div class="section-head">
+            <p class="eyebrow num" data-n="01">Where it fits</p>
+            <h2>What defence and security teams can use it for.</h2>
+          </div>
+          <div class="grid">
+            <article class="card">
+              <p class="kicker">Environmental awareness</p>
+              <h3>Ice, weather and light</h3>
+              <p>Current station weather, NASA imagery and pan-Arctic sea-ice extent, with daily sea-ice concentration feeding the route planner. Each value states its source and date.</p>
+            </article>
+            <article class="card">
+              <p class="kicker">Logistics and exercises</p>
+              <h3>Route and timing estimates</h3>
+              <p>Shortest open-water paths between ports with sailing time, daylight, wind and wave forecasts, and an option to avoid sea ice above a chosen concentration. A first-pass planning aid for sustainment and exercise design.</p>
+            </article>
+            <article class="card">
+              <p class="kicker">Assurance</p>
+              <h3>A method you can inspect</h3>
+              <p>Open source under the MIT licence, with configuration in one file, checksummed outputs, tests and a verifier. Teams can review it, reproduce it on their own data and adapt the study area.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section alt">
+        <div class="wrap grid two">
+          <div>
+            <div class="section-head">
+              <p class="eyebrow num" data-n="02">Will not do</p>
+              <h2>Boundaries that do not change with the customer.</h2>
+            </div>
+            <div class="panel warn-panel">
+              <ul>
+                <li>No identifying, tracking or targeting of specific vessels, people or groups.</li>
+                <li>No inference of intent. An AIS gap is an event with an unknown cause; an unmatched radar detection is a detection. Neither is described as suspicious, hostile or evasive.</li>
+                <li>No operational navigation, ice routing or safety-of-life use. Outputs are planning estimates, not certified products.</li>
+                <li>No handling of classified or controlled material. Do not send it through this website or the contact form.</li>
+              </ul>
+            </div>
+          </div>
+          <div>
+            <div class="section-head">
+              <p class="eyebrow num" data-n="03">Deploying it</p>
+              <h2>Running it in your own environment.</h2>
+            </div>
+            <div class="panel">
+              <ul>
+                <li>The site is static files. It can be hosted on your own infrastructure, and the route planner runs in the browser, so entered ports and dates are not sent to this project.</li>
+                <li>The live feeds call public services (Environment Canada, NASA, Open-Meteo, OpenFreeMap) from the browser. A restricted network needs those hosts allowed, or the feeds replaced with mirrors.</li>
+                <li>No accreditation, security certification or clearance is claimed. This is an open-source project maintained by one person, with no service level.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="wrap">
+          <div class="section-head">
+            <p class="eyebrow num" data-n="04">Data terms</p>
+            <h2>Licences that matter for a government or contractor user.</h2>
+          </div>
+          <div class="table-wrap">
+            <table class="data" style="min-width:560px">
+              <thead><tr><th>Component</th><th>Terms</th><th>What it means</th></tr></thead>
+              <tbody>
+                <tr><td>Project code</td><td>MIT</td><td>Use, modify and redistribute with the licence notice.</td></tr>
+                <tr><td>Global Fishing Watch events</td><td>CC BY-NC 4.0</td><td>Non-commercial only. Contractors cannot build commercial products on this layer.</td></tr>
+                <tr><td>Open-Meteo forecasts</td><td>Free API non-commercial; paid plan for commercial</td><td>A funded programme should take a commercial plan.</td></tr>
+                <tr><td>Google Earth Engine</td><td>Non-commercial free; commercial licence otherwise</td><td>Needed for the Landsat and Sentinel-1 layers outside research.</td></tr>
+                <tr><td>NSIDC, NASA GIBS, Natural Earth, Environment Canada</td><td>Open, with attribution</td><td>Suitable for reuse. See the Sources page.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="chart-note">Check each provider's current terms before committing to a deployment. The Sources page lists them.</p>
+        </div>
+      </section>
+
+      <section class="section alt">
+        <div class="wrap">
+          <div class="panel cta-band">
+            <div>
+              <p class="eyebrow" style="margin:0 0 .3rem">Talk to us</p>
+              <h3 style="font-size:1.35rem">Review the method, adapt it to your area, or plan a validation.</h3>
+              <p class="sub" style="margin:.2rem 0 0">Choose "Defence or security organisation" as the topic. Replies are by email as time allows.</p>
+            </div>
+            <div class="actions" style="margin:0">
+              <a class="button" href="contact.html#enquire">Contact and support</a>
+              <a class="button secondary" href="sources.html">Sources and licences</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- chrome:footer --><footer class="site-footer pro"><div class="wrap"><div class="footer-grid"><div><strong>Arctic Passage Atlas</strong><p style="margin:.5rem 0 0;max-width:34ch">An open-source method for observing Arctic surface, sea-ice and vessel-event change from public data. By Maheep Chowdhary.</p></div><div><h4>Project</h4><a href="index.html">Overview</a><a href="live.html">Live conditions</a><a href="methodology.html">Method and limits</a><a href="sources.html">Sources and licences</a></div><div><h4>Layers</h4><a href="layers/change.html">Surface change</a><a href="layers/ice.html">Sea ice</a><a href="layers/vessels.html">Vessel events</a></div><div><h4>Company</h4><a href="contact.html">Contact and support</a><a href="defence.html">Defence and security</a><a href="about.html">About the author</a><a href="sources.html#licences">Licences</a><a href="route.html">Route planner</a></div></div><p class="footer-legal">Environmental planning context only. Not for targeting, tracking, surveillance or navigation. No accreditation or clearance is claimed.</p></div></footer><!-- /chrome:footer -->
+      <script src="assets/ui.js" defer></script>
+  </body>
+</html>

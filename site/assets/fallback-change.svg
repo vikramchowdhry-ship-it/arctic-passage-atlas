@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="t d">
+<title id="t">Surface-change candidates static fallback</title><desc id="d">DEMONSTRATION FIXTURE · not an observation. 3 mapped features shown. AOI outline only; no basemap.</desc>
+<rect width="1200" height="675" fill="#071521"/>
+<rect x="345.5" y="70.0" width="509.0" height="520.0" fill="#0c2232" stroke="#83f3c7" stroke-width="2" stroke-dasharray="10 8"/>
+<path d="M 589.8 392.4 L 625.4 392.4 L 625.4 345.6 L 589.8 345.6 L 589.8 392.4 Z" fill="#ffb454" fill-opacity=".34" stroke="#ffb454" stroke-width="2" fill-rule="evenodd"/><path d="M 635.6 319.6 L 686.5 319.6 L 686.5 288.4 L 635.6 288.4 L 635.6 319.6 Z" fill="#ffb454" fill-opacity=".34" stroke="#ffb454" stroke-width="2" fill-rule="evenodd"/><path d="M 549.1 272.8 L 574.6 272.8 L 574.6 231.2 L 549.1 231.2 L 549.1 272.8 Z" fill="#ffb454" fill-opacity=".34" stroke="#ffb454" stroke-width="2" fill-rule="evenodd"/>
+<text x="80" y="42" fill="#d9edf7" font-family="system-ui,sans-serif" font-size="28" font-weight="700">Surface-change candidates</text>
+<text x="345.5" y="60.0" fill="#8ba9b9" font-family="system-ui,sans-serif" font-size="14">-105.65°, 69.35°</text>
+<text x="854.5" y="610.0" text-anchor="end" fill="#8ba9b9" font-family="system-ui,sans-serif" font-size="14">-104.55°, 68.95°</text>
+<text x="1120" y="42" text-anchor="end" fill="#8ba9b9" font-family="system-ui,sans-serif" font-size="14">AOI outline only · no basemap</text>
+<circle cx="82" cy="615" r="6" fill="#ffb454"/><text x="94" y="620" fill="#d9edf7" font-family="system-ui,sans-serif" font-size="15">change candidate</text>
+<text x="80" y="665" fill="#8ba9b9" font-family="system-ui,sans-serif" font-size="14">DEMONSTRATION FIXTURE · not an observation · 3 mapped features shown</text>
+</svg>

@@ -1,0 +1,325 @@
+{
+ "note": "Positions are the sea approach to each port, not berths. Chosen as well-known container or trade ports; not an endorsement or a complete list.",
+ "ports": [
+  {
+   "id": "rtm",
+   "name": "Rotterdam",
+   "country": "Netherlands",
+   "region": "Europe",
+   "lon": 4.05,
+   "lat": 51.97
+  },
+  {
+   "id": "ham",
+   "name": "Hamburg (Elbe approach)",
+   "country": "Germany",
+   "region": "Europe",
+   "lon": 8.0,
+   "lat": 53.95
+  },
+  {
+   "id": "sou",
+   "name": "Southampton",
+   "country": "United Kingdom",
+   "region": "Europe",
+   "lon": -1.3,
+   "lat": 50.77
+  },
+  {
+   "id": "alg",
+   "name": "Algeciras",
+   "country": "Spain",
+   "region": "Europe",
+   "lon": -5.43,
+   "lat": 36.1
+  },
+  {
+   "id": "vlc",
+   "name": "Valencia",
+   "country": "Spain",
+   "region": "Europe",
+   "lon": -0.3,
+   "lat": 39.43
+  },
+  {
+   "id": "mrs",
+   "name": "Marseille",
+   "country": "France",
+   "region": "Europe",
+   "lon": 5.3,
+   "lat": 43.3
+  },
+  {
+   "id": "pir",
+   "name": "Piraeus",
+   "country": "Greece",
+   "region": "Europe",
+   "lon": 23.6,
+   "lat": 37.93
+  },
+  {
+   "id": "ist",
+   "name": "Istanbul",
+   "country": "Turkey",
+   "region": "Europe",
+   "lon": 29.0,
+   "lat": 41.1
+  },
+  {
+   "id": "rkv",
+   "name": "Reykjavik",
+   "country": "Iceland",
+   "region": "Europe",
+   "lon": -21.95,
+   "lat": 64.17
+  },
+  {
+   "id": "mur",
+   "name": "Murmansk",
+   "country": "Russia",
+   "region": "Europe",
+   "lon": 33.1,
+   "lat": 69.0
+  },
+  {
+   "id": "tos",
+   "name": "Tromsø",
+   "country": "Norway",
+   "region": "Europe",
+   "lon": 18.95,
+   "lat": 69.7
+  },
+  {
+   "id": "psd",
+   "name": "Port Said",
+   "country": "Egypt",
+   "region": "Africa and Middle East",
+   "lon": 32.35,
+   "lat": 31.3
+  },
+  {
+   "id": "jed",
+   "name": "Jeddah",
+   "country": "Saudi Arabia",
+   "region": "Africa and Middle East",
+   "lon": 39.1,
+   "lat": 21.5
+  },
+  {
+   "id": "jea",
+   "name": "Jebel Ali (Dubai)",
+   "country": "United Arab Emirates",
+   "region": "Africa and Middle East",
+   "lon": 55.0,
+   "lat": 25.05
+  },
+  {
+   "id": "dkr",
+   "name": "Dakar",
+   "country": "Senegal",
+   "region": "Africa and Middle East",
+   "lon": -17.4,
+   "lat": 14.7
+  },
+  {
+   "id": "los",
+   "name": "Lagos",
+   "country": "Nigeria",
+   "region": "Africa and Middle East",
+   "lon": 3.4,
+   "lat": 6.4
+  },
+  {
+   "id": "mba",
+   "name": "Mombasa",
+   "country": "Kenya",
+   "region": "Africa and Middle East",
+   "lon": 39.7,
+   "lat": -4.1
+  },
+  {
+   "id": "dur",
+   "name": "Durban",
+   "country": "South Africa",
+   "region": "Africa and Middle East",
+   "lon": 31.05,
+   "lat": -29.88
+  },
+  {
+   "id": "cpt",
+   "name": "Cape Town",
+   "country": "South Africa",
+   "region": "Africa and Middle East",
+   "lon": 18.4,
+   "lat": -33.9
+  },
+  {
+   "id": "bom",
+   "name": "Mumbai",
+   "country": "India",
+   "region": "Asia and Oceania",
+   "lon": 72.85,
+   "lat": 18.9
+  },
+  {
+   "id": "cmb",
+   "name": "Colombo",
+   "country": "Sri Lanka",
+   "region": "Asia and Oceania",
+   "lon": 79.8,
+   "lat": 6.95
+  },
+  {
+   "id": "sin",
+   "name": "Singapore",
+   "country": "Singapore",
+   "region": "Asia and Oceania",
+   "lon": 103.85,
+   "lat": 1.23
+  },
+  {
+   "id": "hkg",
+   "name": "Hong Kong",
+   "country": "China",
+   "region": "Asia and Oceania",
+   "lon": 114.2,
+   "lat": 22.3
+  },
+  {
+   "id": "sha",
+   "name": "Shanghai",
+   "country": "China",
+   "region": "Asia and Oceania",
+   "lon": 122.1,
+   "lat": 31.0
+  },
+  {
+   "id": "pus",
+   "name": "Busan",
+   "country": "South Korea",
+   "region": "Asia and Oceania",
+   "lon": 129.05,
+   "lat": 35.07
+  },
+  {
+   "id": "yok",
+   "name": "Yokohama",
+   "country": "Japan",
+   "region": "Asia and Oceania",
+   "lon": 139.7,
+   "lat": 35.4
+  },
+  {
+   "id": "syd",
+   "name": "Sydney",
+   "country": "Australia",
+   "region": "Asia and Oceania",
+   "lon": 151.3,
+   "lat": -33.9
+  },
+  {
+   "id": "akl",
+   "name": "Auckland",
+   "country": "New Zealand",
+   "region": "Asia and Oceania",
+   "lon": 174.8,
+   "lat": -36.8
+  },
+  {
+   "id": "hnl",
+   "name": "Honolulu",
+   "country": "United States",
+   "region": "Americas",
+   "lon": -157.9,
+   "lat": 21.3
+  },
+  {
+   "id": "yvr",
+   "name": "Vancouver (Juan de Fuca approach)",
+   "country": "Canada",
+   "region": "Americas",
+   "lon": -124.0,
+   "lat": 48.35
+  },
+  {
+   "id": "lax",
+   "name": "Los Angeles",
+   "country": "United States",
+   "region": "Americas",
+   "lon": -118.3,
+   "lat": 33.7
+  },
+  {
+   "id": "bal",
+   "name": "Balboa (Panama, Pacific side)",
+   "country": "Panama",
+   "region": "Americas",
+   "lon": -79.55,
+   "lat": 8.88
+  },
+  {
+   "id": "cri",
+   "name": "Cristóbal (Panama, Atlantic side)",
+   "country": "Panama",
+   "region": "Americas",
+   "lon": -79.92,
+   "lat": 9.38
+  },
+  {
+   "id": "iah",
+   "name": "Houston",
+   "country": "United States",
+   "region": "Americas",
+   "lon": -94.8,
+   "lat": 29.3
+  },
+  {
+   "id": "nyc",
+   "name": "New York",
+   "country": "United States",
+   "region": "Americas",
+   "lon": -74.0,
+   "lat": 40.5
+  },
+  {
+   "id": "yhz",
+   "name": "Halifax",
+   "country": "Canada",
+   "region": "Americas",
+   "lon": -63.5,
+   "lat": 44.6
+  },
+  {
+   "id": "nuk",
+   "name": "Nuuk",
+   "country": "Greenland",
+   "region": "Americas",
+   "lon": -51.8,
+   "lat": 64.2
+  },
+  {
+   "id": "ssz",
+   "name": "Santos",
+   "country": "Brazil",
+   "region": "Americas",
+   "lon": -46.3,
+   "lat": -24.0
+  },
+  {
+   "id": "bue",
+   "name": "Buenos Aires",
+   "country": "Argentina",
+   "region": "Americas",
+   "lon": -57.8,
+   "lat": -34.6
+  },
+  {
+   "id": "vap",
+   "name": "Valparaíso",
+   "country": "Chile",
+   "region": "Americas",
+   "lon": -71.7,
+   "lat": -33.03
+  }
+ ]
+}

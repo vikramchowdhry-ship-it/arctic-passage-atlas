@@ -1,0 +1,58 @@
+{
+  "demo": true,
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -105.342,
+          69.126
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "cell_id": "DEMO-S01",
+        "demo": true,
+        "detections": 1,
+        "interpretation": "Aggregated unmatched SAR-detection cell; not proof of AIS disabling",
+        "matched": false
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -104.979,
+          69.22999999999999
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "cell_id": "DEMO-S02",
+        "demo": true,
+        "detections": 2,
+        "interpretation": "Aggregated unmatched SAR-detection cell; not proof of AIS disabling",
+        "matched": false
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -104.814,
+          69.098
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "cell_id": "DEMO-S03",
+        "demo": true,
+        "detections": 1,
+        "interpretation": "Aggregated unmatched SAR-detection cell; not proof of AIS disabling",
+        "matched": false
+      },
+      "type": "Feature"
+    }
+  ],
+  "notice": "Synthetic demonstration fixture. It is not an observation of Cambridge Bay.",
+  "type": "FeatureCollection"
+}

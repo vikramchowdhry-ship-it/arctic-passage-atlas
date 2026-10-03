@@ -1,0 +1,66 @@
+{
+  "config": "configs/cambridge-bay.json",
+  "config_sha256": "db213c61f9434d5e27275db71bbd214165124f917ef98b21fbfc32fb794e754e",
+  "datasets": {
+    "change": "LANDSAT/LC08/C02/T1_L2",
+    "ice": "COPERNICUS/S1_GRD",
+    "ice_reference": "NOAA/CDR/OISST/V2_1",
+    "sar_detections": "public-global-sar-presence:latest",
+    "vessel_events": "public-global-gaps-events:latest"
+  },
+  "demo_data": true,
+  "generated_at": "2026-10-03T17:47:45+00:00",
+  "git_commit": null,
+  "mode": "demo",
+  "notes": [
+    "All analytical features and summary values are deterministic synthetic fixtures.",
+    "The configured AOI is real; the demonstration observations are not."
+  ],
+  "outputs": {
+    "data/processed/aoi.geojson": {
+      "bytes": 761,
+      "sha256": "f4b94c3f15c3abbad887727b04dcd2cd385072fcb862d00133c7788de03176ee"
+    },
+    "data/processed/change_candidates.geojson": {
+      "bytes": 2433,
+      "sha256": "e6fb475ebeeaa5b0d2c74fac2135fe64393355a5803dcf766071babb7b6f3a02"
+    },
+    "data/processed/change_summary.json": {
+      "bytes": 429,
+      "sha256": "de5c6efa0f1801a789ea2470ff87563bf37ed021f538f7747de3de1a9d2cccc6"
+    },
+    "data/processed/ice_extent.geojson": {
+      "bytes": 3008,
+      "sha256": "3ba0b8bb7ea4e77c24f49b43b915e9b4f95ce537cbfee530da6039ccd44a3693"
+    },
+    "data/processed/ice_summary.json": {
+      "bytes": 3252,
+      "sha256": "15902968bd0639762bd0c6ba04dcc908381b56bfcb530553a6ee1e9f3c727024"
+    },
+    "data/processed/sar_detections.geojson": {
+      "bytes": 1412,
+      "sha256": "393e58fd1817d503eab51b5411de46db950ef6b3b95b6d884d0d045d5a08355f"
+    },
+    "data/processed/vessel_events.geojson": {
+      "bytes": 1856,
+      "sha256": "cd959b7f01fbe43d146906f86641b88711db4c3d1c1fd533363f1425d80701b2"
+    },
+    "data/processed/vessel_summary.json": {
+      "bytes": 842,
+      "sha256": "965dca96f70c512cf24a02ab068dc329dd4de35597a874288a18340f4304f64b"
+    },
+    "site/assets/fallback-change.svg": {
+      "bytes": 1866,
+      "sha256": "4d59956f6cb01dee4af15d7431cb0d760ee54a1a25b38962810863f05c63d7e2"
+    },
+    "site/assets/fallback-ice.svg": {
+      "bytes": 2479,
+      "sha256": "ef087b7a6424363f79d19d851d73bf85a4d095c39d1e0aa0f599ee40f1f75178"
+    },
+    "site/assets/fallback-vessels.svg": {
+      "bytes": 2028,
+      "sha256": "76aac49c7ed47005a6ef15f8d12685478a44d706f0f797686d83d857d39e179b"
+    }
+  },
+  "schema_version": 1
+}

@@ -1,0 +1,67 @@
+{
+  "project": {
+    "name": "Arctic Passage Atlas",
+    "slug": "cambridge-bay",
+    "owner": "Maheep Chowdhary",
+    "framing": "Open-source methodology for observing Arctic environmental and maritime change",
+    "license": "MIT"
+  },
+  "aoi": {
+    "name": "Cambridge Bay passage and port study area",
+    "description": "A compact study area around Cambridge Bay, Nunavut. The bounds are a project decision, not an official administrative boundary.",
+    "bbox": [-105.65, 68.95, -104.55, 69.35],
+    "center": [-105.10, 69.15],
+    "display_projection": "EPSG:3413",
+    "shore_reference_point": {
+      "name": "Cambridge Bay (hamlet)",
+      "lon": -105.05278,
+      "lat": 69.11389,
+      "source": "https://en.wikipedia.org/wiki/Cambridge_Bay, read 2026-10-02"
+    }
+  },
+  "change": {
+    "dataset": "LANDSAT/LC08/C02/T1_L2",
+    "before": ["2014-07-01", "2014-09-01"],
+    "after": ["2024-07-01", "2024-09-01"],
+    "cloud_cover_max": 60,
+    "change_threshold": 0.12,
+    "sensitivity": 0.03,
+    "mask_dataset": "ESA/WorldCover/v200",
+    "mask_exclude_classes": [80],
+    "vector_scale_m": 30,
+    "minimum_candidate_pixels": 5,
+    "threshold_status": "requires_aoi_calibration",
+    "manual_review_status": "pending"
+  },
+  "ice": {
+    "dataset": "COPERNICUS/S1_GRD",
+    "reference_dataset": "NOAA/CDR/OISST/V2_1",
+    "land_mask_dataset": "ESA/WorldCover/v200",
+    "year": 2024,
+    "instrument_mode": "AUTO",
+    "polarization": "AUTO",
+    "orbit_pass": "BOTH",
+    "thresholds_db": { "HH": null, "VV": null, "HV": null, "VH": null },
+    "demo_threshold_db": -16.0,
+    "threshold_status": "requires_aoi_calibration",
+    "water_mask_expected_fraction": [0.10, 0.95],
+    "sensitivity_db": 2.0,
+    "snapshot_months": [2, 5, 8, 11],
+    "vector_scale_m": 240
+  },
+  "vessels": {
+    "events_dataset": "public-global-gaps-events:latest",
+    "sar_dataset": "public-global-sar-presence:latest",
+    "start_date": "2023-07-01",
+    "end_date": "2024-12-01",
+    "minimum_gap_minutes": 720,
+    "sar_unmatched_only": true,
+    "max_events": 1000
+  },
+  "site": {
+    "map_zoom": 7,
+    "external_basemap": "OpenFreeMap dark style (OpenStreetMap data)",
+    "data_accessed": null
+  }
+}
+

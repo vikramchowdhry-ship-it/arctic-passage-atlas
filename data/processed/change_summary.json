@@ -1,0 +1,16 @@
+{
+  "after_period": [
+    "2024-07-01",
+    "2024-09-01"
+  ],
+  "before_period": [
+    "2014-07-01",
+    "2014-09-01"
+  ],
+  "candidate_area_km2": 2.74,
+  "candidate_count": 3,
+  "claim": "Candidates require manual and documentary validation; they are not confirmed construction.",
+  "mode": "demo",
+  "notice": "Synthetic demonstration fixture. It is not an observation of Cambridge Bay.",
+  "threshold": 0.12
+}

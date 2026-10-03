@@ -1,0 +1,27 @@
+{
+  "air_temperature": {
+    "unit": "\u00b0C",
+    "value": -1.2
+  },
+  "observed_at": "2026-10-03T16:20:00.000Z",
+  "relative_humidity": {
+    "unit": "%",
+    "value": 81
+  },
+  "retrieved_at": "2026-10-03T16:21:21+00:00",
+  "source": "Environment and Climate Change Canada, MSC GeoMet real-time observations (SWOB)",
+  "source_url": "https://api.weather.gc.ca/collections/swob-realtime/items",
+  "station": "CAMBRIDGE BAY GSN",
+  "station_pressure": {
+    "unit": "hPa",
+    "value": 1010.6
+  },
+  "wind_direction_10m_10min": {
+    "unit": "\u00b0",
+    "value": 350
+  },
+  "wind_speed_10m_10min": {
+    "unit": "km/h",
+    "value": 12.0
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "caveat": "Passive microwave, 25 km cells, analysis of one past day and not a forecast. It misses thin new ice, can underestimate concentration during summer melt and is unreliable at the coast. Not an ice chart. Use Canadian Ice Service or national ice service charts for navigation.",
+  "convention": "8-bit PNG, value is percent ice concentration, row 0 is the north edge",
+  "coverage": "Northern Hemisphere only. Cells south of 30 N and the Southern Ocean are 0 and are not ice-free evidence.",
+  "dataset_page": "https://nsidc.org/data/g02135",
+  "date": "2026-10-02",
+  "grids": {
+    "arctic": {
+      "bbox": [
+        -142.0,
+        60.0,
+        -60.0,
+        78.5
+      ],
+      "cells_at_or_above_15_percent": 475937,
+      "cols": 1640,
+      "png_sha256": "df7ca982adb3a1278e79eb6373f3a061a6d9afd91be3b597c9d2b3543cf52e85",
+      "rows": 925
+    },
+    "world": {
+      "bbox": [
+        -180.0,
+        -78.0,
+        180.0,
+        84.0
+      ],
+      "cells_at_or_above_15_percent": 279325,
+      "cols": 3600,
+      "png_sha256": "3b1ce39d5ad61d6f3c3e3dd09d72b120dc3a14a0ded33a1426df9ae409a42217",
+      "rows": 1620
+    }
+  },
+  "retrieved_at": "2026-10-03T18:11:17+00:00",
+  "source": "NSIDC Sea Ice Index, version 4 (G02135), daily Northern Hemisphere sea-ice concentration",
+  "source_sha256": "ea83fc589b8d5ece8de865a951f9c77e945f46e1dd253bbe9cf507342e481ba5",
+  "source_url": "https://noaadata.apps.nsidc.org/NOAA/G02135/north/daily/geotiff/2026/10_Oct/N_20261002_concentration_v4.0.tif"
+}

@@ -1,0 +1,115 @@
+{
+  "demo": true,
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -105.122,
+              69.102
+            ],
+            [
+              -105.045,
+              69.102
+            ],
+            [
+              -105.045,
+              69.138
+            ],
+            [
+              -105.122,
+              69.138
+            ],
+            [
+              -105.122,
+              69.102
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "candidate_id": "DEMO-C01",
+        "change_magnitude": 0.23,
+        "demo": true,
+        "interpretation": "Unverified surface-change candidate"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -105.023,
+              69.158
+            ],
+            [
+              -104.913,
+              69.158
+            ],
+            [
+              -104.913,
+              69.182
+            ],
+            [
+              -105.023,
+              69.182
+            ],
+            [
+              -105.023,
+              69.158
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "candidate_id": "DEMO-C02",
+        "change_magnitude": 0.18,
+        "demo": true,
+        "interpretation": "Unverified surface-change candidate"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          [
+            [
+              -105.21000000000001,
+              69.194
+            ],
+            [
+              -105.155,
+              69.194
+            ],
+            [
+              -105.155,
+              69.226
+            ],
+            [
+              -105.21000000000001,
+              69.226
+            ],
+            [
+              -105.21000000000001,
+              69.194
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "properties": {
+        "candidate_id": "DEMO-C03",
+        "change_magnitude": 0.16,
+        "demo": true,
+        "interpretation": "Unverified surface-change candidate"
+      },
+      "type": "Feature"
+    }
+  ],
+  "notice": "Synthetic demonstration fixture. It is not an observation of Cambridge Bay.",
+  "type": "FeatureCollection"
+}
