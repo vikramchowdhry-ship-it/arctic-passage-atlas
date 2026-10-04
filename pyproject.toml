@@ -13,6 +13,8 @@ authors = [{ name = "Maheep Chowdhary" }]
 dependencies = [
   "earthengine-api>=1.4,<2",
   "gfw-api-python-client>=1.4,<2",
+  "numpy>=1.26",
+  "Pillow>=10",
 ]
 
 [project.optional-dependencies]
