@@ -100,6 +100,42 @@
 
   var map = null, ready = false, hidden = {}, bySource = { digitraffic: [], relay: [] }, state = { digitraffic: "…", relay: cfg.aisRelayUrl ? "…" : "not connected" };
   var types = null, typesAt = 0;
+  var presence = null, presenceOn = true;   // 30-day AIS presence from Global Fishing Watch (anonymous cells)
+
+  function presenceGeojson() {
+    var rows = presence ? presence.data : [];
+    return { type: "FeatureCollection", features: rows.map(function (r) {
+      return { type: "Feature", properties: { vessels: r[2], hours: r[3], cls: JSON.stringify(r[4]) }, geometry: { type: "Point", coordinates: [r[1], r[0]] } };
+    }) };
+  }
+  function addPresence() {
+    if (!map || !ready || !presence || map.getSource("presence")) return;
+    map.addSource("presence", { type: "geojson", data: presenceGeojson() });
+    map.addLayer({ id: "presence-dots", type: "circle", source: "presence",
+      layout: { visibility: presenceOn ? "visible" : "none" },
+      paint: {
+        "circle-radius": ["interpolate", ["linear"], ["zoom"], 1, ["interpolate", ["linear"], ["get", "vessels"], 1, 1.4, 20, 3.2, 100, 5], 6, ["interpolate", ["linear"], ["get", "vessels"], 1, 4, 20, 9, 100, 15]],
+        "circle-color": ["interpolate", ["linear"], ["get", "vessels"], 1, "#35607a", 5, "#7bdff2", 20, "#ffd479", 60, "#ff9b54", 150, "#ff5d6c"],
+        "circle-opacity": 0.55, "circle-stroke-width": 0 } }, map.getLayer("ais-dots") ? "ais-dots" : undefined);
+    map.on("click", "presence-dots", function (e) {
+      var f = e.features[0].properties, parts = [], cls = {};
+      try { cls = JSON.parse(f.cls); } catch (err) { cls = {}; }
+      Object.keys(cls).forEach(function (k) { parts.push((CLASSES[k] ? CLASSES[k][0] : k) + " " + cls[k]); });
+      new maplibregl.Popup({ offset: 8 }).setLngLat(e.lngLat).setHTML("<strong>" + esc(f.vessels) + " vessel" + (Number(f.vessels) === 1 ? "" : "s") + "</strong> in this 0.2° cell<br>" + esc(Math.round(f.hours)) + " vessel-hours · " +
+        esc(presence.date_start) + " to " + esc(presence.date_end) + "<br>" + esc(parts.join(", ")) + "<br><em>Anonymous AIS presence, Global Fishing Watch. Not live.</em>").addTo(map);
+    });
+    map.on("mouseenter", "presence-dots", function () { map.getCanvas().style.cursor = "pointer"; });
+    map.on("mouseleave", "presence-dots", function () { map.getCanvas().style.cursor = ""; });
+  }
+  function loadPresence() {
+    if (presence) return Promise.resolve();
+    var note = $("#presence-note");
+    return getJson("data/live/gfw_presence.json", 60000).then(function (d) {
+      presence = d;
+      if (note) note.textContent = d.date_start + " to " + d.date_end + ", " + d.cells.toLocaleString("en-US") + " cells. " + d.license + ".";
+      addPresence();
+    }).catch(function () { if (note) note.textContent = "The shipping-presence file could not be loaded."; });
+  }
 
   function all() { return bySource.digitraffic.concat(bySource.relay); }
   function geojson() {
@@ -178,6 +214,13 @@
       map.on("mouseenter", "ais-dots", function () { map.getCanvas().style.cursor = "pointer"; });
       map.on("mouseleave", "ais-dots", function () { map.getCanvas().style.cursor = ""; });
       ready = true; draw();
+      if (presenceOn) loadPresence();
+    });
+    var box = $("#presence-on");
+    if (box) box.addEventListener("change", function () {
+      presenceOn = box.checked;
+      if (presenceOn && !presence) { loadPresence(); return; }
+      if (map && map.getLayer("presence-dots")) map.setLayoutProperty("presence-dots", "visibility", presenceOn ? "visible" : "none");
     });
     var lt = $("#ais-lakes");
     if (lt) lt.addEventListener("click", function (e) {

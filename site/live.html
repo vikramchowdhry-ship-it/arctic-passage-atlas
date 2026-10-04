@@ -189,12 +189,17 @@
           <div class="section-head">
             <p class="eyebrow num" data-n="06">Vessels</p>
             <h2>AIS-reported positions in the Arctic and its approaches.</h2>
-            <p>Anonymous positions refreshed every minute. Live now over the Baltic Sea and the Gulf of Bothnia, up to about 66°N, from Finland's open AIS feed. The Arctic proper needs an AIS relay with a key, which is set up separately. No names, identifiers or destinations are shown. This is context, not a tracking service.</p>
+            <p>Two layers. The coloured cells show where ships were seen over the last 30 days across the Alaskan, Canadian, Greenland and Siberian Arctic, from Global Fishing Watch satellite AIS, anonymised and a few days old. The dots are live positions, refreshed every minute: the Baltic Sea and Gulf of Bothnia from Finland's open feed, and the Arctic from the AIS relay when it is connected. No names, identifiers or destinations are shown. This is context, not a tracking service.</p>
           </div>
           <div class="panel" id="ais-panel">
             <p class="form-status" id="ais-status" role="status">Checking…</p>
             <div class="kpis" style="margin-bottom:1rem"><div class="kpi"><div class="label">Positions shown</div><div class="value" id="ais-total">—</div></div><div class="kpi"><div class="label">North of 60°N</div><div class="value" id="ais-north">—</div></div></div>
             <div id="ais-map-wrap">
+              <div class="layer-bar" id="presence-bar">
+                <label class="layer-ctl"><input type="checkbox" id="presence-on" checked /><span>Shipping presence, last 30 days (not live)</span></label>
+                <span class="muted" id="presence-note" style="font-size:.8rem">Loading…</span>
+                <span class="muted" style="font-size:.8rem">Fewer vessels <span style="display:inline-block;width:90px;height:.6rem;border-radius:4px;vertical-align:middle;background:linear-gradient(90deg,#35607a,#7bdff2,#ffd479,#ff9b54,#ff5d6c)"></span> more vessels per cell</span>
+              </div>
               <div class="layer-bar" id="ais-legend" role="group" aria-label="Vessel classes"></div>
               <div class="map tall" id="ais-map" aria-label="Map of AIS-reported vessel positions"></div>
             </div>
@@ -209,7 +214,7 @@
           <div class="panel warn-panel" style="margin-top:1rem">
             <h3>How to read it</h3>
             <ul>
-              <li>Source for the live Baltic layer: Fintraffic, digitraffic.fi, licence CC BY 4.0. The Arctic relay, when connected, uses AISStream. These are positions that terrestrial receivers heard. Open ocean and much of the high Arctic have no receivers, so many vessels are not shown. A missing dot is not a missing vessel.</li>
+              <li>Shipping presence: Global Fishing Watch (CC BY-NC 4.0, non-commercial), satellite and terrestrial AIS, aggregated to 0.2° cells. Source for the live Baltic layer: Fintraffic, digitraffic.fi, licence CC BY 4.0. The Arctic relay, when connected, uses AISStream. These are positions that terrestrial receivers heard. Open ocean and much of the high Arctic have no receivers, so many vessels are not shown. A missing dot is not a missing vessel.</li>
               <li>The site does not label any vessel suspicious, and it does not call a gap in AIS coverage a dark vessel: a gap has many ordinary causes, including reception, equipment and power. The Vessels layer treats gap events and unmatched radar detections as events with unknown cause.</li>
               <li>Military, law-enforcement and search-and-rescue vessels are not published. Not for navigation, enforcement or surveillance.</li>
             </ul>

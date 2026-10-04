@@ -32,6 +32,8 @@ def _parser() -> argparse.ArgumentParser:
     sub.add_parser("demo", help="Generate visibly labelled synthetic fixtures and site data")
     live = sub.add_parser("live", help="Generate authenticated provider-backed outputs")
     live.add_argument("--parts", nargs="+", choices=["change", "ice", "vessels"], default=["change", "ice", "vessels"])
+    presence = sub.add_parser("gfw-presence", help="Build the anonymous 30-day Arctic shipping presence layer from Global Fishing Watch")
+    presence.add_argument("--days", type=int, default=30, help="Days of AIS history to aggregate")
     sub.add_parser("ice-grid", help="Download the newest NSIDC sea-ice concentration and resample it for the Route page")
     sub.add_parser("route-grid", help="Rebuild the land/water grid used by the Route page (downloads Natural Earth land)")
     sub.add_parser("pages", help="Re-apply the shared header, footer and stylesheet links to every site page")
@@ -64,6 +66,12 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "live":
         outputs = run_live(config, args.parts)
         print(f"Generated {len(outputs)} outputs in live mode.")
+        return 0
+    if args.command == "gfw-presence":
+        from .gfw_presence import build_presence
+
+        for path in build_presence(config, days=args.days):
+            print(f"Wrote {path.relative_to(config.root)}")
         return 0
     if args.command == "ice-grid":
         from .ice_grid import build_ice_grids

@@ -97,6 +97,7 @@ python -m arctic_passage_atlas gfw-fixture
 python -m arctic_passage_atlas verify
 python -m arctic_passage_atlas serve [--port 8000]
 python -m arctic_passage_atlas live-feeds     # refresh third-party snapshots (sea-ice extent, station)
+python -m arctic_passage_atlas gfw-presence   # anonymous 30-day Arctic shipping presence (needs GFW_API_ACCESS_TOKEN)
 python -m arctic_passage_atlas ice-grid       # newest NSIDC sea-ice concentration, resampled for the Route page
 python -m arctic_passage_atlas route-grid     # rebuild the Arctic and worldwide land/water grids (downloads Natural Earth)
 python -m arctic_passage_atlas pages          # re-apply the shared header, footer and metadata

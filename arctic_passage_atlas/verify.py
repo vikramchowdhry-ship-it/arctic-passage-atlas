@@ -114,6 +114,15 @@ def verify_project(config: ProjectConfig) -> list[str]:
     ice = json.loads((root / "site" / "data" / "route" / "ice_grid.json").read_text(encoding="utf-8"))
     if not (ice.get("retrieved_at") and ice.get("source_url") and ice.get("date") and ice.get("caveat")):
         raise VerificationError("Sea-ice route grid lacks provenance or caveat fields")
+    presence = root / "site" / "data" / "live" / "gfw_presence.json"
+    if presence.exists():
+        text = presence.read_text(encoding="utf-8")
+        meta = json.loads(text)
+        if not (meta.get("retrieved_at") and meta.get("source_url") and meta.get("license") and meta.get("caveat")):
+            raise VerificationError("Shipping-presence snapshot lacks provenance, licence or caveat fields")
+        for key in ("mmsi", "imo", "shipname", "callsign", "vesselid", "flag"):
+            if f'"{key}"' in text.lower():
+                raise VerificationError(f"Shipping-presence snapshot contains an identifier field: {key}")
     messages.append("live feeds: third-party notice and snapshot provenance present")
     return messages
 
