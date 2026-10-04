@@ -96,6 +96,21 @@
               it is not a substitute for an ice chart.
             </p>
           </div>
+          <div class="panel warn-panel" style="margin:1.2rem 0">
+            <h3>Calibration attempt: not validated</h3>
+            <p class="sub" style="margin-bottom:.4rem">
+              We tested whether one backscatter threshold on real 2024 Sentinel-1 Extra Wide data reproduces the seasonal ice
+              cycle that NSIDC reports for this area. It does not. The best HH threshold (-24 dB) correlates 0.40 with the
+              reference and calls open water ice in August and September. HV sits near the noise floor, with winter ice and
+              summer water both near -30 dB. Both are worse than guessing the yearly average.
+            </p>
+            <p class="sub" style="margin-bottom:0">
+              The reference is coarse (25 km cells, 44 km study box), so the test is not conclusive either way. Until a finer
+              reference such as Canadian Ice Service charts is used, the ice map on this page stays a labelled demonstration.
+              Details and the code to repeat it:
+              <a href="https://github.com/vikramchowdhry-ship-it/arctic-passage-atlas/blob/main/docs/CALIBRATION.md">docs/CALIBRATION.md</a>.
+            </p>
+          </div>
           <h2>Principal limitations</h2>
           <ul>
             <li>

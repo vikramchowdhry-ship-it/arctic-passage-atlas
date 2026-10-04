@@ -1,0 +1,199 @@
+{
+  "acquisition": {
+    "candidate_counts": {
+      "EW/HV": 83,
+      "IW/VH": 0
+    },
+    "instrument_mode": "EW",
+    "polarization": "HV"
+  },
+  "dataset": "COPERNICUS/S1_GRD",
+  "mode": "calibration_inventory",
+  "monthly": [
+    {
+      "backscatter_percentiles_db": {
+        "p25": -36.88,
+        "p5": -39.63,
+        "p50": -30.12,
+        "p75": -24.37,
+        "p95": -20.37
+      },
+      "month": 1,
+      "month_name": "Jan",
+      "period": "2024-01",
+      "period_end": "2024-02-01",
+      "period_start": "2024-01-01",
+      "scene_count": 8
+    },
+    {
+      "backscatter_percentiles_db": {
+        "p25": -37.13,
+        "p5": -40.12,
+        "p50": -29.63,
+        "p75": -22.63,
+        "p95": -18.38
+      },
+      "month": 2,
+      "month_name": "Feb",
+      "period": "2024-02",
+      "period_end": "2024-03-01",
+      "period_start": "2024-02-01",
+      "scene_count": 7
+    },
+    {
+      "backscatter_percentiles_db": {
+        "p25": -38.37,
+        "p5": -41.37,
+        "p50": -30.62,
+        "p75": -23.62,
+        "p95": -19.89
+      },
+      "month": 3,
+      "month_name": "Mar",
+      "period": "2024-03",
+      "period_end": "2024-04-01",
+      "period_start": "2024-03-01",
+      "scene_count": 7
+    },
+    {
+      "backscatter_percentiles_db": {
+        "p25": -37.62,
+        "p5": -40.38,
+        "p50": -30.13,
+        "p75": -22.63,
+        "p95": -18.38
+      },
+      "month": 4,
+      "month_name": "Apr",
+      "period": "2024-04",
+      "period_end": "2024-05-01",
+      "period_start": "2024-04-01",
+      "scene_count": 7
+    },
+    {
+      "backscatter_percentiles_db": {
+        "p25": -32.56,
+        "p5": -34.81,
+        "p50": -28.56,
+        "p75": -23.07,
+        "p95": -20.19
+      },
+      "month": 5,
+      "month_name": "May",
+      "period": "2024-05",
+      "period_end": "2024-06-01",
+      "period_start": "2024-05-01",
+      "scene_count": 7
+    },
+    {
+      "backscatter_percentiles_db": {
+        "p25": -26.19,
+        "p5": -28.56,
+        "p50": -24.69,
+        "p75": -22.56,
+        "p95": -19.32
+      },
+      "month": 6,
+      "month_name": "Jun",
+      "period": "2024-06",
+      "period_end": "2024-07-01",
+      "period_start": "2024-06-01",
+      "scene_count": 4
+    },
+    {
+      "backscatter_percentiles_db": {
+        "p25": -33.38,
+        "p5": -36.63,
+        "p50": -30.88,
+        "p75": -24.12,
+        "p95": -19.38
+      },
+      "month": 7,
+      "month_name": "Jul",
+      "period": "2024-07",
+      "period_end": "2024-08-01",
+      "period_start": "2024-07-01",
+      "scene_count": 6
+    },
+    {
+      "backscatter_percentiles_db": {
+        "p25": -36.19,
+        "p5": -38.56,
+        "p50": -33.94,
+        "p75": -26.81,
+        "p95": -20.94
+      },
+      "month": 8,
+      "month_name": "Aug",
+      "period": "2024-08",
+      "period_end": "2024-09-01",
+      "period_start": "2024-08-01",
+      "scene_count": 6
+    },
+    {
+      "backscatter_percentiles_db": {
+        "p25": -38.13,
+        "p5": -40.62,
+        "p50": -35.12,
+        "p75": -26.87,
+        "p95": -21.12
+      },
+      "month": 9,
+      "month_name": "Sep",
+      "period": "2024-09",
+      "period_end": "2024-10-01",
+      "period_start": "2024-09-01",
+      "scene_count": 9
+    },
+    {
+      "backscatter_percentiles_db": {
+        "p25": -34.06,
+        "p5": -36.19,
+        "p50": -31.94,
+        "p75": -26.19,
+        "p95": -22.94
+      },
+      "month": 10,
+      "month_name": "Oct",
+      "period": "2024-10",
+      "period_end": "2024-11-01",
+      "period_start": "2024-10-01",
+      "scene_count": 7
+    },
+    {
+      "backscatter_percentiles_db": {
+        "p25": -30.06,
+        "p5": -32.69,
+        "p50": -27.81,
+        "p75": -25.69,
+        "p95": -22.56
+      },
+      "month": 11,
+      "month_name": "Nov",
+      "period": "2024-11",
+      "period_end": "2024-12-01",
+      "period_start": "2024-11-01",
+      "scene_count": 8
+    },
+    {
+      "backscatter_percentiles_db": {
+        "p25": -32.56,
+        "p5": -35.19,
+        "p50": -29.82,
+        "p75": -24.69,
+        "p95": -21.57
+      },
+      "month": 12,
+      "month_name": "Dec",
+      "period": "2024-12",
+      "period_end": "2025-01-01",
+      "period_start": "2024-12-01",
+      "scene_count": 7
+    }
+  ],
+  "next_step": "Calibrate a threshold against these distributions and independent reference data.",
+  "water_mask_area_km2": 861.369,
+  "water_mask_dataset": "ESA/WorldCover/v200",
+  "water_mask_fraction_of_aoi": 0.4449,
+  "year": 2024
+}

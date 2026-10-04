@@ -156,9 +156,9 @@
     map.addSource("presence", { type: "geojson", data: presenceGeojson() });
     map.addSource("presence-pts", { type: "geojson", data: presencePoints() });
     map.addLayer({ id: "presence-heat", type: "heatmap", source: "presence-pts", filter: presenceFilter(), paint: {
-      "heatmap-weight": ["interpolate", ["linear"], ["get", "vessels"], 1, 0.06, 5, 0.18, 20, 0.45, 100, 1],
-      "heatmap-intensity": ["interpolate", ["linear"], ["zoom"], 2, 0.22, 6, 0.32, 9, 0.45],
-      "heatmap-radius": ["interpolate", ["linear"], ["zoom"], 1, 7, 3, 22, 5, 56, 7, 130, 9, 260, 11, 420],
+      "heatmap-weight": ["interpolate", ["linear"], ["get", "vessels"], 1, 0.07, 5, 0.18, 20, 0.34, 100, 0.55, 400, 0.8, 1500, 1],
+      "heatmap-intensity": ["interpolate", ["linear"], ["zoom"], 2, 0.85, 5, 1.0, 8, 1.2],
+      "heatmap-radius": ["interpolate", ["linear"], ["zoom"], 1, 5, 3, 13, 5, 32, 7, 95, 9, 230, 11, 420],
       "heatmap-color": ["interpolate", ["linear"], ["heatmap-density"], 0, ramp[0], 0.1, ramp[1], 0.3, ramp[2], 0.55, ramp[3], 0.8, ramp[4], 1, ramp[5]],
       "heatmap-opacity": 0.78 } }, before);
     map.addLayer({ id: "presence-fill", type: "fill", source: "presence", filter: presenceFilter(),
