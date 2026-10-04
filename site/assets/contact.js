@@ -37,7 +37,6 @@
     if (!form) return;
     setLink("link-email", cfg.contactEmail ? "mailto:" + cfg.contactEmail : "", cfg.contactEmail);
     setLink("link-linkedin", cfg.linkedinUrl, "LinkedIn");
-    setLink("link-repo", cfg.repoUrl, "Source code");
     var note = $("#response-note");
     if (note) note.textContent = cfg.responseNote || "";
     var noAddress = !cfg.contactEmail;
