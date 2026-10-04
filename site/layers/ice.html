@@ -86,6 +86,16 @@
             composites each month, then applies the configured dB threshold
             inside a WorldCover water mask.
           </p>
+          <div class="panel" style="margin:1.2rem 0">
+            <h3>How this relates to operational ice charts</h3>
+            <p class="sub" style="margin-bottom:0">
+              Operational sea-ice monitoring in the Canadian Arctic, such as Canadian Ice Service charts, is produced by analysts who combine
+              several sensors and report ice using the WMO egg code and the MANICE procedures: concentration, stage of development (new, grey,
+              thin and thick first-year, old ice) and floe size. This layer is different. It applies one backscatter threshold to Sentinel-1
+              C-band SAR as a screening baseline for ice versus open water. It does not classify stage of development, floe size or ridges, and
+              it is not a substitute for an ice chart.
+            </p>
+          </div>
           <h2>Principal limitations</h2>
           <ul>
             <li>
@@ -105,7 +115,7 @@
           <h2>Reproduce this</h2>
           <p>
             Run the live pipeline’s <code>ice</code> part or open
-            <code>notebooks/02_ice_extent_s1.ipynb</code>. The selected
+            <a href="https://github.com/vikramchowdhry-ship-it/arctic-passage-atlas/blob/main/notebooks/02_ice_extent_s1.ipynb">notebooks/02_ice_extent_s1.ipynb</a> on GitHub. The selected
             acquisition characteristics are stored in
             <code>ice_summary.json</code>.
           </p>

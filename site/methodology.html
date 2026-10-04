@@ -45,7 +45,12 @@
             surface-reflectance scenes are reduced to summer median composites.
             Euclidean spectral distance across six optical bands produces a
             change magnitude. Pixels above the configured threshold are
-            vectorized as candidates.
+            vectorized as candidates. The six bands are Landsat 8 OLI bands 2
+            to 7 (blue, green, red, near-infrared, shortwave infrared 1 and 2).
+            The thermal bands (10, 11) and the panchromatic band (8) are not
+            used: they measure a different quantity or carry no spectral
+            information to compare. See the Surface change layer page for the
+            wavelengths.
           </p>
           <h2>Sea-ice classification</h2>
           <p>
@@ -55,6 +60,16 @@
             over a static water mask and repeats the area calculation at plus
             and minus the sensitivity interval. NOAA OISST supplies a coarse
             seasonal reference.
+          </p>
+          <p>
+            Operational sea-ice monitoring in the Canadian Arctic (Canadian
+            Ice Service charts) is produced by analysts combining several
+            sensors and reporting ice with the WMO egg code and MANICE
+            procedures: concentration, stage of development and floe size.
+            This project's single-threshold C-band SAR classification is a
+            screening baseline for ice versus open water. It does not
+            classify stage of development, floe size or ridging, and it is not
+            a substitute for an ice chart.
           </p>
           <h2>Vessel events</h2>
           <p>
@@ -69,6 +84,18 @@
             pixel-area image is used for area statistics so square degrees are
             never treated as square metres. The configured polar projection is
             available for exported cartographic work.
+          </p>
+          <p>
+            The interactive map is drawn in Web Mercator for tile
+            compatibility. Web Mercator stretches lengths by about 1 ÷
+            cos(latitude), so at Cambridge Bay (69°N) lengths look about 2.8
+            times larger than they are, and areas about 7.8 times. Areas in this
+            project are not measured on the map: they come from Earth Engine's
+            pixel-area image, which gives ground area on the WGS 84 ellipsoid,
+            and the study-area dimensions use geodesic distance. For desktop GIS
+            work with the exported GeoJSON (EPSG:4326), reproject to EPSG:3413
+            (NSIDC Sea Ice Polar Stereographic North) or EPSG:3978 (Canada
+            Atlas Lambert) before measuring.
           </p>
           <h2 id="reproduce">Reproduce this</h2>
           <ol>
@@ -99,6 +126,14 @@
             mutable; reruns can therefore differ as providers update their
             records.
           </p>
+          <h2>How to cite this work</h2>
+          <p>
+            Chowdhary, M. (2026). <em>Arctic Passage Atlas: an open-source
+            method for observing Arctic surface, sea-ice and vessel-event
+            change from public data</em> [Software]. GitHub.
+            <a href="https://github.com/vikramchowdhry-ship-it/arctic-passage-atlas">https://github.com/vikramchowdhry-ship-it/arctic-passage-atlas</a>
+          </p>
+          <p class="sub">GitHub also offers a "Cite this repository" button, built from the repository's CITATION.cff file.</p>
           <h2>Known limitations</h2>
           <ul>
             <li>

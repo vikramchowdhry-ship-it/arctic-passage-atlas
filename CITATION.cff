@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this software or method, please cite it as below."
+title: "Arctic Passage Atlas: an open-source method for observing Arctic surface, sea-ice and vessel-event change from public data"
+type: software
+authors:
+  - family-names: Chowdhary
+    given-names: Maheep
+repository-code: "https://github.com/vikramchowdhry-ship-it/arctic-passage-atlas"
+license: MIT
+date-released: "2026-10-04"
+keywords:
+  - Arctic
+  - sea ice
+  - remote sensing
+  - Sentinel-1
+  - Landsat
+  - geospatial

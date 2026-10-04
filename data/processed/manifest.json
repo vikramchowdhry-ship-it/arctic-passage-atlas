@@ -9,8 +9,8 @@
     "vessel_events": "public-global-gaps-events:latest"
   },
   "demo_data": true,
-  "generated_at": "2026-10-03T17:47:45+00:00",
-  "git_commit": null,
+  "generated_at": "2026-10-04T13:56:21+00:00",
+  "git_commit": "0e99a0f843199f971144e997a4f1270b0dd46c23",
   "mode": "demo",
   "notes": [
     "All analytical features and summary values are deterministic synthetic fixtures.",

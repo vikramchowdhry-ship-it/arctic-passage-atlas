@@ -97,6 +97,27 @@
               Candidates below the minimum mapping unit are dropped.
             </p>
           </div>
+          <div class="panel" style="margin:1.2rem 0">
+            <h3>Bands used</h3>
+            <p class="sub" style="margin-bottom:.4rem">
+              Change magnitude is the Euclidean distance between two six-band surface-reflectance vectors from Landsat 8 OLI
+              (Collection 2 Level 2, scaled to reflectance):
+            </p>
+            <ul>
+              <li>Band 2, blue, 0.45–0.51 µm</li>
+              <li>Band 3, green, 0.53–0.59 µm</li>
+              <li>Band 4, red, 0.64–0.67 µm</li>
+              <li>Band 5, near-infrared, 0.85–0.88 µm</li>
+              <li>Band 6, shortwave infrared 1, 1.57–1.65 µm</li>
+              <li>Band 7, shortwave infrared 2, 2.11–2.29 µm</li>
+            </ul>
+            <p class="sub" style="margin-bottom:0">
+              Not used: the thermal bands (10 and 11) measure emitted temperature, a different quantity from reflectance, at a coarser native
+              resolution. Band 8 is a single 15 m panchromatic band with no spectral information to compare. Bands 1 and 9 are
+              coastal-aerosol and cirrus diagnostic bands. Pixels flagged for dilated cloud, cirrus, cloud, cloud shadow, snow or saturation
+              are masked before the distance is computed.
+            </p>
+          </div>
           <h2>Principal limitations</h2>
           <ul>
             <li>
@@ -120,7 +141,7 @@
           <h2>Reproduce this</h2>
           <p>
             Run the live pipeline’s <code>change</code> part or open
-            <code>notebooks/03_infrastructure_change.ipynb</code>. The exact
+            <a href="https://github.com/vikramchowdhry-ship-it/arctic-passage-atlas/blob/main/notebooks/03_infrastructure_change.ipynb">notebooks/03_infrastructure_change.ipynb</a> on GitHub. The exact
             dates and threshold are in <code>configs/cambridge-bay.json</code>.
           </p>
         </div>

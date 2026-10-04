@@ -189,16 +189,23 @@
           <div class="section-head">
             <p class="eyebrow num" data-n="06">Vessels</p>
             <h2>AIS-reported positions in the Arctic and its approaches.</h2>
-            <p>Two layers. The coloured cells show where ships were seen over the last 30 days across the Alaskan, Canadian, Greenland and Siberian Arctic, from Global Fishing Watch satellite AIS, anonymised and a few days old. The dots are live positions, refreshed every minute: the Baltic Sea and Gulf of Bothnia from Finland's open feed, and the Arctic from the AIS relay when it is connected. No names, identifiers or destinations are shown. This is context, not a tracking service.</p>
+            <p>Three layers. Live dots refresh every minute: the Baltic Sea and Gulf of Bothnia from Finland's open feed, and the Arctic from the AIS relay when it is connected. Dots with a dark ring elsewhere show each vessel's last-seen position, one to four days old, from Global Fishing Watch satellite AIS across the Arctic and North America. The heat map or grid shows where ships were seen over the last 30 days. No names, identifiers or destinations are shown. This is context, not a tracking service.</p>
           </div>
           <div class="panel" id="ais-panel">
             <p class="form-status" id="ais-status" role="status">Checking…</p>
             <div class="kpis" style="margin-bottom:1rem"><div class="kpi"><div class="label">Positions shown</div><div class="value" id="ais-total">—</div></div><div class="kpi"><div class="label">North of 60°N</div><div class="value" id="ais-north">—</div></div></div>
             <div id="ais-map-wrap">
+              <div class="layer-bar" id="recent-bar">
+                <label class="layer-ctl"><input type="checkbox" id="recent-on" checked /><span>Last-seen vessels, 1 to 4 days old (dots, all Arctic and North America)</span></label>
+                <span class="muted" id="recent-note" style="font-size:.8rem">Loading…</span>
+              </div>
               <div class="layer-bar" id="presence-bar">
                 <label class="layer-ctl"><input type="checkbox" id="presence-on" checked /><span>Shipping presence, last 30 days (not live)</span></label>
+                <label class="layer-ctl"><span>Style</span><select id="presence-style"><option value="heat">Heat map</option><option value="cells">Grid cells</option></select></label>
+                <label class="layer-ctl"><span>Show cells with at least</span><select id="presence-min"><option value="1">1 vessel</option><option value="2">2 vessels</option><option value="3">3 vessels</option><option value="5">5 vessels</option><option value="10">10 vessels</option></select></label>
                 <label class="layer-ctl"><span>Base map</span><select id="ais-base"><option value="light">Light</option><option value="dark">Dark</option><option value="streets">Streets</option><option value="satellite">Satellite (NASA)</option></select></label>
                 <span class="muted" id="presence-note" style="font-size:.8rem">Loading…</span>
+                <span class="muted" id="presence-hint" style="font-size:.8rem"></span>
                 <span class="muted" style="font-size:.8rem">1 vessel <span style="display:inline-block;width:110px;height:.6rem;border-radius:4px;vertical-align:middle;background:linear-gradient(90deg,#9fc3dd,#4a90c2,#f2a33a,#e4572e,#8a1c2b)"></span> 150+ per cell</span>
               </div>
               <div class="layer-bar" id="ais-legend" role="group" aria-label="Vessel classes"></div>

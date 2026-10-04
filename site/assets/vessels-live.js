@@ -100,7 +100,8 @@
 
   var map = null, ready = false, hidden = {}, bySource = { digitraffic: [], relay: [] }, state = { digitraffic: "…", relay: cfg.aisRelayUrl ? "…" : "not connected" };
   var types = null, typesAt = 0;
-  var presence = null, presenceOn = true;   // 30-day AIS presence from Global Fishing Watch (anonymous cells)
+  var presence = null, presenceOn = true, presenceStyle = "heat", presenceMin = 1;
+  var recent = null, recentOn = true;   // each vessel's last-seen position, 1 to 4 days old (Global Fishing Watch)   // 30-day AIS presence from Global Fishing Watch (anonymous cells)
 
   var CLASS_ORDER = ["cargo", "tanker", "passenger", "fishing", "other"];
   var BASEMAPS = {
@@ -113,14 +114,36 @@
         layers: [{ id: "bg", type: "background", paint: { "background-color": "#081925" } }, { id: "bm", type: "raster", source: "bm" }] } }
   };
   var base = "light";
+  var HEAT = {
+    light: ["rgba(74,144,194,0)", "rgba(74,144,194,0.45)", "#4a90c2", "#f2a33a", "#e4572e", "#8a1c2b"],
+    streets: ["rgba(47,109,176,0)", "rgba(47,109,176,0.45)", "#2f6db0", "#f2a33a", "#e4572e", "#8a1c2b"],
+    dark: ["rgba(123,223,242,0)", "rgba(53,96,122,0.6)", "#7bdff2", "#ffd479", "#ff9b54", "#ff5d6c"],
+    satellite: ["rgba(123,223,242,0)", "rgba(123,223,242,0.5)", "#fff3a3", "#ffc247", "#ff7a3d", "#ff3b5c"]
+  };
+  function presencePoints() {
+    var rows = presence ? presence.data : [];
+    return { type: "FeatureCollection", features: rows.map(function (r) {
+      return { type: "Feature", properties: { vessels: r[2] }, geometry: { type: "Point", coordinates: [r[1], r[0]] } };
+    }) };
+  }
+  function presenceFilter() { return [">=", ["get", "vessels"], presenceMin]; }
+  function showPresenceStyle() {
+    if (!map) return;
+    var on = presenceOn ? "visible" : "none", off = "none";
+    if (map.getLayer("presence-heat")) map.setLayoutProperty("presence-heat", "visibility", presenceStyle === "heat" ? on : off);
+    if (map.getLayer("presence-fill")) map.setLayoutProperty("presence-fill", "visibility", presenceStyle === "cells" ? on : off);
+    var hint = $("#presence-hint");
+    if (hint) hint.textContent = presenceStyle === "heat" ? "Smooth density. Switch to grid cells to click a cell." : "Each square is one 0.2° grid cell. Click one for its numbers.";
+  }
 
   /* Each cell is drawn as the grid square it is, so adjacent cells join up and zooming in shows areas, not dots. */
   function presenceGeojson() {
-    var rows = presence ? presence.data : [], h = (presence ? presence.cell_degrees : 0.2) / 2;
+    var rows = presence ? presence.data : [], cell = presence ? presence.cell_degrees : 0.2, h = cell / 2;
     return { type: "FeatureCollection", features: rows.map(function (r) {
       var lat = r[0], lon = r[1];
+      var n = Math.max(1, Math.round(360 * Math.cos(lat * Math.PI / 180) / cell)), w = 180 / n;   // half the cell width in degrees of longitude
       return { type: "Feature", properties: { vessels: r[2], hours: r[3], cls: r[4].join(",") },
-        geometry: { type: "Polygon", coordinates: [[[lon - h, lat - h], [lon + h, lat - h], [lon + h, lat + h], [lon - h, lat + h], [lon - h, lat - h]]] } };
+        geometry: { type: "Polygon", coordinates: [[[lon - w, lat - h], [lon + w, lat - h], [lon + w, lat + h], [lon - w, lat + h], [lon - w, lat - h]]] } };
     }) };
   }
   function rampExpr() {
@@ -129,14 +152,26 @@
   }
   function addPresence() {
     if (!map || !ready || !presence || map.getSource("presence")) return;
+    var before = map.getLayer("ais-dots") ? "ais-dots" : undefined, ramp = HEAT[base];
     map.addSource("presence", { type: "geojson", data: presenceGeojson() });
-    map.addLayer({ id: "presence-fill", type: "fill", source: "presence", layout: { visibility: presenceOn ? "visible" : "none" },
-      paint: { "fill-color": rampExpr(), "fill-opacity": BASEMAPS[base].opacity } }, map.getLayer("ais-dots") ? "ais-dots" : undefined);
+    map.addSource("presence-pts", { type: "geojson", data: presencePoints() });
+    map.addLayer({ id: "presence-heat", type: "heatmap", source: "presence-pts", filter: presenceFilter(), paint: {
+      "heatmap-weight": ["interpolate", ["linear"], ["get", "vessels"], 1, 0.12, 5, 0.35, 20, 0.7, 100, 1],
+      "heatmap-intensity": ["interpolate", ["linear"], ["zoom"], 2, 0.35, 6, 0.5, 9, 0.7],
+      "heatmap-radius": ["interpolate", ["linear"], ["zoom"], 1, 7, 3, 22, 5, 56, 7, 130, 9, 260, 11, 420],
+      "heatmap-color": ["interpolate", ["linear"], ["heatmap-density"], 0, ramp[0], 0.1, ramp[1], 0.3, ramp[2], 0.55, ramp[3], 0.8, ramp[4], 1, ramp[5]],
+      "heatmap-opacity": 0.88 } }, before);
+    map.addLayer({ id: "presence-fill", type: "fill", source: "presence", filter: presenceFilter(),
+      paint: { "fill-color": rampExpr(), "fill-opacity": BASEMAPS[base].opacity } }, before);
+    showPresenceStyle();
+  }
+  function applyPresenceFilter() {
+    ["presence-heat", "presence-fill"].forEach(function (id) { if (map && map.getLayer(id)) map.setFilter(id, presenceFilter()); });
   }
   function presenceClick(e) {
     var f = e.features[0].properties, parts = [], cls = String(f.cls).split(",");
     CLASS_ORDER.forEach(function (k, i) { if (Number(cls[i]) > 0) parts.push((CLASSES[k] ? CLASSES[k][0] : k) + " " + cls[i]); });
-    new maplibregl.Popup({ offset: 8 }).setLngLat(e.lngLat).setHTML("<strong>" + esc(f.vessels) + " vessel" + (Number(f.vessels) === 1 ? "" : "s") + "</strong> in this 0.2° cell (about 22 km tall)<br>" + esc(f.hours) + " vessel-hours · " +
+    new maplibregl.Popup({ offset: 8 }).setLngLat(e.lngLat).setHTML("<strong>" + esc(f.vessels) + " vessel" + (Number(f.vessels) === 1 ? "" : "s") + "</strong> in this cell (about 22 km by 22 km)<br>" + esc(f.hours) + " vessel-hours · " +
       esc(presence.date_start) + " to " + esc(presence.date_end) + "<br>" + esc(parts.join(", ")) + "<br><em>Anonymous AIS presence, Global Fishing Watch. Not live.</em>").addTo(map);
   }
   function loadPresence() {
@@ -150,15 +185,49 @@
   }
 
   function all() { return bySource.digitraffic.concat(bySource.relay); }
+  function recentList() {
+    return recent && recentOn ? recent.data.map(function (r) { return { lat: r[0], lon: r[1], cls: r[2], seen: r[3] }; }) : [];
+  }
+  function recentGeojson() {
+    return { type: "FeatureCollection", features: recentList().filter(function (v) { return !hidden[v.cls]; }).map(function (v) {
+      return { type: "Feature", properties: { cls: v.cls, seen: v.seen }, geometry: { type: "Point", coordinates: [v.lon, v.lat] } };
+    }) };
+  }
+  function addRecent() {
+    if (!map || !ready || !recent || map.getSource("recent")) return;
+    var colour = ["match", ["get", "cls"]]; Object.keys(CLASSES).forEach(function (k) { colour.push(k, CLASSES[k][1]); }); colour.push("#e8f2f5");
+    map.addSource("recent", { type: "geojson", data: recentGeojson() });
+    map.addLayer({ id: "recent-dots", type: "circle", source: "recent", layout: { visibility: recentOn ? "visible" : "none" }, paint: {
+      "circle-radius": ["interpolate", ["linear"], ["zoom"], 1, 2.6, 4, 4, 8, 6.5], "circle-color": colour,
+      "circle-stroke-color": base === "light" || base === "streets" ? "#06121b" : "#ffffff", "circle-stroke-width": 1, "circle-opacity": 0.9 } },
+      map.getLayer("ais-dots") ? "ais-dots" : undefined);
+  }
+  function loadRecent() {
+    if (recent) return Promise.resolve();
+    return getJson("data/live/gfw_recent.json", 60000).then(function (d) {
+      recent = d; addRecent(); refresh();
+      var note = $("#recent-note");
+      if (note) note.textContent = d.vessels.toLocaleString("en-US") + " vessels, last seen " + d.date_start + " to " + d.date_end + ". " + d.license + ".";
+    }).catch(function () { var note = $("#recent-note"); if (note) note.textContent = "The last-seen positions file could not be loaded."; });
+  }
+  function recentClick(e) {
+    var f = e.features[0].properties, c = CLASSES[f.cls] || CLASSES.unknown, hour = String(f.seen || "");
+    var when = hour ? hour.replace("T", " ") + ":00 UTC" : "unknown time";
+    new maplibregl.Popup({ offset: 8 }).setLngLat(e.lngLat).setHTML("<strong>" + esc(c[0]) + "</strong><br>Last seen about " + esc(when) + "<br><em>From Global Fishing Watch AIS, a few days delayed. No name or identifier is published. It may have moved since.</em>").addTo(map);
+  }
   function geojson() {
     return { type: "FeatureCollection", features: all().filter(function (v) { return !hidden[v.cls]; }).map(function (v) {
       return { type: "Feature", properties: { cls: v.cls, sog: v.sog, cog: v.cog, age_s: v.age_s, src: v.src }, geometry: { type: "Point", coordinates: [v.lon, v.lat] } };
     }) };
   }
-  function draw() { if (map && ready && map.getSource("ais")) map.getSource("ais").setData(geojson()); }
+  function draw() {
+    if (!map || !ready) return;
+    if (map.getSource("ais")) map.getSource("ais").setData(geojson());
+    if (map.getSource("recent")) map.getSource("recent").setData(recentGeojson());
+  }
   function legend() {
     var counts = {};
-    all().forEach(function (v) { counts[v.cls] = (counts[v.cls] || 0) + 1; });
+    all().concat(recentList()).forEach(function (v) { counts[v.cls] = (counts[v.cls] || 0) + 1; });
     $("#ais-legend").innerHTML = Object.keys(CLASSES).filter(function (k) { return counts[k]; }).map(function (k) {
       return '<label class="layer-ctl"><input type="checkbox" data-cls="' + k + '"' + (hidden[k] ? "" : " checked") + ' /><span class="dot-swatch" style="background:' + CLASSES[k][1] + '"></span><span>' +
         CLASSES[k][0] + " (" + counts[k] + ")</span></label>";
@@ -223,6 +292,7 @@
       map.addLayer({ id: "ais-dots", type: "circle", source: "ais", paint: { "circle-radius": ["interpolate", ["linear"], ["zoom"], 1, 3, 6, 6], "circle-color": colour, "circle-stroke-color": base === "light" || base === "streets" ? "#06121b" : "#ffffff", "circle-stroke-width": 1.2, "circle-opacity": 0.95 } });
       ready = true;
       if (presence) addPresence(); else if (presenceOn) loadPresence();
+      if (recent) addRecent(); else loadRecent();
     }
     function tryEnsure() { try { ensureLayers(); return !!map.getSource("ais"); } catch (e) { return false; } }
     map.on("styledata", tryEnsure);
@@ -235,7 +305,8 @@
         (p.cog !== "null" && p.cog !== null ? " · course " + esc(p.cog) + "°" : "") + "<br>Position " + mins(Number(p.age_s)) + " old<br><em>No name or identifier is published.</em>").addTo(map);
     });
     map.on("click", "presence-fill", presenceClick);
-    ["ais-dots", "presence-fill"].forEach(function (id) {
+    map.on("click", "recent-dots", recentClick);
+    ["ais-dots", "presence-fill", "recent-dots"].forEach(function (id) {
       map.on("mouseenter", id, function () { map.getCanvas().style.cursor = "pointer"; });
       map.on("mouseleave", id, function () { map.getCanvas().style.cursor = ""; });
     });
@@ -252,8 +323,17 @@
     if (box) box.addEventListener("change", function () {
       presenceOn = box.checked;
       if (presenceOn && !presence) { loadPresence(); return; }
-      if (map && map.getLayer("presence-fill")) map.setLayoutProperty("presence-fill", "visibility", presenceOn ? "visible" : "none");
+      showPresenceStyle();
     });
+    var recentBox = $("#recent-on");
+    if (recentBox) recentBox.addEventListener("change", function () {
+      recentOn = recentBox.checked;
+      if (map && map.getLayer("recent-dots")) map.setLayoutProperty("recent-dots", "visibility", recentOn ? "visible" : "none");
+      refresh();
+    });
+    var styleSel = $("#presence-style"), minSel = $("#presence-min");
+    if (styleSel) styleSel.addEventListener("change", function () { presenceStyle = styleSel.value; showPresenceStyle(); });
+    if (minSel) minSel.addEventListener("change", function () { presenceMin = Number(minSel.value); applyPresenceFilter(); });
     var lt = $("#ais-lakes");
     if (lt) lt.addEventListener("click", function (e) {
       var b = e.target.closest && e.target.closest("button[data-lake]");

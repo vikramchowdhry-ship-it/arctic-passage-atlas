@@ -56,9 +56,22 @@ def vessel_class(vessel_type: str | None) -> str:
     return CLASS_OF.get((vessel_type or "").upper(), "other")
 
 
+def lon_bins(lat_centre: float) -> int:
+    """Number of longitude cells in the 0.2 degree latitude row centred on lat_centre.
+
+    Cells are 0.2 degrees tall and about as wide on the ground, so a row near the pole has far fewer, wider
+    cells than one at the equator. The site draws them with the same formula.
+    """
+    return max(1, round(360 * math.cos(math.radians(lat_centre)) / CELL))
+
+
 def bin_cell(lat: float, lon: float) -> tuple[float, float]:
-    """Centre of the 0.2 degree cell that contains the point."""
-    return (math.floor(lat / CELL) * CELL + CELL / 2, math.floor(lon / CELL) * CELL + CELL / 2)
+    """Centre of the near-equal-area cell that contains the point."""
+    row = math.floor(lat / CELL) * CELL + CELL / 2
+    n = lon_bins(row)
+    width = 360 / n
+    index = min(n - 1, math.floor((((lon + 180) % 360)) / width))
+    return (row, -180 + (index + 0.5) * width)
 
 
 def aggregate(rows: list[dict[str, Any]], into: dict | None = None) -> dict:
@@ -85,8 +98,8 @@ def finish(cells: dict) -> list[list[Any]]:
     return out
 
 
-def _fetch(token: str, polygon: list[list[float]], start: date, end: date) -> list[dict[str, Any]]:
-    url = (f"{API}?temporal-resolution=ENTIRE&spatial-resolution=LOW&datasets[0]={DATASET}"
+def _fetch(token: str, polygon: list[list[float]], start: date, end: date, resolution: str = "LOW") -> list[dict[str, Any]]:
+    url = (f"{API}?temporal-resolution=ENTIRE&spatial-resolution={resolution}&datasets[0]={DATASET}"
            f"&date-range={start.isoformat()},{end.isoformat()}&format=JSON")
     body = json.dumps({"geojson": {"type": "Polygon", "coordinates": [polygon]}}).encode()
     request = urllib.request.Request(url, data=body, method="POST", headers={
@@ -97,7 +110,7 @@ def _fetch(token: str, polygon: list[list[float]], start: date, end: date) -> li
     except urllib.error.HTTPError as error:
         raise RuntimeError(f"Global Fishing Watch returned HTTP {error.code}. Check the token and its use.") from error
     entries = payload.get("entries") or []
-    return next(iter(entries[0].values())) if entries else []
+    return (next(iter(entries[0].values())) if entries else []) or []
 
 
 def build_presence(config: ProjectConfig, days: int = DEFAULT_DAYS, today: date | None = None) -> list[Path]:
@@ -121,12 +134,66 @@ def build_presence(config: ProjectConfig, days: int = DEFAULT_DAYS, today: date 
         "source": "Global Fishing Watch 4Wings API, AIS vessel presence",
         "source_url": API, "dataset": DATASET, "dataset_page": PAGE,
         "date_start": start.isoformat(), "date_end": end.isoformat(), "retrieved_at": utc_now(),
-        "cell_degrees": CELL, "columns": ["lat", "lon", "vessels", "hours", "classes"], "class_order": CLASS_ORDER,
+        "cell_degrees": CELL, "cell_shape": "rows 0.2 degrees tall; longitude cells per row = max(1, round(360 * cos(row latitude) / 0.2))", "columns": ["lat", "lon", "vessels", "hours", "classes"], "class_order": CLASS_ORDER,
         "records_by_area": per_chunk, "cells": len(data),
         "license": "CC BY-NC 4.0, non-commercial, attribution to Global Fishing Watch required",
         "caveat": ("Anonymous aggregate of AIS reports, delayed by a few days. No vessel names, identifiers or flags are kept. "
                    "AIS is self-reported and incomplete: a vessel with no AIS, or out of satellite reach, is not shown. "
                    "Presence is not fishing, intent or wrongdoing."),
+        "data": data,
+    })
+    return [path]
+
+
+RECENT_DAYS = 3
+
+
+def latest_positions(rows: list[dict[str, Any]], into: dict | None = None) -> dict:
+    """Keep each vessel's most recent grid cell. Identifiers are used only as in-memory keys."""
+    seen: dict = into if into is not None else {}
+    for r in rows:
+        if r.get("lat") is None or r.get("lon") is None:
+            continue
+        key = r.get("vesselId") or r.get("mmsi") or id(r)
+        stamp = r.get("exitTimestamp") or r.get("entryTimestamp") or ""
+        if key not in seen or stamp > seen[key][0]:
+            seen[key] = (stamp, float(r["lat"]), float(r["lon"]), vessel_class(r.get("vesselType")))
+    return seen
+
+
+def finish_recent(seen: dict) -> list[list[Any]]:
+    """[lat, lon, class, hour last seen]. No identifier survives."""
+    out = [[round(lat, 2), round(lon, 2), cls, stamp[:13]] for stamp, lat, lon, cls in seen.values()]
+    out.sort(key=lambda x: (-x[0], x[1]))
+    return out
+
+
+def build_recent(config: ProjectConfig, days: int = RECENT_DAYS, today: date | None = None) -> list[Path]:
+    """Last-seen position of each vessel over the last few days, one anonymous dot per vessel."""
+    token = os.environ.get("GFW_API_ACCESS_TOKEN")
+    if not token:
+        raise RuntimeError("GFW_API_ACCESS_TOKEN is not set. Create a token at https://globalfishingwatch.org/our-apis/tokens")
+    end = (today or datetime.now(UTC).date()) - timedelta(days=LATENCY_DAYS - 1)     # the newest day or two are not published yet
+    start = end - timedelta(days=days)
+    seen: dict = {}
+    per_chunk: dict[str, int] = {}
+    for name, polygon in CHUNKS.items():
+        rows = _fetch(token, polygon, start, end, resolution="HIGH")
+        per_chunk[name] = len(rows)
+        latest_positions(rows, seen)
+        del rows
+    data = finish_recent(seen)
+    target = config.root / "site" / "data" / "live"
+    target.mkdir(parents=True, exist_ok=True)
+    path = target / "gfw_recent.json"
+    write_json(path, {
+        "source": "Global Fishing Watch 4Wings API, AIS vessel presence (high resolution)",
+        "source_url": API, "dataset": DATASET, "dataset_page": PAGE,
+        "date_start": start.isoformat(), "date_end": end.isoformat(), "retrieved_at": utc_now(),
+        "columns": ["lat", "lon", "class", "last_seen_hour_utc"], "vessels": len(data), "records_by_area": per_chunk,
+        "license": "CC BY-NC 4.0, non-commercial, attribution to Global Fishing Watch required",
+        "caveat": ("Each dot is one vessel's last reported AIS position in the window, one to four days old. No names, identifiers or "
+                   "flags are kept. AIS is self-reported and incomplete, and a vessel can have moved since. Not live, not for navigation."),
         "data": data,
     })
     return [path]

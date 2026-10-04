@@ -10,7 +10,7 @@ The pipeline uses Landsat 8 Collection 2 Tier 1 Level 2 for both periods to avoi
 
 Only land pixels are compared. Pixels in the configured WorldCover classes (water by default) are excluded, because sea-ice break-up, turbidity and tide change reflectance far more than anything built on land. The mask is a fixed coast mask and can be wrong at the shoreline. Candidates are vectorised at the Landsat native 30 m and kept only if they cover at least `minimum_candidate_pixels` pixels. The candidate area is also recomputed at the threshold plus and minus `change.sensitivity`.
 
-Change magnitude is the Euclidean distance between the two six-band reflectance vectors. Pixels above `change_threshold` become candidates. This is a screening method. A candidate needs visual and documentary corroboration before it can be described as a particular development.
+Change magnitude is the Euclidean distance between the two six-band reflectance vectors. The bands are Landsat 8 OLI bands 2 to 7: blue (0.45-0.51 um), green (0.53-0.59 um), red (0.64-0.67 um), near-infrared (0.85-0.88 um), SWIR-1 (1.57-1.65 um) and SWIR-2 (2.11-2.29 um). The thermal bands (10, 11) measure emitted temperature rather than reflectance at a coarser native resolution, band 8 is a single 15 m panchromatic band, and bands 1 and 9 are coastal-aerosol and cirrus diagnostics, so none is used. Pixels above `change_threshold` become candidates. This is a screening method. A candidate needs visual and documentary corroboration before it can be described as a particular development.
 
 ## Sea ice
 
@@ -36,6 +36,12 @@ An automatic histogram method such as Otsu's is not used yet. It assumes a two-p
 Each monthly composite spans the whole calendar month. Use `period`; no representative acquisition date is invented. The run also stops if the WorldCover water-mask fraction lies outside the configured plausible range, prompting an explicit coast-mask review.
 
 This method does not distinguish all ice types, calibrate a universal threshold or replace operational ice charts.
+
+Operational sea-ice monitoring in the Canadian Arctic (Canadian Ice Service charts) is produced by analysts who combine several sensors and report ice with the WMO egg code and MANICE procedures: concentration, stage of development and floe size. This project's single-threshold C-band SAR classification is a screening baseline for ice versus open water. It does not classify stage of development, floe size or ridging, and it is not a substitute for an ice chart.
+
+## Projection and area
+
+The interactive map is drawn in Web Mercator for tile compatibility, which stretches lengths by about 1 / cos(latitude): roughly 2.8 times at Cambridge Bay (69 N) and about 7.8 times for areas. Areas are not measured on the map. They come from Earth Engine's pixel-area image (ellipsoidal ground area), and study-area dimensions use geodesic distance. For desktop GIS work with the exported GeoJSON (EPSG:4326), reproject to EPSG:3413 (NSIDC Sea Ice Polar Stereographic North) or EPSG:3978 (Canada Atlas Lambert) before measuring lengths or areas.
 
 ## Vessel events
 

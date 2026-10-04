@@ -20,19 +20,26 @@ def row(vid, lat, lon, hours, vtype, **extra):
             "imo": "9999999", "shipName": "SECRET NAME", "callsign": "ABC", "flag": "XXX", **extra}
 
 
-def test_cells_are_0_2_degree_and_centred():
+def test_cells_are_equal_area_rows_and_centred():
+    from arctic_passage_atlas.gfw_presence import lon_bins
+
     assert CELL == 0.2
+    assert lon_bins(0.1) > lon_bins(69.1) > lon_bins(84.1) >= 1       # fewer, wider cells toward the pole
     lat, lon = bin_cell(69.1, -105.12)
-    assert abs(lat - 69.1) <= 0.1 and abs(lon + 105.1) <= 0.1
-    assert bin_cell(69.01, -105.01) == bin_cell(69.19, -105.19)          # same cell
-    assert bin_cell(69.01, -105.01) != bin_cell(69.21, -105.01)          # next cell north
+    assert abs(lat - 69.1) <= 0.1
+    width = 360 / lon_bins(lat)
+    assert abs(lon + 105.12) <= width / 2 + 1e-9
+    assert width * 111.2 * __import__("math").cos(__import__("math").radians(lat)) < 0.2 * 111.2 * 1.5    # roughly square on the ground
+    assert bin_cell(69.01, -105.0) == bin_cell(69.19, -105.0 + width * 0.2)   # same cell
+    assert bin_cell(69.01, -105.0) != bin_cell(69.21, -105.0)              # next row north
+    assert bin_cell(69.01, 179.99)[1] < 180 and bin_cell(69.01, -179.99)[1] > -180
 
 
 def test_distinct_vessels_hours_and_classes_with_no_identifiers():
     rows = [row("a", 69.05, -105.05, 3, "CARGO"), row("a", 69.06, -105.06, 2, "CARGO"), row("b", 69.07, -105.04, 4, "PASSENGER"),
             row("c", 69.08, -105.03, 1, "FISHING"), row("d", 69.5, -104.0, 9, "SOMETHING_NEW")]
     out = finish(aggregate(rows))
-    cell = next(c for c in out if abs(c[0] - 69.1) < 0.11 and abs(c[1] + 105.1) < 0.11)
+    cell = next(c for c in out if abs(c[0] - 69.1) < 0.11)
     assert cell[2] == 3 and cell[3] == 10.0                               # vessels a, b, c; hours 3+2+4+1
     assert cell[4] == [1, 0, 1, 1, 0]                                      # cargo, tanker, passenger, fishing, other
     other = next(c for c in out if c[4] == [0, 0, 0, 0, 1])
