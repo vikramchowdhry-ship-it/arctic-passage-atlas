@@ -28,9 +28,12 @@ jobs:
         with:
           python-version: "3.12"
       - run: python -m pip install -e ".[dev]"
+      # A failed refresh must not stop publication: the committed snapshot is kept and `verify` still checks it.
       - name: Refresh live-feed snapshots
+        continue-on-error: true
         run: python -m arctic_passage_atlas live-feeds
       - name: Refresh sea-ice concentration for the route planner
+        continue-on-error: true
         run: python -m arctic_passage_atlas ice-grid
       - run: python -m ruff check .
       - run: python -m pytest -q

@@ -106,7 +106,7 @@ def _fetch(url: str) -> bytes | None:
         with urllib.request.urlopen(request, timeout=60) as response:
             return response.read()
     except urllib.error.HTTPError as error:
-        if error.code == 404:
+        if error.code in (403, 404):      # a day that is not published yet; the next older day is tried
             return None
         raise
 
