@@ -152,15 +152,15 @@
   }
   function addPresence() {
     if (!map || !ready || !presence || map.getSource("presence")) return;
-    var before = map.getLayer("ais-dots") ? "ais-dots" : undefined, ramp = HEAT[base];
+    var before = map.getLayer("recent-dots") ? "recent-dots" : (map.getLayer("ais-dots") ? "ais-dots" : undefined), ramp = HEAT[base];
     map.addSource("presence", { type: "geojson", data: presenceGeojson() });
     map.addSource("presence-pts", { type: "geojson", data: presencePoints() });
     map.addLayer({ id: "presence-heat", type: "heatmap", source: "presence-pts", filter: presenceFilter(), paint: {
-      "heatmap-weight": ["interpolate", ["linear"], ["get", "vessels"], 1, 0.12, 5, 0.35, 20, 0.7, 100, 1],
-      "heatmap-intensity": ["interpolate", ["linear"], ["zoom"], 2, 0.35, 6, 0.5, 9, 0.7],
+      "heatmap-weight": ["interpolate", ["linear"], ["get", "vessels"], 1, 0.06, 5, 0.18, 20, 0.45, 100, 1],
+      "heatmap-intensity": ["interpolate", ["linear"], ["zoom"], 2, 0.22, 6, 0.32, 9, 0.45],
       "heatmap-radius": ["interpolate", ["linear"], ["zoom"], 1, 7, 3, 22, 5, 56, 7, 130, 9, 260, 11, 420],
       "heatmap-color": ["interpolate", ["linear"], ["heatmap-density"], 0, ramp[0], 0.1, ramp[1], 0.3, ramp[2], 0.55, ramp[3], 0.8, ramp[4], 1, ramp[5]],
-      "heatmap-opacity": 0.88 } }, before);
+      "heatmap-opacity": 0.78 } }, before);
     map.addLayer({ id: "presence-fill", type: "fill", source: "presence", filter: presenceFilter(),
       paint: { "fill-color": rampExpr(), "fill-opacity": BASEMAPS[base].opacity } }, before);
     showPresenceStyle();
@@ -198,8 +198,8 @@
     var colour = ["match", ["get", "cls"]]; Object.keys(CLASSES).forEach(function (k) { colour.push(k, CLASSES[k][1]); }); colour.push("#e8f2f5");
     map.addSource("recent", { type: "geojson", data: recentGeojson() });
     map.addLayer({ id: "recent-dots", type: "circle", source: "recent", layout: { visibility: recentOn ? "visible" : "none" }, paint: {
-      "circle-radius": ["interpolate", ["linear"], ["zoom"], 1, 2.6, 4, 4, 8, 6.5], "circle-color": colour,
-      "circle-stroke-color": base === "light" || base === "streets" ? "#06121b" : "#ffffff", "circle-stroke-width": 1, "circle-opacity": 0.9 } },
+      "circle-radius": ["interpolate", ["linear"], ["zoom"], 1, 3.2, 4, 4.8, 8, 7.5], "circle-color": colour,
+      "circle-stroke-color": base === "light" || base === "streets" ? "#06121b" : "#ffffff", "circle-stroke-width": 1.4, "circle-opacity": 1 } },
       map.getLayer("ais-dots") ? "ais-dots" : undefined);
   }
   function loadRecent() {
