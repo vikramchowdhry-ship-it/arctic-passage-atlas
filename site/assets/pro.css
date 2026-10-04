@@ -292,3 +292,4 @@ details.limits summary { cursor: pointer; font-weight: 600; }
 #ais-legend:empty { display: none; }
 #ais-lakes button { background: #061018; color: var(--text); border: 1px solid var(--line); border-radius: 6px; padding: .25rem .6rem; font: inherit; font-size: .8rem; cursor: pointer; }
 #ais-lakes button:hover { border-color: var(--ice); color: var(--ice); }
+.export-help { flex-basis: 100%; font-size: .78rem; }

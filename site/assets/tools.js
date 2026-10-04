@@ -112,7 +112,7 @@
       keys.map(function (k) {
         return '<span class="export-group"><span class="export-name">' + LAYERS[k].label + '</span>' +
           ["GeoJSON", "KML", "CSV"].map(function (f) { return '<button type="button" data-k="' + k + '" data-f="' + f + '">' + f + "</button>"; }).join("") + "</span>";
-      }).join("") + '<button type="button" class="print-btn" data-print>Save PDF briefing</button>';
+      }).join("") + '<span class="muted export-help">KML opens in Google Earth: on the web use Projects, then Open, then Import KML file; on the desktop use File, then Open.</span><button type="button" class="print-btn" data-print>Save PDF briefing</button>';
     shell.insertAdjacentElement("afterend", bar);
     bar.addEventListener("click", function (e) {
       var b = e.target.closest("button"); if (!b) return;
