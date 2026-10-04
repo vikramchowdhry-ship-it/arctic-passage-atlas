@@ -40,8 +40,11 @@ jobs:
       # Fails if checksums, publication mode, demo labelling or live-feed provenance are inconsistent.
       - name: Verify publication gates
         run: |
-          python -m arctic_passage_atlas verify > verify.log 2>&1 || { echo "::error title=verify failed::$(tr '
-' ' ' < verify.log | cut -c1-900)"; cat verify.log; exit 1; }
+          if ! python -m arctic_passage_atlas verify > verify.log 2>&1; then
+            echo "::error title=verify failed::$(tr '\n' ' ' < verify.log | cut -c1-900)"
+            cat verify.log
+            exit 1
+          fi
           cat verify.log
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
