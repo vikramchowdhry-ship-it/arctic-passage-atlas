@@ -6,7 +6,7 @@
 window.ATLAS_SITE = {
   contactName: "Maheep Chowdhary",
   contactEmail: "maheep512@gmail.com",      // e.g. "name@example.com" (shown on the page and used by the enquiry form)
-  linkedinUrl: "",       // e.g. "https://www.linkedin.com/in/..."
+  linkedinUrl: "https://www.linkedin.com/in/maheepc",
   repoUrl: "https://github.com/vikramchowdhry-ship-it/arctic-passage-atlas",
   aisRelayUrl: "",       // address of your deployed AIS relay (see /ais-relay); empty keeps the vessel panel switched off
   responseNote: "Replies are sent by email as time allows. No response time is promised."
