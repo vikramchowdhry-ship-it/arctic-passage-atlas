@@ -9,8 +9,8 @@
     "vessel_events": "public-global-gaps-events:latest"
   },
   "demo_data": true,
-  "generated_at": "2026-10-04T14:05:52+00:00",
-  "git_commit": "8624c12ff4c0087c8e9f82945943bb23020f7403",
+  "generated_at": "2026-10-04T17:43:58+00:00",
+  "git_commit": "fbce3ed8058b62f35047e2c68dfc70a4d7dc8f2f",
   "mode": "demo",
   "notes": [
     "All analytical features and summary values are deterministic synthetic fixtures.",
@@ -18,48 +18,48 @@
   ],
   "outputs": {
     "data/processed/aoi.geojson": {
-      "bytes": 761,
-      "sha256": "f4b94c3f15c3abbad887727b04dcd2cd385072fcb862d00133c7788de03176ee"
+      "bytes": 721,
+      "sha256": "540b60b8d7b876d4fcee8a9b10cf37ce33c5725692786d30691ef6af9591e37a"
     },
     "data/processed/change_candidates.geojson": {
-      "bytes": 2433,
-      "sha256": "e6fb475ebeeaa5b0d2c74fac2135fe64393355a5803dcf766071babb7b6f3a02"
+      "bytes": 2318,
+      "sha256": "033e3d0fe642b8ba0fd74b7cca154252bb225608b0016bc7673241e3c4e3eba9"
     },
     "data/processed/change_summary.json": {
-      "bytes": 429,
-      "sha256": "de5c6efa0f1801a789ea2470ff87563bf37ed021f538f7747de3de1a9d2cccc6"
+      "bytes": 413,
+      "sha256": "4cdbd023feb39cb7f6bdc24b691c49b4d99e260790e23c9a4b8677bda5cce161"
     },
     "data/processed/ice_extent.geojson": {
-      "bytes": 3008,
-      "sha256": "3ba0b8bb7ea4e77c24f49b43b915e9b4f95ce537cbfee530da6039ccd44a3693"
+      "bytes": 2857,
+      "sha256": "908982181d0633a665cbaaa105727dde568bfa4805faf1e5ceb6e847fb65cb3a"
     },
     "data/processed/ice_summary.json": {
-      "bytes": 3252,
-      "sha256": "15902968bd0639762bd0c6ba04dcc908381b56bfcb530553a6ee1e9f3c727024"
+      "bytes": 3130,
+      "sha256": "98b353a87ff2e043b75323abbb092dc39f5514d2a0598be72b9de3bbbf10c9db"
     },
     "data/processed/sar_detections.geojson": {
-      "bytes": 1412,
-      "sha256": "393e58fd1817d503eab51b5411de46db950ef6b3b95b6d884d0d045d5a08355f"
+      "bytes": 1354,
+      "sha256": "2aa068190152c44a6e58a60567bc95f21bfec3aef7308fdbeceb0f039d56b62c"
     },
     "data/processed/vessel_events.geojson": {
-      "bytes": 1856,
-      "sha256": "cd959b7f01fbe43d146906f86641b88711db4c3d1c1fd533363f1425d80701b2"
+      "bytes": 1774,
+      "sha256": "07507de4c611270c5bcf32dbe162526b7456a52f2b072763945daf7023e288c3"
     },
     "data/processed/vessel_summary.json": {
-      "bytes": 842,
-      "sha256": "965dca96f70c512cf24a02ab068dc329dd4de35597a874288a18340f4304f64b"
+      "bytes": 827,
+      "sha256": "0d50479705643d1af48f64ca08a0d7e9b3ac5cb42d71fe242df3e1c1a6b5fea5"
     },
     "site/assets/fallback-change.svg": {
-      "bytes": 1866,
-      "sha256": "4d59956f6cb01dee4af15d7431cb0d760ee54a1a25b38962810863f05c63d7e2"
+      "bytes": 1855,
+      "sha256": "a2a13f1196ba734db18df8b28e1a31eabfcbf250418e0e254676b2ccfe403c9b"
     },
     "site/assets/fallback-ice.svg": {
-      "bytes": 2479,
-      "sha256": "ef087b7a6424363f79d19d851d73bf85a4d095c39d1e0aa0f599ee40f1f75178"
+      "bytes": 2468,
+      "sha256": "a64cd22cf547a534358d381f660ca712d976c9f8cbdfaa0e37603ce941e21de8"
     },
     "site/assets/fallback-vessels.svg": {
-      "bytes": 2028,
-      "sha256": "76aac49c7ed47005a6ef15f8d12685478a44d706f0f797686d83d857d39e179b"
+      "bytes": 2017,
+      "sha256": "df57c2401715af98df084ce10c2e2c14d067bc0d6ae26002798319a65724de61"
     }
   },
   "schema_version": 1

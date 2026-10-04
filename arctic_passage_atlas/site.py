@@ -39,6 +39,7 @@ def build_site_data(config: ProjectConfig) -> Path:
     destination.write_text(
         "window.ATLAS_DATA = " + json.dumps(bundle, separators=(",", ":")) + ";\n",
         encoding="utf-8",
+        newline="\n",
     )
     return destination
 

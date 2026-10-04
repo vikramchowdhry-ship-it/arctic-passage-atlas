@@ -161,6 +161,6 @@ def apply_chrome(config: ProjectConfig) -> list[Path]:
             )
         text = _ensure_head_and_scripts(text, prefix, path)
         if text != original:
-            target.write_text(text, encoding="utf-8")
+            target.write_text(text, encoding="utf-8", newline="\n")
             changed.append(target)
     return changed

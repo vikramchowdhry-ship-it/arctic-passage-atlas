@@ -177,6 +177,7 @@ def _render(
 <text x="80" y="665" fill="#8ba9b9" font-family="system-ui,sans-serif" font-size="14">{escape(label)} · {count_label} mapped features shown</text>
 </svg>""",
         encoding="utf-8",
+        newline="\n",
     )
     return path
 
