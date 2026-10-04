@@ -17,7 +17,7 @@ import os
 import urllib.error
 import urllib.request
 from collections import Counter
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
@@ -90,14 +90,14 @@ def _fetch(token: str, polygon: list[list[float]], start: date, end: date) -> li
     except urllib.error.HTTPError as error:
         raise RuntimeError(f"Global Fishing Watch returned HTTP {error.code}. Check the token and its use.") from error
     entries = payload.get("entries") or []
-    return list(entries[0].values())[0] if entries else []
+    return next(iter(entries[0].values())) if entries else []
 
 
 def build_presence(config: ProjectConfig, days: int = DEFAULT_DAYS, today: date | None = None) -> list[Path]:
     token = os.environ.get("GFW_API_ACCESS_TOKEN")
     if not token:
         raise RuntimeError("GFW_API_ACCESS_TOKEN is not set. Create a token at https://globalfishingwatch.org/our-apis/tokens")
-    end = (today or date.today()) - timedelta(days=LATENCY_DAYS)
+    end = (today or datetime.now(timezone.utc).date()) - timedelta(days=LATENCY_DAYS)
     start = end - timedelta(days=days)
     cells: dict = {}
     per_chunk: dict[str, int] = {}
