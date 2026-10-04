@@ -43,6 +43,12 @@ CHUNKS: dict[str, list[list[float]]] = {
     "Great Lakes and Hudson Bay, 44-60 N": [[-110, 44], [-80, 44], [-80, 60], [-110, 60], [-110, 44]],
     "St. Lawrence, Gulf and Labrador, 44-60 N": [[-80, 44], [-60, 44], [-60, 60], [-80, 60], [-80, 44]],
     "Newfoundland and the Grand Banks, 44-60 N": [[-60, 44], [-45, 44], [-45, 60], [-60, 60], [-60, 44]],
+    # Northern and western Europe, in windows for the same reason.
+    "Norway, the Barents Sea and Kola, 60-82 N": [[-10, 60], [60, 60], [60, 82], [-10, 82], [-10, 60]],
+    "North Sea, 51-60 N": [[-4, 51], [10, 51], [10, 60], [-4, 60], [-4, 51]],
+    "British Isles and the Atlantic approaches, 48-60 N": [[-12, 48], [-4, 48], [-4, 60], [-12, 60], [-12, 48]],
+    "Baltic Sea and Gulf of Finland, 53-66 N": [[10, 53], [32, 53], [32, 66], [10, 66], [10, 53]],
+    "English Channel and Bay of Biscay, 44-51 N": [[-10, 44], [4, 44], [4, 51], [-10, 51], [-10, 44]],
 }
 CLASS_ORDER = ["cargo", "tanker", "passenger", "fishing", "other"]
 
