@@ -4,6 +4,6 @@ compatibility_date = "2026-01-01"
 
 [vars]
 # The website origin that may call this relay. Do not use "*".
-ALLOWED_ORIGIN = "https://YOUR-USER.github.io"
+ALLOWED_ORIGIN = "https://arcticpassageatlas.com"
 
 # The AISStream key is NOT set here. Run: wrangler secret put AISSTREAM_API_KEY

@@ -7,7 +7,7 @@
  *
  * Secrets and settings (never commit these):
  *   AISSTREAM_API_KEY   secret, from your AISStream account
- *   ALLOWED_ORIGIN      variable, the website origin, for example https://<user>.github.io
+ *   ALLOWED_ORIGIN      variable, the website origin: https://arcticpassageatlas.com
  */
 import { BOXES, MESSAGE_TYPES, reduce, summarise } from "./logic.mjs";
 

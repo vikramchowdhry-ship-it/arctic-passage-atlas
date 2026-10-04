@@ -5,6 +5,7 @@ type: software
 authors:
   - family-names: Chowdhary
     given-names: Maheep
+url: "https://arcticpassageatlas.com/"
 repository-code: "https://github.com/vikramchowdhry-ship-it/arctic-passage-atlas"
 license: MIT
 date-released: "2026-10-04"

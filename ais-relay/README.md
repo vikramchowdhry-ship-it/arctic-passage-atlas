@@ -18,7 +18,7 @@ so the map shows where receivers hear ships, not all ships. A missing dot is not
 1. Create a free AISStream account and an API key at <https://aisstream.io>. Read their current terms.
 2. Create a free Cloudflare account and install Wrangler: `npm install -g wrangler`, then `wrangler login`.
 3. In this folder, create `wrangler.toml` from `wrangler.example.toml` and set `ALLOWED_ORIGIN` to your website
-   origin, for example `https://<user>.github.io`.
+   origin, which is `https://arcticpassageatlas.com`. (The older address `https://vikramchowdhry-ship-it.github.io` redirects to it.)
 4. Store the key as a secret (it is not written to any file): `wrangler secret put AISSTREAM_API_KEY`.
 5. Deploy: `wrangler deploy`. Wrangler prints the Worker URL.
 6. Put that URL in `site/assets/site-config.js` as `aisRelayUrl`, then publish the site.
