@@ -76,7 +76,7 @@ def test_missing_duration_and_non_dict_nested_values_are_safe():
     assert feature is not None
     assert feature["properties"]["duration_hours"] is None
     assert feature["properties"]["vessel_type"] is None
-    assert feature["properties"]["flag"] is None
+    assert "flag" not in feature["properties"]          # flag state is not published: with type and time it can narrow a vessel down
 
 
 def test_gap_without_position_is_not_mapped():
@@ -86,7 +86,7 @@ def test_gap_without_position_is_not_mapped():
 def test_fixture_redaction_preserves_shape_and_removes_vessel_identifiers():
     response = {
         "id": "event-1",
-        "vessel": {"mmsi": "123456789", "shipname": "Example", "flag": "CA"},
+        "vessel": {"id": "abc-123", "mmsi": "123456789", "shipname": "Example", "flag": "CA"},
         "nested": [{"callsign": "CALL", "imo": "123"}],
     }
     redacted = redact_fixture(response)
@@ -95,6 +95,7 @@ def test_fixture_redaction_preserves_shape_and_removes_vessel_identifiers():
     assert redacted["vessel"]["mmsi"] == "REDACTED"
     assert redacted["vessel"]["shipname"] == "REDACTED"
     assert redacted["vessel"]["flag"] == "CA"
+    assert redacted["vessel"]["id"] == "REDACTED"
     assert redacted["nested"][0]["callsign"] == "REDACTED"
 
 
@@ -179,3 +180,19 @@ def test_demo_vessel_outputs_do_not_assign_prohibited_labels(tmp_path):
     public_output = json.dumps(values)
     assert re.search(r"\b(dark|suspicious|evasion)\b", public_output, re.IGNORECASE) is None
     assert any("50 nautical miles" in limitation for limitation in values[2]["limitations"])
+
+
+def test_real_provider_event_fixture_maps_to_a_line_without_identifiers():
+    """A real Global Fishing Watch gap event (captured 2026-10-04, redacted) goes through the parser."""
+    import json
+    from pathlib import Path
+
+    record = json.loads((Path(__file__).parent / "fixtures" / "gfw_event_sample.json").read_text(encoding="utf-8"))
+    assert record["vessel"]["id"] == "REDACTED" and record["vessel"]["ssvid"] == "REDACTED" and record["vessel"]["name"] == "REDACTED"
+    feature = _normalise_gap(record)
+    assert feature["geometry"]["type"] == "LineString"                     # off_position to on_position
+    assert len(feature["geometry"]["coordinates"]) == 2
+    props = feature["properties"]
+    assert props["event_type"] == "AIS gap event" and props["duration_hours"] is not None
+    assert "intentional_disabling" not in json.dumps(feature)               # the provider's own label is never carried into the site
+    assert set(props) == {"event_id", "event_type", "start", "end", "duration_hours", "vessel_type", "demo", "interpretation"}

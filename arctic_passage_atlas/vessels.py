@@ -47,7 +47,10 @@ def redact_fixture(value: Any, key: str | None = None) -> Any:
     if key and key.casefold() in FIXTURE_REDACTION_KEYS:
         return "REDACTED"
     if isinstance(value, dict):
-        return {str(item_key): redact_fixture(item_value, str(item_key)) for item_key, item_value in value.items()}
+        out = {str(item_key): redact_fixture(item_value, str(item_key)) for item_key, item_value in value.items()}
+        if key == "vessel" and "id" in out:
+            out["id"] = "REDACTED"        # the provider's vessel id identifies a vessel as directly as an MMSI
+        return out
     if isinstance(value, list):
         return [redact_fixture(item) for item in value]
     return value
@@ -140,7 +143,6 @@ def _normalise_gap(record: dict[str, Any]) -> dict[str, Any] | None:
             "end": end,
             "duration_hours": duration_hours,
             "vessel_type": vessel.get("type", vessel.get("vessel_type")),
-            "flag": vessel.get("flag"),
             "demo": False,
             "interpretation": GAP_INTERPRETATION,
         },

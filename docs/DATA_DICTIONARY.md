@@ -22,7 +22,7 @@
 - `event_type`: always labelled as an AIS gap event.
 - `start`, `end`: provider timestamps when available.
 - `duration_hours`: provider duration when available; never inferred from a missing value.
-- `vessel_type`, `flag`: provider fields when available. Direct vessel identifiers are not published.
+- `vessel_type`: provider field when available. Direct vessel identifiers are not published, and neither is flag state, which together with type, time and position can narrow a vessel down.
 - `interpretation`: states that cause is not established.
 - `demo`: whether the feature is synthetic.
 

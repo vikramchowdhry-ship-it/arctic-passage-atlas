@@ -1,0 +1,71 @@
+{
+  "start": "2020-11-21T10:45:12Z",
+  "end": "2026-04-27T12:49:34Z",
+  "id": "0f5616dd85f34000ca8042436d96692d",
+  "type": "gap",
+  "position": {
+    "lat": 73.8862,
+    "lon": 20.595
+  },
+  "regions": {
+    "mpa": [],
+    "eez": [
+      "5690"
+    ],
+    "rfmo": [
+      "ACAP",
+      "IWC"
+    ],
+    "fao": [
+      "18"
+    ],
+    "major_fao": [
+      "18"
+    ],
+    "eez_12_nm": [],
+    "high_seas": [],
+    "mpa_no_take_partial": [],
+    "mpa_no_take": []
+  },
+  "bounding_box": [
+    5.615743,
+    60.129607,
+    87.292165,
+    81.94283666666666
+  ],
+  "distances": {
+    "start_distance_from_shore_km": 96.0,
+    "end_distance_from_shore_km": 2.0,
+    "start_distance_from_port_km": 896.2310620000001,
+    "end_distance_from_port_km": 1.107577
+  },
+  "vessel": {
+    "id": "REDACTED",
+    "name": "REDACTED",
+    "ssvid": "REDACTED",
+    "flag": null,
+    "type": "other",
+    "public_authorizations": [],
+    "nextPort": null
+  },
+  "encounter": null,
+  "fishing": null,
+  "gap": {
+    "intentional_disabling": true,
+    "distance_km": "3301.6186369776615",
+    "duration_hours": 47594.066666666666,
+    "implied_speed_knots": "0.0374570103021028",
+    "positions_12_hours_before_sat": "38",
+    "positions_per_day_sat_reception": 153.0590347895194,
+    "off_position": {
+      "lat": 81.94283666666666,
+      "lon": 87.292165
+    },
+    "on_position": {
+      "lat": 60.129607,
+      "lon": 5.615743
+    }
+  },
+  "loitering": null,
+  "port_visit": null
+}
