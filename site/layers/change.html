@@ -138,6 +138,15 @@
             The public label is “surface-change candidate,” not “new
             infrastructure.”
           </p>
+          <h2>How false candidates are reduced</h2>
+          <p>
+            Early live runs produced hundreds of candidates, mostly patches of late-lying snow and ice in the 2014 summer.
+            The screening now masks snow in every scene (NDSI test), requires at least three clear scenes per pixel,
+            skips very bright surfaces, and keeps a pixel only if it also changes in a second, independent pair of years
+            (2016 and 2023). A live test run with these rules found 42 candidates covering about 0.14 km². The rules lower
+            false positives but can also hide small or short-lived real changes. Every candidate remains unverified until it
+            is checked against imagery and documents.
+          </p>
           <h2>Reproduce this</h2>
           <p>
             Run the live pipeline’s <code>change</code> part or open

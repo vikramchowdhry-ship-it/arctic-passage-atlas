@@ -1,6 +1,6 @@
 {
   "config": "configs/cambridge-bay.json",
-  "config_sha256": "db213c61f9434d5e27275db71bbd214165124f917ef98b21fbfc32fb794e754e",
+  "config_sha256": "fc5460cc52123d0429ae3bd42736c3ef482bcc6a59f840766aa8f4feb8aeedc5",
   "datasets": {
     "change": "LANDSAT/LC08/C02/T1_L2",
     "ice": "COPERNICUS/S1_GRD",
@@ -9,8 +9,8 @@
     "vessel_events": "public-global-gaps-events:latest"
   },
   "demo_data": true,
-  "generated_at": "2026-10-04T17:43:58+00:00",
-  "git_commit": "fbce3ed8058b62f35047e2c68dfc70a4d7dc8f2f",
+  "generated_at": "2026-10-04T20:52:46+00:00",
+  "git_commit": "a967df8326127656dd6b5819fb19ab4d6e072b73",
   "mode": "demo",
   "notes": [
     "All analytical features and summary values are deterministic synthetic fixtures.",
