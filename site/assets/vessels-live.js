@@ -102,30 +102,42 @@
   var types = null, typesAt = 0;
   var presence = null, presenceOn = true;   // 30-day AIS presence from Global Fishing Watch (anonymous cells)
 
+  var CLASS_ORDER = ["cargo", "tanker", "passenger", "fishing", "other"];
+  var BASEMAPS = {
+    light: { label: "Light", style: "https://tiles.openfreemap.org/styles/positron", ramp: ["#7fb0d6", "#4a90c2", "#f2a33a", "#e4572e", "#8a1c2b"], opacity: 0.72 },
+    dark: { label: "Dark", style: "https://tiles.openfreemap.org/styles/dark", ramp: ["#35607a", "#7bdff2", "#ffd479", "#ff9b54", "#ff5d6c"], opacity: 0.7 },
+    streets: { label: "Streets", style: "https://tiles.openfreemap.org/styles/liberty", ramp: ["#6aa3d4", "#2f6db0", "#f2a33a", "#e4572e", "#8a1c2b"], opacity: 0.7 },
+    satellite: { label: "Satellite (NASA Blue Marble)", ramp: ["#7bdff2", "#fff3a3", "#ffc247", "#ff7a3d", "#ff3b5c"], opacity: 0.75,
+      style: { version: 8, sources: { bm: { type: "raster", tileSize: 256, maxzoom: 8, attribution: "Imagery: NASA Blue Marble, via NASA GIBS",
+        tiles: ["https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/BlueMarble_ShadedRelief_Bathymetry/default/GoogleMapsCompatible_Level8/{z}/{y}/{x}.jpeg"] } },
+        layers: [{ id: "bg", type: "background", paint: { "background-color": "#081925" } }, { id: "bm", type: "raster", source: "bm" }] } }
+  };
+  var base = "light";
+
+  /* Each cell is drawn as the grid square it is, so adjacent cells join up and zooming in shows areas, not dots. */
   function presenceGeojson() {
-    var rows = presence ? presence.data : [];
+    var rows = presence ? presence.data : [], h = (presence ? presence.cell_degrees : 0.2) / 2;
     return { type: "FeatureCollection", features: rows.map(function (r) {
-      return { type: "Feature", properties: { vessels: r[2], hours: r[3], cls: JSON.stringify(r[4]) }, geometry: { type: "Point", coordinates: [r[1], r[0]] } };
+      var lat = r[0], lon = r[1];
+      return { type: "Feature", properties: { vessels: r[2], hours: r[3], cls: r[4].join(",") },
+        geometry: { type: "Polygon", coordinates: [[[lon - h, lat - h], [lon + h, lat - h], [lon + h, lat + h], [lon - h, lat + h], [lon - h, lat - h]]] } };
     }) };
+  }
+  function rampExpr() {
+    var r = BASEMAPS[base].ramp;
+    return ["interpolate", ["linear"], ["get", "vessels"], 1, r[0], 5, r[1], 20, r[2], 60, r[3], 150, r[4]];
   }
   function addPresence() {
     if (!map || !ready || !presence || map.getSource("presence")) return;
     map.addSource("presence", { type: "geojson", data: presenceGeojson() });
-    map.addLayer({ id: "presence-dots", type: "circle", source: "presence",
-      layout: { visibility: presenceOn ? "visible" : "none" },
-      paint: {
-        "circle-radius": ["interpolate", ["linear"], ["zoom"], 1, ["interpolate", ["linear"], ["get", "vessels"], 1, 1.4, 20, 3.2, 100, 5], 6, ["interpolate", ["linear"], ["get", "vessels"], 1, 4, 20, 9, 100, 15]],
-        "circle-color": ["interpolate", ["linear"], ["get", "vessels"], 1, "#35607a", 5, "#7bdff2", 20, "#ffd479", 60, "#ff9b54", 150, "#ff5d6c"],
-        "circle-opacity": 0.55, "circle-stroke-width": 0 } }, map.getLayer("ais-dots") ? "ais-dots" : undefined);
-    map.on("click", "presence-dots", function (e) {
-      var f = e.features[0].properties, parts = [], cls = {};
-      try { cls = JSON.parse(f.cls); } catch (err) { cls = {}; }
-      Object.keys(cls).forEach(function (k) { parts.push((CLASSES[k] ? CLASSES[k][0] : k) + " " + cls[k]); });
-      new maplibregl.Popup({ offset: 8 }).setLngLat(e.lngLat).setHTML("<strong>" + esc(f.vessels) + " vessel" + (Number(f.vessels) === 1 ? "" : "s") + "</strong> in this 0.2° cell<br>" + esc(Math.round(f.hours)) + " vessel-hours · " +
-        esc(presence.date_start) + " to " + esc(presence.date_end) + "<br>" + esc(parts.join(", ")) + "<br><em>Anonymous AIS presence, Global Fishing Watch. Not live.</em>").addTo(map);
-    });
-    map.on("mouseenter", "presence-dots", function () { map.getCanvas().style.cursor = "pointer"; });
-    map.on("mouseleave", "presence-dots", function () { map.getCanvas().style.cursor = ""; });
+    map.addLayer({ id: "presence-fill", type: "fill", source: "presence", layout: { visibility: presenceOn ? "visible" : "none" },
+      paint: { "fill-color": rampExpr(), "fill-opacity": BASEMAPS[base].opacity } }, map.getLayer("ais-dots") ? "ais-dots" : undefined);
+  }
+  function presenceClick(e) {
+    var f = e.features[0].properties, parts = [], cls = String(f.cls).split(",");
+    CLASS_ORDER.forEach(function (k, i) { if (Number(cls[i]) > 0) parts.push((CLASSES[k] ? CLASSES[k][0] : k) + " " + cls[i]); });
+    new maplibregl.Popup({ offset: 8 }).setLngLat(e.lngLat).setHTML("<strong>" + esc(f.vessels) + " vessel" + (Number(f.vessels) === 1 ? "" : "s") + "</strong> in this 0.2° cell (about 22 km tall)<br>" + esc(f.hours) + " vessel-hours · " +
+      esc(presence.date_start) + " to " + esc(presence.date_end) + "<br>" + esc(parts.join(", ")) + "<br><em>Anonymous AIS presence, Global Fishing Watch. Not live.</em>").addTo(map);
   }
   function loadPresence() {
     if (presence) return Promise.resolve();
@@ -197,30 +209,50 @@
   function init() {
     if (!$("#ais-panel")) return;
     if (typeof maplibregl === "undefined") { $("#ais-status").textContent = "The map library did not load."; return; }
-    map = new maplibregl.Map({ container: "ais-map", style: "https://tiles.openfreemap.org/styles/dark", center: cfg.aisRelayUrl ? [-20, 68] : [22, 62.5], zoom: cfg.aisRelayUrl ? 1.7 : 4.2,
+    map = new maplibregl.Map({ container: "ais-map", style: BASEMAPS[base].style, center: cfg.aisRelayUrl ? [-20, 68] : [22, 62.5], zoom: cfg.aisRelayUrl ? 1.7 : 4.2,
       attributionControl: { compact: true }, cooperativeGestures: true });
     map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
     try { (window.AtlasMaps = window.AtlasMaps || []).push(map); document.dispatchEvent(new CustomEvent("atlas-map", { detail: map })); } catch (e) { /* optional */ }
     if (typeof ResizeObserver === "function") new ResizeObserver(function () { map.resize(); }).observe($("#ais-map"));
-    map.on("style.load", function () {
+    // "style.load" fires only for the first style, so rebuild the layers whenever a new base map has replaced them.
+    function ensureLayers() {
+      if (map.getSource("ais")) return;
+      ready = false;
       map.addSource("ais", { type: "geojson", data: geojson() });
       var colour = ["match", ["get", "cls"]]; Object.keys(CLASSES).forEach(function (k) { colour.push(k, CLASSES[k][1]); }); colour.push("#e8f2f5");
-      map.addLayer({ id: "ais-dots", type: "circle", source: "ais", paint: { "circle-radius": ["interpolate", ["linear"], ["zoom"], 1, 2.5, 6, 5], "circle-color": colour, "circle-stroke-color": "#06121b", "circle-stroke-width": 1, "circle-opacity": 0.92 } });
-      map.on("click", "ais-dots", function (e) {
-        var p = e.features[0].properties, c = CLASSES[p.cls] || CLASSES.unknown;
-        new maplibregl.Popup({ offset: 8 }).setLngLat(e.lngLat).setHTML("<strong>" + esc(c[0]) + "</strong><br>" + (p.sog !== "null" && p.sog !== null ? "Speed " + esc(p.sog) + " kn" : "Speed not reported") +
-          (p.cog !== "null" && p.cog !== null ? " · course " + esc(p.cog) + "°" : "") + "<br>Position " + mins(Number(p.age_s)) + " old<br><em>No name or identifier is published.</em>").addTo(map);
-      });
-      map.on("mouseenter", "ais-dots", function () { map.getCanvas().style.cursor = "pointer"; });
-      map.on("mouseleave", "ais-dots", function () { map.getCanvas().style.cursor = ""; });
-      ready = true; draw();
-      if (presenceOn) loadPresence();
+      map.addLayer({ id: "ais-dots", type: "circle", source: "ais", paint: { "circle-radius": ["interpolate", ["linear"], ["zoom"], 1, 3, 6, 6], "circle-color": colour, "circle-stroke-color": base === "light" || base === "streets" ? "#06121b" : "#ffffff", "circle-stroke-width": 1.2, "circle-opacity": 0.95 } });
+      ready = true;
+      if (presence) addPresence(); else if (presenceOn) loadPresence();
+    }
+    function tryEnsure() { try { ensureLayers(); return !!map.getSource("ais"); } catch (e) { return false; } }
+    map.on("styledata", tryEnsure);
+    function afterStyleChange() {           // a replaced style may not be usable at its first event, so retry briefly
+      var tries = 0, timer = setInterval(function () { if (tryEnsure() || ++tries > 100) clearInterval(timer); }, 150);
+    }
+    map.on("click", "ais-dots", function (e) {
+      var p = e.features[0].properties, c = CLASSES[p.cls] || CLASSES.unknown;
+      new maplibregl.Popup({ offset: 8 }).setLngLat(e.lngLat).setHTML("<strong>" + esc(c[0]) + "</strong><br>" + (p.sog !== "null" && p.sog !== null ? "Speed " + esc(p.sog) + " kn" : "Speed not reported") +
+        (p.cog !== "null" && p.cog !== null ? " · course " + esc(p.cog) + "°" : "") + "<br>Position " + mins(Number(p.age_s)) + " old<br><em>No name or identifier is published.</em>").addTo(map);
     });
+    map.on("click", "presence-fill", presenceClick);
+    ["ais-dots", "presence-fill"].forEach(function (id) {
+      map.on("mouseenter", id, function () { map.getCanvas().style.cursor = "pointer"; });
+      map.on("mouseleave", id, function () { map.getCanvas().style.cursor = ""; });
+    });
+    var sel = $("#ais-base");
+    if (sel) {
+      sel.value = base;
+      sel.addEventListener("change", function () {
+        base = sel.value;
+        map.setStyle(BASEMAPS[base].style);          // the layers are rebuilt once the new style is usable
+        afterStyleChange();
+      });
+    }
     var box = $("#presence-on");
     if (box) box.addEventListener("change", function () {
       presenceOn = box.checked;
       if (presenceOn && !presence) { loadPresence(); return; }
-      if (map && map.getLayer("presence-dots")) map.setLayoutProperty("presence-dots", "visibility", presenceOn ? "visible" : "none");
+      if (map && map.getLayer("presence-fill")) map.setLayoutProperty("presence-fill", "visibility", presenceOn ? "visible" : "none");
     });
     var lt = $("#ais-lakes");
     if (lt) lt.addEventListener("click", function (e) {

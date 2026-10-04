@@ -34,8 +34,8 @@ def test_distinct_vessels_hours_and_classes_with_no_identifiers():
     out = finish(aggregate(rows))
     cell = next(c for c in out if abs(c[0] - 69.1) < 0.11 and abs(c[1] + 105.1) < 0.11)
     assert cell[2] == 3 and cell[3] == 10.0                               # vessels a, b, c; hours 3+2+4+1
-    assert cell[4] == {"cargo": 1, "passenger": 1, "fishing": 1}
-    other = next(c for c in out if c[4] == {"other": 1})
+    assert cell[4] == [1, 0, 1, 1, 0]                                      # cargo, tanker, passenger, fishing, other
+    other = next(c for c in out if c[4] == [0, 0, 0, 0, 1])
     assert other[2] == 1 and vessel_class("TUG") == "other" and vessel_class(None) == "other"
     text = json.dumps(out).lower()
     for secret in ("secret", "123456789", "9999999", "abc", "xxx", "mmsi", "imo", "callsign", "flag"):
@@ -59,4 +59,5 @@ def test_the_published_file_has_provenance_and_no_identifier_keys():
     text = path.read_text(encoding="utf-8").lower()
     for key in FORBIDDEN_KEYS:
         assert f'"{key}"' not in text, key
-    assert all(len(r) == 5 and isinstance(r[4], dict) for r in d["data"][:200])
+    assert all(len(r) == 5 and isinstance(r[4], list) and len(r[4]) == 5 for r in d["data"][:200])
+    assert d["class_order"] == ["cargo", "tanker", "passenger", "fishing", "other"]

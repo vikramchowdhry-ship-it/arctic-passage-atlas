@@ -197,8 +197,9 @@
             <div id="ais-map-wrap">
               <div class="layer-bar" id="presence-bar">
                 <label class="layer-ctl"><input type="checkbox" id="presence-on" checked /><span>Shipping presence, last 30 days (not live)</span></label>
+                <label class="layer-ctl"><span>Base map</span><select id="ais-base"><option value="light">Light</option><option value="dark">Dark</option><option value="streets">Streets</option><option value="satellite">Satellite (NASA)</option></select></label>
                 <span class="muted" id="presence-note" style="font-size:.8rem">Loading…</span>
-                <span class="muted" style="font-size:.8rem">Fewer vessels <span style="display:inline-block;width:90px;height:.6rem;border-radius:4px;vertical-align:middle;background:linear-gradient(90deg,#35607a,#7bdff2,#ffd479,#ff9b54,#ff5d6c)"></span> more vessels per cell</span>
+                <span class="muted" style="font-size:.8rem">1 vessel <span style="display:inline-block;width:110px;height:.6rem;border-radius:4px;vertical-align:middle;background:linear-gradient(90deg,#9fc3dd,#4a90c2,#f2a33a,#e4572e,#8a1c2b)"></span> 150+ per cell</span>
               </div>
               <div class="layer-bar" id="ais-legend" role="group" aria-label="Vessel classes"></div>
               <div class="map tall" id="ais-map" aria-label="Map of AIS-reported vessel positions"></div>

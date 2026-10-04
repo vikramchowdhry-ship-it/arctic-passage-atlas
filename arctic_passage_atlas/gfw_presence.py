@@ -37,7 +37,14 @@ CHUNKS: dict[str, list[list[float]]] = {
     "Canadian Arctic, Baffin Bay and Hudson Bay": [[-141, 60], [-52, 60], [-52, 84], [-141, 84], [-141, 60]],
     "Greenland and Iceland": [[-52, 60], [-10, 60], [-10, 84], [-52, 84], [-52, 60]],
     "Siberian Arctic coast": [[60, 66], [180, 66], [180, 84], [60, 84], [60, 66]],
+    # North America south of 60 N, in windows so each response stays a manageable size.
+    "North Pacific coast and Alaska Gulf, 44-60 N": [[-180, 44], [-130, 44], [-130, 60], [-180, 60], [-180, 44]],
+    "British Columbia and the prairies, 44-60 N": [[-130, 44], [-110, 44], [-110, 60], [-130, 60], [-130, 44]],
+    "Great Lakes and Hudson Bay, 44-60 N": [[-110, 44], [-80, 44], [-80, 60], [-110, 60], [-110, 44]],
+    "St. Lawrence, Gulf and Labrador, 44-60 N": [[-80, 44], [-60, 44], [-60, 60], [-80, 60], [-80, 44]],
+    "Newfoundland and the Grand Banks, 44-60 N": [[-60, 44], [-45, 44], [-45, 60], [-60, 60], [-60, 44]],
 }
+CLASS_ORDER = ["cargo", "tanker", "passenger", "fishing", "other"]
 
 CLASS_OF = {
     "CARGO": "cargo", "CARRIER": "cargo", "BUNKER": "tanker", "PASSENGER": "passenger", "FISHING": "fishing", "GEAR": "fishing",
@@ -69,11 +76,11 @@ def aggregate(rows: list[dict[str, Any]], into: dict | None = None) -> dict:
 
 
 def finish(cells: dict) -> list[list[Any]]:
-    """Drop every identifier. Each cell becomes [lat, lon, vessels, hours, {class: count}]."""
+    """Drop every identifier. Each cell becomes [lat, lon, vessels, hours, [cargo, tanker, passenger, fishing, other]]."""
     out = []
     for (lat, lon), c in cells.items():
         counts = Counter(c["ids"].values())
-        out.append([round(lat, 2), round(lon, 2), len(c["ids"]), round(c["hours"], 1), dict(counts)])
+        out.append([round(lat, 2), round(lon, 2), len(c["ids"]), round(c["hours"]), [counts.get(k, 0) for k in CLASS_ORDER]])
     out.sort(key=lambda x: (-x[0], x[1]))
     return out
 
@@ -114,7 +121,7 @@ def build_presence(config: ProjectConfig, days: int = DEFAULT_DAYS, today: date 
         "source": "Global Fishing Watch 4Wings API, AIS vessel presence",
         "source_url": API, "dataset": DATASET, "dataset_page": PAGE,
         "date_start": start.isoformat(), "date_end": end.isoformat(), "retrieved_at": utc_now(),
-        "cell_degrees": CELL, "columns": ["lat", "lon", "vessels", "hours", "classes"],
+        "cell_degrees": CELL, "columns": ["lat", "lon", "vessels", "hours", "classes"], "class_order": CLASS_ORDER,
         "records_by_area": per_chunk, "cells": len(data),
         "license": "CC BY-NC 4.0, non-commercial, attribution to Global Fishing Watch required",
         "caveat": ("Anonymous aggregate of AIS reports, delayed by a few days. No vessel names, identifiers or flags are kept. "
