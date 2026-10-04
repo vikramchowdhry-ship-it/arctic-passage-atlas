@@ -17,7 +17,7 @@ import os
 import urllib.error
 import urllib.request
 from collections import Counter
-from datetime import date, datetime, timedelta, timezone
+from datetime import UTC, date, datetime, timedelta
 from pathlib import Path
 from typing import Any
 
@@ -97,7 +97,7 @@ def build_presence(config: ProjectConfig, days: int = DEFAULT_DAYS, today: date 
     token = os.environ.get("GFW_API_ACCESS_TOKEN")
     if not token:
         raise RuntimeError("GFW_API_ACCESS_TOKEN is not set. Create a token at https://globalfishingwatch.org/our-apis/tokens")
-    end = (today or datetime.now(timezone.utc).date()) - timedelta(days=LATENCY_DAYS)
+    end = (today or datetime.now(UTC).date()) - timedelta(days=LATENCY_DAYS)
     start = end - timedelta(days=days)
     cells: dict = {}
     per_chunk: dict[str, int] = {}
