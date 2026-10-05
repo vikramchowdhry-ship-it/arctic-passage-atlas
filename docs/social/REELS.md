@@ -1,6 +1,6 @@
 # Instagram reels: scripts, captions and posting plan
 
-Five 30-second vertical reels (1080x1920) for the `@arcticpassageatlas` account, one per day. They are built by
+Ten 30-second vertical reels (1080x1920) for the `@arcticpassageatlas` account, one per day (days 1 to 5, then days 6 to 10). They are built by
 `video/build_reels.py` from generated narration (voice: Arthur), generated motion clips (labelled "AI-generated
 footage" on screen), NASA, USGS and U.S. Coast Guard imagery, and real screenshots of the live site. The built files
 are kept on E: (`E:/atlas-reels/out`), not in git.
@@ -32,6 +32,23 @@ Caption: Radar sees through the polar night. #sentinel1 #radar #seaice #arctic #
 Script: Right now, a weather station in Cambridge Bay, Nunavut, is reporting the temperature. Ships are broadcasting their positions. Satellites pass overhead every day. All of it is public data, and I pulled it into one live map. One honest warning: a missing ship on the map does not mean a missing ship. Coverage in the Arctic is thin. See it live at arcticpassageatlas.com.
 
 Caption: Live Arctic weather and vessel data, with the limits shown next to it: arcticpassageatlas.com #arctic #opendata #maps #gis #geospatial
+
+## Days 6 to 10 (second batch)
+
+Day 6, "Why Cambridge Bay?": a town under two thousand people on the Northwest Passage; Iqaluktuuttiaq, "good fishing place"; Canada's High Arctic Research Station opened there in 2019; the 44 km study area.
+Caption: Why a small Arctic town? A small place on a big route is a good place to test a method. #cambridgebay #nunavut #arctic #gis #geomatics
+
+Day 7, "My map flagged 700 changes": the first change-screening run flagged about 700 candidates; many looked like old snow; snow masking, a brightness ceiling and a second pair of years left 42 candidates, which are still only candidates. Narration is sped up about 1.19x to fit 30 seconds.
+Caption: Good science means doubting your own map. #remotesensing #landsat #gis #datascience #geomatics
+
+Day 8, "Three ways over the top of the world": Northwest Passage, Northern Sea Route and the Transpolar Route (still mostly theory); each trades distance for ice risk.
+Caption: Three Arctic routes, one free planner (a learning tool, not for navigation): arcticpassageatlas.com #arctic #shipping #northwestpassage #northernsearoute #maps
+
+Day 9, "Why only summer images?": optical satellites need sunlight; midsummer has 24-hour sun and deep winter none, so the Landsat analysis uses July and August.
+Caption: Geomatics is partly knowing when not to trust the data. #landsat #remotesensing #arctic #midnightsun #geomatics
+
+Day 10, "What a ship dot really means": AIS is a radio message; Arctic receiver coverage is thin; a gap is not suspicious; the shipping heat map drops ship names and ID numbers.
+Caption: Honest maps show their blind spots. #ais #maritime #arctic #opendata #gis
 
 ## Posting notes
 - Post around the same time each day; add arcticpassageatlas.com to the bio link.
