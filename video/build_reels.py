@@ -26,6 +26,7 @@ FONT = "C\\:/Windows/Fonts/segoeui.ttf"
 URL = "arcticpassageatlas.com"
 
 AI = "AI-generated footage"
+VEO = "AI-generated footage (Google Veo)"
 NASA_GIBS = "NASA GIBS"
 LANDSAT = "NASA/USGS Landsat via NASA GIBS"
 
@@ -147,6 +148,55 @@ REELS: dict[int, list[tuple[str, str, str, str, str]]] = {
          "No names. No ID numbers.", "U.S. Coast Guard"),
         ("card", "", "Honest maps show their blind spots.", "Honest maps show\ntheir blind spots", ""),
     ],
+    11: [
+        ("clip", "gem01.mp4", "Why isn't the Arctic already a shipping highway? Ice is the first problem. Even in summer, floes can block a channel, and ships need strengthened hulls or an icebreaker.",
+         "Problem 1: ice", VEO),
+        ("still", "arctic_intersection.jpg", "The second problem is the charts: many Arctic waters are surveyed far less than other seas.",
+         "Problem 2: thin charts", "USGS"),
+        ("clip", "clip0.mp4", "And the third is rescue: help can be days away.",
+         "Problem 3: help is far away", AI),
+        ("still", "icebreakers_2.jpg", "A shorter route is only worth it if you can sail it safely. That is why watching the ice matters.",
+         "Watching the ice matters", "U.S. Coast Guard"),
+        ("card", "", "Follow for one Arctic story, every day.", "Follow for more", ""),
+    ],
+    12: [
+        ("clip", "clip6.mp4", "Under the Arctic tundra, the ground has been frozen for thousands of years. It is called permafrost.",
+         "Permafrost:\nfrozen ground", VEO),
+        ("clip", "clip1.mp4", "When it thaws, the ground can sink, lakes can appear, and roads and buildings can shift.",
+         "When it thaws,\nthe ground moves", VEO),
+        ("still", "landsat_aoi_2000.jpg", "Satellites can measure this from space. Radar can detect the ground moving by millimetres.",
+         "Satellites can measure it", LANDSAT),
+        ("card", "", "Geomatics turns that into maps that planners can use. Even a small town needs to know where the ground is changing.",
+         "Maps for planners", ""),
+    ],
+    13: [
+        ("clip", "gemA.mp4", "Landsat 8 circles the Earth about every ninety nine minutes, at roughly seven hundred kilometres up.",
+         "~99 minutes per orbit\n~700 km up", VEO),
+        ("clip", "clip2.mp4", "It sweeps a stripe of land one hundred and eighty five kilometres wide, and returns to the same place every sixteen days.",
+         "185 km swath\nRepeat every 16 days", VEO),
+        ("still", "landsat_aoi_1990.jpg", "In the Arctic, the tracks overlap near the pole, so images come more often. That is how I compare the same shoreline year after year, for free.",
+         "Same shoreline,\nyear after year", LANDSAT),
+        ("card", "", "Free data. Open code.", "Free data.\nOpen code.", ""),
+    ],
+    14: [
+        ("clip", "clip1.mp4", "I study geomatics, and I love city planning. A map can show where a town can safely grow.",
+         "Geomatics + planning", AI),
+        ("clip", "clip6.mp4", "Where flooding or melting ground is a risk, and where roads or ports are needed.",
+         "Where is it safe to build?", AI),
+        ("still", "gibs_modis_2024-08-02.jpg", "Arctic communities have these questions too, just with sea ice and permafrost mixed in.",
+         "Sea ice and permafrost\nmixed in", "NASA MODIS via NASA GIBS"),
+        ("card", "", "Planning is about places, and geomatics is how you see them clearly. That is why this project sits between the Arctic and planning.",
+         "Between the Arctic\nand planning", ""),
+    ],
+    15: [
+        ("clip", "clip5.mp4", "Everything on Arctic Passage Atlas is built from open data: NASA, USGS, Copernicus, Environment Canada, and Global Fishing Watch.",
+         "Built on open data", AI),
+        ("clip", "clip3.mp4", "The code is open source, the limits are written next to the results, and the site is free.",
+         "Free. Open source.\nLimits shown.", VEO),
+        ("shot", "live_c.png", "If you work in GIS, remote sensing, or planning, I would love to hear what you think.",
+         "GIS · remote sensing · planning", ""),
+        ("card", "", "Visit arctic passage atlas dot com, or message me. More tomorrow.", "Tell me what\nyou think", ""),
+    ],
 }
 
 
@@ -230,7 +280,7 @@ def build(number: int) -> Path:
     OUT.mkdir(parents=True, exist_ok=True)
     TMP.mkdir(parents=True, exist_ok=True)
     spec = REELS[number]
-    voice_raw = RAW / f"voice{number}.wav"
+    voice_raw = next((p for p in (RAW / f"voice{number}.wav", RAW / f"voice{number}.mp3") if p.exists()), RAW / f"voice{number}.wav")
     # Speed the narration up just enough to fit 29.2 s, never slowing it down.
     speed = max(1.0, duration(voice_raw) / 29.2)
     voice = TMP / f"voice{number}_fit.wav"
