@@ -282,14 +282,24 @@ def build(number: int) -> Path:
     spec = REELS[number]
     voice_raw = next((p for p in (RAW / f"voice{number}.wav", RAW / f"voice{number}.mp3") if p.exists()), RAW / f"voice{number}.wav")
     # Speed the narration up just enough to fit 29.2 s, never slowing it down.
-    speed = max(1.0, duration(voice_raw) / 29.2)
+    # Narration is sped up to at most 26 s, then a half-second pause and the Maheep sign-off (outro.mp3, ~10.6 s).
+    # Reels may run past 30 s so the sign-off is never cut off.
+    outro = RAW / "outro.mp3"
+    outro_len = duration(outro) if outro.exists() else 0.0
+    speed = max(1.0, duration(voice_raw) / 26.0)
     voice = TMP / f"voice{number}_fit.wav"
-    run("-i", str(voice_raw), "-filter:a", f"atempo={speed:.4f}", str(voice))
+    if outro_len:
+        run("-i", str(voice_raw), "-i", str(outro), "-filter_complex",
+            f"[0:a]atempo={speed:.4f},apad=pad_dur=0.5[n];[n][1:a]concat=n=2:v=0:a=1[v]",
+            "-map", "[v]", str(voice))
+    else:
+        run("-i", str(voice_raw), "-filter:a", f"atempo={speed:.4f}", str(voice))
     speech = duration(voice)
+    total = max(TOTAL, speech + 1.0)
 
     words = [max(1, len(item[2].split())) for item in spec]
     cards_extra = 1.0  # the end card holds a second past the last word
-    spoken_total = TOTAL - cards_extra
+    spoken_total = total - cards_extra
     lengths = [spoken_total * w / sum(words) for w in words]
     lengths[-1] += cards_extra
 
@@ -305,12 +315,12 @@ def build(number: int) -> Path:
     out = OUT / f"arctic-passage-atlas-reel-{number}.mp4"
     audio = (
         f"[1:a]loudnorm=I=-16:TP=-1.5:LRA=11,asplit=2[v1][v2];"
-        f"[2:a]volume=0.5,atrim=0:{TOTAL},afade=t=out:st={TOTAL - 2}:d=2[m];"
+        f"[2:a]volume=0.5,atrim=0:{total},afade=t=out:st={total - 2}:d=2[m];"
         f"[m][v2]sidechaincompress=threshold=0.03:ratio=8:attack=20:release=400[md];"
-        f"[v1][md]amix=inputs=2:duration=first:normalize=0,apad,atrim=0:{TOTAL}[a]"
+        f"[v1][md]amix=inputs=2:duration=first:normalize=0,apad,atrim=0:{total}[a]"
     )
     run("-i", str(silent), "-i", str(voice), "-stream_loop", "-1", "-i", str(music), "-filter_complex", audio,
-        "-map", "0:v", "-map", "[a]", "-t", str(TOTAL), "-c:v", "libx264", "-preset", "medium", "-crf", "19",
+        "-map", "0:v", "-map", "[a]", "-t", str(total), "-c:v", "libx264", "-preset", "medium", "-crf", "19",
         "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", str(out))
     print(f"reel {number}: {out.name} {duration(out):.1f}s (speech {speech:.1f}s)")
     return out
