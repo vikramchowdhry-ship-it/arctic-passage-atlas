@@ -21,6 +21,7 @@ WORK = Path("E:/atlas-reels")
 RAW, SHOTS, OUT, TMP = WORK / "raw", WORK / "shots", WORK / "out", WORK / "tmp"
 W, H, FPS = 1080, 1920, 30
 TOTAL = 30.0
+VOICE_TEMPO = 0.85  # slows the 1.2x ElevenLabs takes to about 1.0x
 FONT_BOLD = "C\\:/Windows/Fonts/segoeuib.ttf"
 FONT = "C\\:/Windows/Fonts/segoeui.ttf"
 URL = "arcticpassageatlas.com"
@@ -286,11 +287,12 @@ def build(number: int) -> Path:
     # Reels may run past 30 s so the sign-off is never cut off.
     outro = RAW / "outro.mp3"
     outro_len = duration(outro) if outro.exists() else 0.0
-    speed = max(1.0, duration(voice_raw) / 26.0)
+    # The ElevenLabs takes were made at 1.2x, which sounds rushed; slow them back to natural pace.
+    speed = VOICE_TEMPO
     voice = TMP / f"voice{number}_fit.wav"
     if outro_len:
         run("-i", str(voice_raw), "-i", str(outro), "-filter_complex",
-            f"[0:a]atempo={speed:.4f},apad=pad_dur=0.5[n];[n][1:a]concat=n=2:v=0:a=1[v]",
+            f"[0:a]atempo={speed:.4f},apad=pad_dur=0.5[n];[1:a]atempo={speed:.4f}[o];[n][o]concat=n=2:v=0:a=1[v]",
             "-map", "[v]", str(voice))
     else:
         run("-i", str(voice_raw), "-filter:a", f"atempo={speed:.4f}", str(voice))
