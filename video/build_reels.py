@@ -22,8 +22,8 @@ RAW, SHOTS, OUT, TMP = WORK / "raw", WORK / "shots", WORK / "out", WORK / "tmp"
 W, H, FPS = 1080, 1920, 30
 TOTAL = 30.0
 VOICE_TEMPO = 0.85  # slows the 1.2x ElevenLabs takes to about 1.0x
-FONT_BOLD = "C\:/Windows/Fonts/segoeuib.ttf"
-FONT = "C\:/Windows/Fonts/segoeui.ttf"
+FONT_BOLD = "C\\:/Windows/Fonts/segoeuib.ttf"
+FONT = "C\\:/Windows/Fonts/segoeui.ttf"
 URL = "arcticpassageatlas.com"
 
 AI = "AI-generated footage"
@@ -36,158 +36,118 @@ LANDSAT = "NASA/USGS Landsat via NASA GIBS"
 REELS: dict[int, list[tuple[str, str, str, str, str]]] = {
     1: [
         ("clip", "clip0.mp4", "This is the Arctic. It is warming much faster than the rest of the planet.",
-         "This is the Arctic.
-It is warming fast.", AI),
+         "This is the Arctic.\nIt is warming fast.", AI),
         ("video", "ice_retreat_2013.ogv", "As summer sea ice shrinks, routes that were frozen shut for centuries are starting to open.",
          "Summer sea ice is shrinking.", "NASA Goddard Space Flight Center"),
         ("still", "p_blue_marble_wide.jpg", "The Northwest Passage. The Northern Sea Route.",
-         "Northwest Passage
-Northern Sea Route", "NASA Blue Marble via NASA GIBS"),
+         "Northwest Passage\nNorthern Sea Route", "NASA Blue Marble via NASA GIBS"),
         ("clip", "clip3.mp4", "On paper, they can cut thousands of kilometres between Asia and Europe.",
-         "On paper: thousands of km
-shorter than the Suez route", AI),
+         "On paper: thousands of km\nshorter than the Suez route", AI),
         ("still", "icebreakers_1.jpg", "But who is actually watching them? I built a free, open map to find out.",
-         "Who is watching?
-I built a free open map.", "U.S. Coast Guard"),
-        ("card", "", "Follow for one Arctic story, every day.", "One Arctic story
-every day", ""),
+         "Who is watching?\nI built a free open map.", "U.S. Coast Guard"),
+        ("card", "", "Follow for one Arctic story, every day.", "One Arctic story\nevery day", ""),
     ],
     2: [
         ("clip", "clip1.mp4", "Here is a word you probably do not know: geomatics.", "GEOMATICS", AI),
         ("clip", "clip2.mp4", "It is the science of measuring, mapping, and understanding places, using satellites, GPS, and data.",
-         "Measuring and mapping places
-with satellites, GPS and data", AI),
+         "Measuring and mapping places\nwith satellites, GPS and data", AI),
         ("still", "landsat_aoi_1990.jpg", "Landsat satellites have photographed Earth since nineteen seventy two, and the archive has been free to use since two thousand eight.",
-         "Landsat: images since 1972
-Free archive since 2008", LANDSAT),
+         "Landsat: images since 1972\nFree archive since 2008", LANDSAT),
         ("still", "landsat_aoi_2000.jpg", "That means anyone can compare the same Arctic shoreline across fifty years.",
-         "The same Arctic coast,
-compared across decades", LANDSAT),
+         "The same Arctic coast,\ncompared across decades", LANDSAT),
         ("card", "", "I am studying geomatics at Waterloo, and this is what I do with it. Follow for more.",
-         "Studying geomatics
-at Waterloo", ""),
+         "Studying geomatics\nat Waterloo", ""),
     ],
     3: [
         ("still", "icebreakers_2.jpg", "Ships do not sail in straight lines. They go around land, ice, and shallow water.",
-         "Ships do not sail
-in straight lines.", "U.S. Coast Guard"),
+         "Ships do not sail\nin straight lines.", "U.S. Coast Guard"),
         ("still", "arctic_intersection.jpg", "So how do you plan a route across the Arctic?",
-         "How do you plan
-an Arctic route?", "USGS"),
+         "How do you plan\nan Arctic route?", "USGS"),
         ("clip", "clip5.mp4", "You turn the ocean into a grid, mark every cell as water or blocked, and let an algorithm search for the shortest clear path.",
-         "Ocean to grid.
-Water or blocked.
-Search the shortest path.", AI),
+         "Ocean to grid.\nWater or blocked.\nSearch the shortest path.", AI),
         ("shot", "route_c.png", "My route planner does exactly that, for the Arctic and the whole world.",
-         "Arctic and worldwide
-route planner", ""),
+         "Arctic and worldwide\nroute planner", ""),
         ("card", "", "It is a learning tool, not for navigation. Try it free at arctic passage atlas dot com.",
-         "A learning tool.
-Not for navigation.", ""),
+         "A learning tool.\nNot for navigation.", ""),
     ],
     4: [
         ("clip", "clip4.mp4", "In the Arctic winter, the sun does not rise for weeks.",
-         "Arctic winter:
-weeks without sun", AI),
+         "Arctic winter:\nweeks without sun", AI),
         ("still", "p_modis_winter.jpg", "So how do satellites see the ice? Radar.",
-         "How do satellites
-see the ice?
-Radar.", "NASA MODIS via NASA GIBS"),
+         "How do satellites\nsee the ice?\nRadar.", "NASA MODIS via NASA GIBS"),
         ("clip", "clip7.mp4", "Sentinel one sends its own microwave pulses through darkness and clouds, and listens for what bounces back.",
-         "Sentinel-1 sends its own
-microwave pulses", AI),
+         "Sentinel-1 sends its own\nmicrowave pulses", AI),
         ("video", "sea_ice_spiral.webm", "Calm water and ice scatter radar very differently. Turn that into a map, and you can watch the sea freeze, from space, in the dark.",
-         "Sea ice, watched
-from space", "NASA Scientific Visualization Studio"),
+         "Sea ice, watched\nfrom space", "NASA Scientific Visualization Studio"),
         ("card", "", "Pretty incredible. More tomorrow.", "More tomorrow", ""),
     ],
     5: [
         ("clip", "clip6.mp4", "Right now, a weather station in Cambridge Bay, Nunavut, is reporting the temperature.",
-         "Live weather from
-Cambridge Bay, Nunavut", AI),
+         "Live weather from\nCambridge Bay, Nunavut", AI),
         ("still", "gibs_modis_2024-08-02.jpg", "Ships are broadcasting their positions. Satellites pass overhead every day.",
-         "Ships broadcast positions.
-Satellites pass daily.", "NASA MODIS via NASA GIBS"),
+         "Ships broadcast positions.\nSatellites pass daily.", "NASA MODIS via NASA GIBS"),
         ("shot", "live_c.png", "All of it is public data, and I pulled it into one live map.",
-         "Public data.
-One live map.", ""),
+         "Public data.\nOne live map.", ""),
         ("still", "gibs_modis_2024-07-22.jpg", "One honest warning: a missing ship on the map does not mean a missing ship. Coverage in the Arctic is thin.",
-         "A missing dot is not
-a missing ship.", "NASA MODIS via NASA GIBS"),
+         "A missing dot is not\na missing ship.", "NASA MODIS via NASA GIBS"),
         ("card", "", "See it live at arctic passage atlas dot com.", "See it live", ""),
     ],
     6: [
         ("clip", "clip1.mp4", "Cambridge Bay, Nunavut. A town of under two thousand people, on the Northwest Passage.",
          "Cambridge Bay, Nunavut", AI),
         ("still", "landsat_aoi_2000.jpg", "Its Inuinnaqtun name, Iqaluktuuttiaq, means good fishing place.",
-         "Iqaluktuuttiaq:
-"good fishing place"", LANDSAT),
+         "Iqaluktuuttiaq:\n\"good fishing place\"", LANDSAT),
         ("still", "p_blue_marble_wide.jpg", "Canada's High Arctic Research Station opened here in twenty nineteen.",
-         "Canada's High Arctic
-Research Station, since 2019", "NASA Blue Marble via NASA GIBS"),
+         "Canada's High Arctic\nResearch Station, since 2019", "NASA Blue Marble via NASA GIBS"),
         ("clip", "clip6.mp4", "It is also the study area for my project: a forty four kilometre box of tundra, coast and sea ice.",
-         "The study area:
-a 44 km box", AI),
+         "The study area:\na 44 km box", AI),
         ("still", "gibs_modis_2024-08-02.jpg", "A small place on a big route is a good place to test a method.",
          "A small place on a big route", "NASA MODIS via NASA GIBS"),
         ("card", "", "Follow for more.", "Follow for more", ""),
     ],
     7: [
         ("still", "landsat_aoi_2000.jpg", "My first map flagged about seven hundred changes in the Arctic. I almost believed it.",
-         "My first run flagged
-~700 "changes"", LANDSAT + " (illustration)"),
+         "My first run flagged\n~700 \"changes\"", LANDSAT + " (illustration)"),
         ("still", "gibs_modis_2024-08-12.jpg", "Then I looked closer: many looked like old patches of snow, bright in one year and gone in the next.",
-         "Many looked like
-old snow patches", "NASA MODIS via NASA GIBS (illustration)"),
+         "Many looked like\nold snow patches", "NASA MODIS via NASA GIBS (illustration)"),
         ("still", "landsat_aoi_1990.jpg", "So I masked snow, skipped very bright pixels, and made every change show up in two separate pairs of years.",
-         "Mask snow. Skip bright pixels.
-Require two year-pairs.", "NASA/USGS Landsat"),
+         "Mask snow. Skip bright pixels.\nRequire two year-pairs.", "NASA/USGS Landsat"),
         ("clip", "clip7.mp4", "Seven hundred became forty two. And even those are only candidates, not confirmed anything.",
-         "~700 became 42
-Candidates, not confirmed", AI),
+         "~700 became 42\nCandidates, not confirmed", AI),
         ("card", "", "Good science means doubting your own map.", "Doubt your own map", ""),
     ],
     8: [
         ("still", "p_blue_marble_wide.jpg", "There are three ways over the top of the world.",
-         "Three ways over the
-top of the world", "NASA Blue Marble via NASA GIBS"),
+         "Three ways over the\ntop of the world", "NASA Blue Marble via NASA GIBS"),
         ("still", "arctic_intersection.jpg", "The Northwest Passage, through Canada's Arctic islands.",
          "Northwest Passage", "USGS"),
         ("clip", "clip3.mp4", "The Northern Sea Route, along Russia's coast.",
          "Northern Sea Route", AI),
         ("clip", "clip0.mp4", "And the Transpolar Route, straight across the pole, which is still mostly theory. Each one trades distance for ice risk.",
-         "Transpolar Route:
-still mostly theory", AI),
+         "Transpolar Route:\nstill mostly theory", AI),
         ("shot", "route_c.png", "My planner lets you compare Arctic and global routes in your browser.",
          "Compare routes free", ""),
         ("card", "", "Free, at arctic passage atlas dot com.", "Try it free", ""),
     ],
     9: [
         ("clip", "clip8.mp4", "Optical satellites need sunlight. But in the Arctic, the sun disappears for weeks.",
-         "Optical satellites
-need sunlight", AI),
+         "Optical satellites\nneed sunlight", AI),
         ("still", "p_modis_winter.jpg", "Cambridge Bay sees the sun for twenty four hours in midsummer, and none at all in deep winter.",
-         "Deep winter:
-no optical image", "NASA MODIS via NASA GIBS"),
+         "Deep winter:\nno optical image", "NASA MODIS via NASA GIBS"),
         ("still", "gibs_modis_2024-07-22.jpg", "That is why my Landsat analysis only uses July and August images, when the ground is clear and the light is good.",
-         "July and August only:
-clear ground, good light", "NASA MODIS via NASA GIBS"),
-        ("card", "", "Geomatics is partly knowing when not to trust the data.", "Know when not to
-trust the data", ""),
+         "July and August only:\nclear ground, good light", "NASA MODIS via NASA GIBS"),
+        ("card", "", "Geomatics is partly knowing when not to trust the data.", "Know when not to\ntrust the data", ""),
     ],
     10: [
         ("clip", "clip9.mp4", "Every dot on a ship map is a radio message. Ships broadcast their position, and receivers pick it up.",
-         "Every dot is
-a radio message", AI),
+         "Every dot is\na radio message", AI),
         ("still", "p_blue_marble_wide.jpg", "In the Arctic, there are very few receivers.",
-         "Very few receivers
-in the Arctic", "NASA Blue Marble via NASA GIBS"),
+         "Very few receivers\nin the Arctic", "NASA Blue Marble via NASA GIBS"),
         ("clip", "clip5.mp4", "So a gap on the map can mean a ship went out of range, nothing more. I never call a gap suspicious.",
          "A gap is not suspicious", AI),
         ("still", "icebreakers_2.jpg", "And the shipping heat map drops ship names and ID numbers, so it shows traffic, not people.",
          "No names. No ID numbers.", "U.S. Coast Guard"),
-        ("card", "", "Honest maps show their blind spots.", "Honest maps show
-their blind spots", ""),
+        ("card", "", "Honest maps show their blind spots.", "Honest maps show\ntheir blind spots", ""),
     ],
     11: [
         ("clip", "gem01.mp4", "Why isn't the Arctic already a shipping highway? Ice is the first problem. Even in summer, floes can block a channel, and ships need strengthened hulls or an icebreaker.",
@@ -202,11 +162,9 @@ their blind spots", ""),
     ],
     12: [
         ("clip", "clip6.mp4", "Under the Arctic tundra, the ground has been frozen for thousands of years. It is called permafrost.",
-         "Permafrost:
-frozen ground", AI),
+         "Permafrost:\nfrozen ground", AI),
         ("clip", "clip1.mp4", "When it thaws, the ground can sink, lakes can appear, and roads and buildings can shift.",
-         "When it thaws,
-the ground moves", AI),
+         "When it thaws,\nthe ground moves", AI),
         ("still", "landsat_aoi_2000.jpg", "Satellites can measure this from space. Radar can detect the ground moving by millimetres.",
          "Satellites can measure it", LANDSAT),
         ("card", "", "Geomatics turns that into maps that planners can use. Even a small town needs to know where the ground is changing.",
@@ -214,16 +172,12 @@ the ground moves", AI),
     ],
     13: [
         ("clip", "gemA.mp4", "Landsat 8 circles the Earth about every ninety nine minutes, at roughly seven hundred kilometres up.",
-         "~99 minutes per orbit
-~700 km up", VEO),
+         "~99 minutes per orbit\n~700 km up", VEO),
         ("clip", "clip2.mp4", "It sweeps a stripe of land one hundred and eighty five kilometres wide, and returns to the same place every sixteen days.",
-         "185 km swath
-Repeat every 16 days", AI),
+         "185 km swath\nRepeat every 16 days", AI),
         ("still", "landsat_aoi_1990.jpg", "In the Arctic, the tracks overlap near the pole, so images come more often. That is how I compare the same shoreline year after year, for free.",
-         "Same shoreline,
-year after year", LANDSAT),
-        ("card", "", "Free data. Open code.", "Free data.
-Open code.", ""),
+         "Same shoreline,\nyear after year", LANDSAT),
+        ("card", "", "Free data. Open code.", "Free data.\nOpen code.", ""),
     ],
     14: [
         ("clip", "clip1.mp4", "I study geomatics, and I love city planning. A map can show where a town can safely grow.",
@@ -231,22 +185,18 @@ Open code.", ""),
         ("clip", "clip6.mp4", "Where flooding or melting ground is a risk, and where roads or ports are needed.",
          "Where is it safe to build?", AI),
         ("still", "gibs_modis_2024-08-02.jpg", "Arctic communities have these questions too, just with sea ice and permafrost mixed in.",
-         "Sea ice and permafrost
-mixed in", "NASA MODIS via NASA GIBS"),
+         "Sea ice and permafrost\nmixed in", "NASA MODIS via NASA GIBS"),
         ("card", "", "Planning is about places, and geomatics is how you see them clearly. That is why this project sits between the Arctic and planning.",
-         "Between the Arctic
-and planning", ""),
+         "Between the Arctic\nand planning", ""),
     ],
     15: [
         ("clip", "clip5.mp4", "Everything on Arctic Passage Atlas is built from open data: NASA, USGS, Copernicus, Environment Canada, and Global Fishing Watch.",
          "Built on open data", AI),
         ("clip", "clip3.mp4", "The code is open source, the limits are written next to the results, and the site is free.",
-         "Free. Open source.
-Limits shown.", AI),
+         "Free. Open source.\nLimits shown.", AI),
         ("shot", "live_c.png", "If you work in GIS, remote sensing, or planning, I would love to hear what you think.",
-         "GIS Â· remote sensing Â· planning", ""),
-        ("card", "", "Visit arctic passage atlas dot com, or message me. More tomorrow.", "Tell me what
-you think", ""),
+         "GIS · remote sensing · planning", ""),
+        ("card", "", "Visit arctic passage atlas dot com, or message me. More tomorrow.", "Tell me what\nyou think", ""),
     ],
 }
 
@@ -265,9 +215,8 @@ def duration(path: Path) -> float:
 
 def textfile(name: str, text: str) -> str:
     path = TMP / f"{name}.txt"
-    path.write_text(text, encoding="utf-8", newline="
-")
-    return str(path).replace("\", "/").replace(":", "\:")
+    path.write_text(text, encoding="utf-8", newline="\n")
+    return str(path).replace("\\", "/").replace(":", "\\:")
 
 
 def overlay_filters(tag: str, caption: str, credit: str, low: bool = False) -> str:
@@ -366,9 +315,7 @@ def build(number: int) -> Path:
     for index, ((kind, src, _text, caption, credit), length) in enumerate(zip(spec, lengths), start=1):
         parts.append(render_segment(f"r{number}s{index}", kind, src, caption, credit, length))
     listing = TMP / f"r{number}.txt"
-    listing.write_text("".join(f"file '{p.as_posix()}'
-" for p in parts), encoding="utf-8", newline="
-")
+    listing.write_text("".join(f"file '{p.as_posix()}'\n" for p in parts), encoding="utf-8", newline="\n")
     silent = TMP / f"r{number}_silent.mp4"
     run("-f", "concat", "-safe", "0", "-i", str(listing), "-c", "copy", str(silent))
 
